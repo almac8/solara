@@ -1232,12 +1232,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 662bb81539ea4912886eaa26955cc54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerModuleCharge: 50
+  coreStandbyPowerConsumption: 0.001
+  powerModuleCharge: 100
   powerModuleMaxCharge: 100
   solarPanelModuleRechargeRate: 1
-  solarPanelModuleRechargeEfficiency: 1
-  processorModulePowerConsumption: 1
-  processorModuleIsProcessing: 0
+  solarPanelModuleRechargeEfficiency: 0
   probeUI: {fileID: 2025185358}
   powerText: {fileID: 1185121651}
 --- !u!4 &1752512442

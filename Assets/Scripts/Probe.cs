@@ -4,14 +4,14 @@ using UnityEngine;
 using TMPro;
 
 public class Probe : MonoBehaviour {
-  [SerializeField] private float powerModuleCharge = 50.0f;
-  [SerializeField] private float powerModuleMaxCharge = 100.0f;
+  [SerializeField] private float coreStandbyPowerConsumption;
 
-  [SerializeField] private float solarPanelModuleRechargeRate = 0.5f;
-  [SerializeField] private float solarPanelModuleRechargeEfficiency = 1.0f;
+  [SerializeField] private float powerModuleCharge;
+  [SerializeField] private float powerModuleMaxCharge;
 
-  [SerializeField] private float processorModulePowerConsumption = 1.0f;
-  [SerializeField] private bool processorModuleIsProcessing = false;
+  [SerializeField] private bool solarPanelModuleIsDeployed;
+  [SerializeField] private float solarPanelModuleRechargeRate;
+  [SerializeField] private float solarPanelModuleRechargeEfficiency;
   
   [SerializeField] private GameObject probeUI;
   [SerializeField] private TMP_Text powerText;
@@ -22,11 +22,11 @@ public class Probe : MonoBehaviour {
     float powerCharged = 0.0f;
     float powerDisCharged = 0.0f;
 
-    powerCharged = solarPanelModuleRechargeRate * solarPanelModuleRechargeEfficiency * Time.deltaTime;
-
-    if(processorModuleIsProcessing) {
-      powerDisCharged = processorModulePowerConsumption * Time.deltaTime;
+    if(solarPanelModuleIsDeployed) {
+      powerCharged = solarPanelModuleRechargeRate * solarPanelModuleRechargeEfficiency * Time.deltaTime;
     }
+    
+    powerDisCharged = coreStandbyPowerConsumption * Time.deltaTime;
 
     powerDelta = powerCharged - powerDisCharged;
     powerModuleCharge = Mathf.Clamp(powerModuleCharge + powerDelta, 0.0f, powerModuleMaxCharge);
