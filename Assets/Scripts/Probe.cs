@@ -12,6 +12,9 @@ public class Probe : MonoBehaviour {
   [SerializeField] private bool solarPanelModuleIsDeployed;
   [SerializeField] private float solarPanelModuleRechargeRate;
   [SerializeField] private float solarPanelModuleRechargeEfficiency;
+
+  [SerializeField] private bool topographyScanComponentIsSampling;
+  [SerializeField] private float topographyScanComponentPowerRequired;
   
   [SerializeField] private GameObject probeUI;
   [SerializeField] private TMP_Text powerText;
@@ -23,10 +26,20 @@ public class Probe : MonoBehaviour {
     float powerDisCharged = 0.0f;
 
     if(solarPanelModuleIsDeployed) {
-      powerCharged = solarPanelModuleRechargeRate * solarPanelModuleRechargeEfficiency * Time.deltaTime;
+      powerCharged += solarPanelModuleRechargeRate * solarPanelModuleRechargeEfficiency * Time.deltaTime;
     }
-    
-    powerDisCharged = coreStandbyPowerConsumption * Time.deltaTime;
+
+    powerDisCharged += coreStandbyPowerConsumption * Time.deltaTime;
+
+    if(topographyScanComponentIsSampling) {
+      float samplePowerRequirement = topographyScanComponentPowerRequired * Time.deltaTime;
+      //  Calculate Data Requirement
+
+      if(powerModuleCharge - samplePowerRequirement > 0f /* && dataStorageAvailable*/) {
+        powerDisCharged += samplePowerRequirement;
+        //  Increase Sample Data Storage Size
+      }
+    }
 
     powerDelta = powerCharged - powerDisCharged;
     powerModuleCharge = Mathf.Clamp(powerModuleCharge + powerDelta, 0.0f, powerModuleMaxCharge);
@@ -46,5 +59,13 @@ public class Probe : MonoBehaviour {
 
   public void HideUI() {
     probeUI.SetActive(false);
+  }
+
+  public void ToggleSolarPanel() {
+    solarPanelModuleIsDeployed = !solarPanelModuleIsDeployed;
+  }
+
+  public void ToggleTopographyScan() {
+    topographyScanComponentIsSampling = !topographyScanComponentIsSampling;
   }
 }
