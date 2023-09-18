@@ -4,33 +4,47 @@ using UnityEngine;
 using TMPro;
 
 public class Probe : MonoBehaviour {
-  [SerializeField] private float processorModulePowerConsumption = 1.0f;
-  [SerializeField] private float powerModuleMaxCharge = 100.0f;
   [SerializeField] private float powerModuleCharge = 50.0f;
-  [SerializeField] private bool processorModuleIsProcessing = false;
+  [SerializeField] private float powerModuleMaxCharge = 100.0f;
+
   [SerializeField] private float solarPanelModuleRechargeRate = 0.5f;
   [SerializeField] private float solarPanelModuleRechargeEfficiency = 1.0f;
-  [SerializeField] private TMP_Text selectedUnitText;
+
+  [SerializeField] private float processorModulePowerConsumption = 1.0f;
+  [SerializeField] private bool processorModuleIsProcessing = false;
+  
+  [SerializeField] private GameObject probeUI;
+  [SerializeField] private TMP_Text powerText;
+
+  private float powerDelta;
 
   private void Update() {
-    if(powerModuleCharge < powerModuleMaxCharge) {
-      powerModuleCharge += solarPanelModuleRechargeRate * solarPanelModuleRechargeEfficiency * Time.deltaTime;
+    float powerCharged = 0.0f;
+    float powerDisCharged = 0.0f;
 
-      if(powerModuleCharge > powerModuleMaxCharge) {
-        powerModuleCharge = powerModuleMaxCharge;
-      }
+    powerCharged = solarPanelModuleRechargeRate * solarPanelModuleRechargeEfficiency * Time.deltaTime;
+
+    if(processorModuleIsProcessing) {
+      powerDisCharged = processorModulePowerConsumption * Time.deltaTime;
     }
 
-    if(powerModuleCharge > 0.0f) {
-      if(processorModuleIsProcessing) {
-        powerModuleCharge -= processorModulePowerConsumption * Time.deltaTime;
-      }
-    } else {
-      powerModuleCharge = 0.0f;
-    }
+    powerDelta = powerCharged - powerDisCharged;
+    powerModuleCharge = Mathf.Clamp(powerModuleCharge + powerDelta, 0.0f, powerModuleMaxCharge);
+  }
+
+  private void FixedUpdate() {
+    powerText.text = "Power: " + powerModuleCharge.ToString() + "/" + powerModuleMaxCharge.ToString() + " (" + powerDelta.ToString() + ")";
   }
 
   private void OnMouseDown() {
-    selectedUnitText.text = "Probe";
+    ShowUI();
+  }
+
+  private void ShowUI() {
+    probeUI.SetActive(true);
+  }
+
+  public void HideUI() {
+    probeUI.SetActive(false);
   }
 }
