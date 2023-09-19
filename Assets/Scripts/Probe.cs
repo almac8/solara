@@ -5,12 +5,9 @@ using TMPro;
 
 public class Probe : MonoBehaviour {
   private PowerModule powerModule;
+  private SolarPanelModule solarPanelModule;
 
   [SerializeField] private float coreStandbyPowerConsumption;
-
-  [SerializeField] private bool solarPanelModuleIsDeployed;
-  [SerializeField] private float solarPanelModuleRechargeRate;
-  [SerializeField] private float solarPanelModuleRechargeEfficiency;
 
   [SerializeField] private float dataStorageUsed;
   [SerializeField] private float dataStorageCapacity;
@@ -32,14 +29,16 @@ public class Probe : MonoBehaviour {
 
   private void Awake() {
     powerModule = new PowerModule(100);
+    solarPanelModule = new SolarPanelModule(1);
   }
 
   private void Update() {
     float dataLoaded = 0.0f;
     float dataProcessed = 0.0f;
 
-    if(solarPanelModuleIsDeployed) {
-      powerModule.SupplyCharge(solarPanelModuleRechargeRate * solarPanelModuleRechargeEfficiency * Time.deltaTime);
+    if(solarPanelModule.IsDeployed) {
+      float chargeSupplied = solarPanelModule.GetCharge(Time.deltaTime);
+      powerModule.SupplyCharge(chargeSupplied);
     }
 
     if(!powerModule.DrainCharge(coreStandbyPowerConsumption * Time.deltaTime)) {
@@ -83,7 +82,7 @@ public class Probe : MonoBehaviour {
   }
 
   public void ToggleSolarPanel() {
-    solarPanelModuleIsDeployed = !solarPanelModuleIsDeployed;
+    solarPanelModule.ToggleIsDeployed();
   }
 
   public void ToggleTopographyScan() {
