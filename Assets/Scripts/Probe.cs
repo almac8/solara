@@ -4,13 +4,11 @@ using UnityEngine;
 using TMPro;
 
 public class Probe : MonoBehaviour {
-  private PowerModule powerModule;
-  private SolarPanelModule solarPanelModule;
-
   [SerializeField] private float coreStandbyPowerConsumption;
 
-  [SerializeField] private float dataStorageUsed;
-  [SerializeField] private float dataStorageCapacity;
+  private PowerModule powerModule;
+  private SolarPanelModule solarPanelModule;
+  private DataStorageModule dataStorageModule;
 
   [SerializeField] private bool topographyScanComponentIsScanning;
   [SerializeField] private float topographyScanComponentPowerRequired;
@@ -30,6 +28,7 @@ public class Probe : MonoBehaviour {
   private void Awake() {
     powerModule = new PowerModule(100);
     solarPanelModule = new SolarPanelModule(1);
+    dataStorageModule = new DataStorageModule(100);
   }
 
   private void Update() {
@@ -50,7 +49,7 @@ public class Probe : MonoBehaviour {
       float scanSampleCompletion = topographyScanComponentScanRate * Time.deltaTime;
       float sampleDataRequirement = scanSampleCompletion * topographyScanComponentCompleteScanDataSize;
 
-      if(powerModule.DrainCharge(samplePowerRequirement) && dataStorageUsed + sampleDataRequirement < dataStorageCapacity) {
+      if(powerModule.DrainCharge(samplePowerRequirement) && dataStorageModule.WriteData(sampleDataRequirement)) {
         dataLoaded += sampleDataRequirement;
 
         topographyScanComponentScanCompletion = Mathf.Clamp(topographyScanComponentScanCompletion + scanSampleCompletion, 0f, 1f);
@@ -61,12 +60,12 @@ public class Probe : MonoBehaviour {
     dataDelta = dataLoaded - dataProcessed;
 
     powerModule.Update();
-    dataStorageUsed = Mathf.Clamp(dataStorageUsed + dataDelta, 0.0f, dataStorageCapacity);
+    dataStorageModule.Update();
   }
 
   private void FixedUpdate() {
     powerText.text = "Power: " + powerModule.GetStatusString();
-    dataText.text = "Data: " + dataStorageUsed.ToString() + "/" + dataStorageCapacity.ToString() + " (" + dataDelta.ToString() + ")";
+    dataText.text = "Data: " + dataStorageModule.GetStatusString();
   }
 
   private void OnMouseDown() {
