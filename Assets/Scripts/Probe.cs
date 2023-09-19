@@ -9,13 +9,8 @@ public class Probe : MonoBehaviour {
   private PowerModule powerModule;
   private SolarPanelModule solarPanelModule;
   private DataStorageModule dataStorageModule;
-
-  [SerializeField] private bool topographyScanComponentIsScanning;
-  [SerializeField] private float topographyScanComponentPowerRequired;
-  [SerializeField] private float topographyScanComponentScanCompletion;
-  [SerializeField] private float topographyScanComponentScanRate;
-  [SerializeField] private float topographyScanComponentCompleteScanDataSize;
-
+  private TopographyScannerModule topographyScannerModule;
+  
   [SerializeField] private bool droneIsDeployed;
   [SerializeField] private GameObject drone;
   
@@ -23,18 +18,17 @@ public class Probe : MonoBehaviour {
   [SerializeField] private TMP_Text powerText;
   [SerializeField] private TMP_Text dataText;
 
-  private float dataDelta;
-
   private void Awake() {
-    powerModule = new PowerModule(100);
-    solarPanelModule = new SolarPanelModule(1);
-    dataStorageModule = new DataStorageModule(100);
+    powerModule = new PowerModule(100f);
+    solarPanelModule = new SolarPanelModule(1f);
+    dataStorageModule = new DataStorageModule(100f);
+
+    topographyScannerModule = new TopographyScannerModule(2f, 0.01f, 20f);
+    topographyScannerModule.SetPowerModule(powerModule);
+    topographyScannerModule.SetDataStorageModule(dataStorageModule);
   }
 
   private void Update() {
-    float dataLoaded = 0.0f;
-    float dataProcessed = 0.0f;
-
     if(solarPanelModule.IsDeployed) {
       float chargeSupplied = solarPanelModule.GetCharge(Time.deltaTime);
       powerModule.SupplyCharge(chargeSupplied);
@@ -43,22 +37,8 @@ public class Probe : MonoBehaviour {
     if(!powerModule.DrainCharge(coreStandbyPowerConsumption * Time.deltaTime)) {
       Debug.Log("Systems Shutdown");
     }
-
-    if(topographyScanComponentIsScanning) {
-      float samplePowerRequirement = topographyScanComponentPowerRequired * Time.deltaTime;
-      float scanSampleCompletion = topographyScanComponentScanRate * Time.deltaTime;
-      float sampleDataRequirement = scanSampleCompletion * topographyScanComponentCompleteScanDataSize;
-
-      if(powerModule.DrainCharge(samplePowerRequirement) && dataStorageModule.WriteData(sampleDataRequirement)) {
-        dataLoaded += sampleDataRequirement;
-
-        topographyScanComponentScanCompletion = Mathf.Clamp(topographyScanComponentScanCompletion + scanSampleCompletion, 0f, 1f);
-        if(topographyScanComponentScanCompletion >= 1f) ToggleTopographyScan();
-      }
-    }
-
-    dataDelta = dataLoaded - dataProcessed;
-
+    
+    topographyScannerModule.Update(Time.deltaTime);
     powerModule.Update();
     dataStorageModule.Update();
   }
@@ -85,11 +65,11 @@ public class Probe : MonoBehaviour {
   }
 
   public void ToggleTopographyScan() {
-    topographyScanComponentIsScanning = !topographyScanComponentIsScanning;
+    topographyScannerModule.ToggleScanning();
   }
 
   public void ToggleDrone() {
-    if(topographyScanComponentScanCompletion == 1f) {
+    if(topographyScannerModule.ScanCompletion == 1f) {
       droneIsDeployed = !droneIsDeployed;
       drone.SetActive(droneIsDeployed);
     }
