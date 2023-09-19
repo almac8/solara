@@ -4,10 +4,9 @@ using UnityEngine;
 using TMPro;
 
 public class Probe : MonoBehaviour {
-  [SerializeField] private float coreStandbyPowerConsumption;
+  private PowerModule powerModule;
 
-  [SerializeField] private float powerModuleCharge;
-  [SerializeField] private float powerModuleChargeCapacity;
+  [SerializeField] private float coreStandbyPowerConsumption;
 
   [SerializeField] private bool solarPanelModuleIsDeployed;
   [SerializeField] private float solarPanelModuleRechargeRate;
@@ -29,28 +28,30 @@ public class Probe : MonoBehaviour {
   [SerializeField] private TMP_Text powerText;
   [SerializeField] private TMP_Text dataText;
 
-  private float powerDelta;
   private float dataDelta;
 
+  private void Awake() {
+    powerModule = new PowerModule(100);
+  }
+
   private void Update() {
-    float powerCharged = 0.0f;
-    float powerDisCharged = 0.0f;
     float dataLoaded = 0.0f;
     float dataProcessed = 0.0f;
 
     if(solarPanelModuleIsDeployed) {
-      powerCharged += solarPanelModuleRechargeRate * solarPanelModuleRechargeEfficiency * Time.deltaTime;
+      powerModule.SupplyCharge(solarPanelModuleRechargeRate * solarPanelModuleRechargeEfficiency * Time.deltaTime);
     }
 
-    powerDisCharged += coreStandbyPowerConsumption * Time.deltaTime;
+    if(!powerModule.DrainCharge(coreStandbyPowerConsumption * Time.deltaTime)) {
+      Debug.Log("Systems Shutdown");
+    }
 
     if(topographyScanComponentIsScanning) {
       float samplePowerRequirement = topographyScanComponentPowerRequired * Time.deltaTime;
       float scanSampleCompletion = topographyScanComponentScanRate * Time.deltaTime;
       float sampleDataRequirement = scanSampleCompletion * topographyScanComponentCompleteScanDataSize;
 
-      if(powerModuleCharge - samplePowerRequirement > 0f && dataStorageUsed + sampleDataRequirement < dataStorageCapacity) {
-        powerDisCharged += samplePowerRequirement;
+      if(powerModule.DrainCharge(samplePowerRequirement) && dataStorageUsed + sampleDataRequirement < dataStorageCapacity) {
         dataLoaded += sampleDataRequirement;
 
         topographyScanComponentScanCompletion = Mathf.Clamp(topographyScanComponentScanCompletion + scanSampleCompletion, 0f, 1f);
@@ -58,15 +59,14 @@ public class Probe : MonoBehaviour {
       }
     }
 
-    powerDelta = powerCharged - powerDisCharged;
     dataDelta = dataLoaded - dataProcessed;
 
-    powerModuleCharge = Mathf.Clamp(powerModuleCharge + powerDelta, 0.0f, powerModuleChargeCapacity);
+    powerModule.Update();
     dataStorageUsed = Mathf.Clamp(dataStorageUsed + dataDelta, 0.0f, dataStorageCapacity);
   }
 
   private void FixedUpdate() {
-    powerText.text = "Power: " + powerModuleCharge.ToString() + "/" + powerModuleChargeCapacity.ToString() + " (" + powerDelta.ToString() + ")";
+    powerText.text = "Power: " + powerModule.GetStatusString();
     dataText.text = "Data: " + dataStorageUsed.ToString() + "/" + dataStorageCapacity.ToString() + " (" + dataDelta.ToString() + ")";
   }
 
