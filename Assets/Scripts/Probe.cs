@@ -91,8 +91,9 @@ public class Probe : MonoBehaviour {
   }
 
   public void ToggleDrone() {
-    droneIsDeployed = !droneIsDeployed;
-    drone.SetActive(droneIsDeployed);
-    Debug.Log("Toggle Drone");
+    if(topographyScanComponentScanCompletion == 1f) {
+      droneIsDeployed = !droneIsDeployed;
+      drone.SetActive(droneIsDeployed);
+    }
   }
 }
