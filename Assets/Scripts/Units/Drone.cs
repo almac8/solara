@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Drone : MonoBehaviour {
-  [SerializeField] private GameObject droneUI;
+public class Drone : Unit {
   [SerializeField] private float rotationSpeed;
 
   private bool isCollecting;
@@ -20,14 +19,6 @@ public class Drone : MonoBehaviour {
 
     transform.position = collectionPoint;
     isCollecting = true;
-  }
-
-  private void ShowUI() {
-    droneUI.SetActive(true);
-  }
-
-  public void HideUI() {
-    droneUI.SetActive(false);
   }
 
   private void OnMouseDown() {

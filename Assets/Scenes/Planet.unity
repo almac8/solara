@@ -1701,7 +1701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e963f9f82a79ec7861b889c0637b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  droneUI: {fileID: 1383305481}
+  UI: {fileID: 1383305481}
   rotationSpeed: 150
 --- !u!4 &920465223
 Transform:
@@ -3554,22 +3554,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 662bb81539ea4912886eaa26955cc54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UI: {fileID: 2025185358}
   coreStandbyPowerConsumption: 0.01
-  powerModuleCharge: 50
-  powerModuleChargeCapacity: 100
-  solarPanelModuleIsDeployed: 0
-  solarPanelModuleRechargeRate: 1
-  solarPanelModuleRechargeEfficiency: 1
-  dataStorageUsed: 0
-  dataStorageCapacity: 25
-  topographyScanComponentIsScanning: 0
-  topographyScanComponentPowerRequired: 2
-  topographyScanComponentScanCompletion: 0
-  topographyScanComponentScanRate: 0.01
-  topographyScanComponentCompleteScanDataSize: 20
   droneIsDeployed: 0
   drone: {fileID: 920465220}
-  probeUI: {fileID: 2025185358}
   powerText: {fileID: 1185121651}
   dataText: {fileID: 1232750353}
 --- !u!4 &1752512442

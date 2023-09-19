@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Probe : MonoBehaviour {
+public class Probe : Unit {
   [SerializeField] private float coreStandbyPowerConsumption;
 
   private PowerModule powerModule;
@@ -14,7 +14,6 @@ public class Probe : MonoBehaviour {
   [SerializeField] private bool droneIsDeployed;
   [SerializeField] private GameObject drone;
   
-  [SerializeField] private GameObject probeUI;
   [SerializeField] private TMP_Text powerText;
   [SerializeField] private TMP_Text dataText;
 
@@ -50,14 +49,6 @@ public class Probe : MonoBehaviour {
 
   private void OnMouseDown() {
     ShowUI();
-  }
-
-  private void ShowUI() {
-    probeUI.SetActive(true);
-  }
-
-  public void HideUI() {
-    probeUI.SetActive(false);
   }
 
   public void ToggleSolarPanel() {
