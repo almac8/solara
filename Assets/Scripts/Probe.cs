@@ -21,6 +21,9 @@ public class Probe : MonoBehaviour {
   [SerializeField] private float topographyScanComponentScanCompletion;
   [SerializeField] private float topographyScanComponentScanRate;
   [SerializeField] private float topographyScanComponentCompleteScanDataSize;
+
+  [SerializeField] private bool droneIsDeployed;
+  [SerializeField] private GameObject drone;
   
   [SerializeField] private GameObject probeUI;
   [SerializeField] private TMP_Text powerText;
@@ -85,5 +88,11 @@ public class Probe : MonoBehaviour {
 
   public void ToggleTopographyScan() {
     topographyScanComponentIsScanning = !topographyScanComponentIsScanning;
+  }
+
+  public void ToggleDrone() {
+    droneIsDeployed = !droneIsDeployed;
+    drone.SetActive(droneIsDeployed);
+    Debug.Log("Toggle Drone");
   }
 }
