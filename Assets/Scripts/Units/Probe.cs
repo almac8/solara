@@ -9,9 +9,7 @@ public class Probe : Unit {
   private SolarPanelModule solarPanelModule;
   private DataStorageModule dataStorageModule;
   private TopographyScannerModule topographyScannerModule;
-  
-  [SerializeField] private bool droneIsDeployed;
-  [SerializeField] private GameObject drone;
+  private DroneDockModule droneDockModule;
   
   [SerializeField] private TMP_Text powerText;
   [SerializeField] private TMP_Text dataText;
@@ -19,7 +17,7 @@ public class Probe : Unit {
   private void Awake() {
     powerModule = new PowerModule(100f);
 
-    coreProcessModule = new CoreProcessModule(1f);
+    coreProcessModule = new CoreProcessModule(0.001f);
     coreProcessModule.SetPowerModule(powerModule);
     
     solarPanelModule = new SolarPanelModule(1f);
@@ -27,9 +25,12 @@ public class Probe : Unit {
 
     dataStorageModule = new DataStorageModule(100f);
 
-    topographyScannerModule = new TopographyScannerModule(2f, 0.01f, 20f);
+    topographyScannerModule = new TopographyScannerModule(2f, 0.01f, 5f);
     topographyScannerModule.SetPowerModule(powerModule);
     topographyScannerModule.SetDataStorageModule(dataStorageModule);
+
+    droneDockModule = new DroneDockModule();
+    droneDockModule.SetTopographyScannerModule(topographyScannerModule);
   }
 
   private void Update() {
@@ -58,9 +59,6 @@ public class Probe : Unit {
   }
 
   public void ToggleDrone() {
-    if(topographyScannerModule.ScanCompletion == 1f) {
-      droneIsDeployed = !droneIsDeployed;
-      drone.SetActive(droneIsDeployed);
-    }
+    droneDockModule.ToggleDocked();
   }
 }
