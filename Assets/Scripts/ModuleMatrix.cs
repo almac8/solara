@@ -14,7 +14,6 @@ public class ModuleMatrix : MonoBehaviour {
 
     CoreProcess coreProcess = gameObject.AddComponent<CoreProcess>();
     coreProcess.standbyPowerConsumption = 0.001f;
-    coreProcess.SetPowerModule(powerModule);
     
     solarPanelModule = new SolarPanelModule(1f);
     solarPanelModule.SetPowerModule(powerModule);
@@ -30,8 +29,8 @@ public class ModuleMatrix : MonoBehaviour {
   }
 
   private void Update() {
-    Debug.Log(powerModule.GetStatusString());
-    //  coreProcessModule.Update(Time.deltaTime);
+    coreProcess.RunStep(Time.deltaTime);
+
     solarPanelModule.Update(Time.deltaTime);
     topographyScannerModule.Update(Time.deltaTime);
     powerModule.Update();

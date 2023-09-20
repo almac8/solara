@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class CoreProcess : Module {
   public float standbyPowerConsumption;
-  private PowerModule powerModule;
+  
+  private PowerStorage powerStorage;
 
-  private void Update() {
-    if(!powerModule.DrainCharge(standbyPowerConsumption * Time.deltaTime)) {
-      Debug.Log("Systems Shutdown");
-    }
+  private void Start() {
+    powerStorage = gameObject.GetComponent<PowerStorage>();
   }
 
-  public void SetPowerModule(PowerModule powerModule) {
-    this.powerModule = powerModule;
+  private void RunStep(deltaTime) {
+    if(!powerStorage.DrainCharge(standbyPowerConsumption * deltaTime)) {
+      Debug.Log("Systems Shutdown");
+    }
   }
 }
