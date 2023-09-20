@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 
 public class Probe : Unit {
-  private CoreProcessModule coreProcessModule;
   private PowerModule powerModule;
   private SolarPanelModule solarPanelModule;
   private DataStorageModule dataStorageModule;
@@ -17,8 +16,9 @@ public class Probe : Unit {
   private void Awake() {
     powerModule = new PowerModule(100f);
 
-    coreProcessModule = new CoreProcessModule(0.001f);
-    coreProcessModule.SetPowerModule(powerModule);
+    CoreProcess coreProcess = gameObject.AddComponent<CoreProcess>();
+    coreProcess.standbyPowerConsumption = 0.001f;
+    coreProcess.SetPowerModule(powerModule);
     
     solarPanelModule = new SolarPanelModule(1f);
     solarPanelModule.SetPowerModule(powerModule);
@@ -34,7 +34,7 @@ public class Probe : Unit {
   }
 
   private void Update() {
-    coreProcessModule.Update(Time.deltaTime);
+    //  coreProcessModule.Update(Time.deltaTime);
     solarPanelModule.Update(Time.deltaTime);
     topographyScannerModule.Update(Time.deltaTime);
     powerModule.Update();
