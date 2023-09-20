@@ -8,9 +8,22 @@ public class SolarPanelModule {
   private float rechargeRate;
   private float rechargeEfficiency;
 
+  private PowerModule powerModule;
+
   public SolarPanelModule(float rechargeRate) {
     this.rechargeRate = rechargeRate;
     rechargeEfficiency = 1f;
+  }
+
+  public void Update(float deltaTime) {
+    if(IsDeployed) {
+      float chargeSupplied = GetCharge(deltaTime);
+      powerModule.SupplyCharge(chargeSupplied);
+    }
+  }
+
+  public void SetPowerModule(PowerModule powerModule) {
+    this.powerModule = powerModule;
   }
 
   public float GetCharge(float deltaTime) {

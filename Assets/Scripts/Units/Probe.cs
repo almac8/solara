@@ -19,7 +19,10 @@ public class Probe : Unit {
 
   private void Awake() {
     powerModule = new PowerModule(100f);
+    
     solarPanelModule = new SolarPanelModule(1f);
+    solarPanelModule.SetPowerModule(powerModule);
+
     dataStorageModule = new DataStorageModule(100f);
 
     topographyScannerModule = new TopographyScannerModule(2f, 0.01f, 20f);
@@ -28,15 +31,11 @@ public class Probe : Unit {
   }
 
   private void Update() {
-    if(solarPanelModule.IsDeployed) {
-      float chargeSupplied = solarPanelModule.GetCharge(Time.deltaTime);
-      powerModule.SupplyCharge(chargeSupplied);
-    }
-
     if(!powerModule.DrainCharge(coreStandbyPowerConsumption * Time.deltaTime)) {
       Debug.Log("Systems Shutdown");
     }
     
+    solarPanelModule.Update(Time.deltaTime);
     topographyScannerModule.Update(Time.deltaTime);
     powerModule.Update();
     dataStorageModule.Update();
