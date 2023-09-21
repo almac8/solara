@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TopographyScanner : Module {
-  public bool IsScanning { get; private set; }
+  public bool isScanning;
   public float ScanCompletion { get; private set; }
 
   public float powerRequired;
@@ -11,26 +11,26 @@ public class TopographyScanner : Module {
   public float completeScanDataSize;
   
   private PowerStorage powerStorage;
-  private DataStorageModule dataStorageModule;
+  private DataStorage dataStorage;
 
   private void Start() {
     powerStorage = gameObject.GetComponent<PowerStorage>();
-    //  dataStorageModule = 
+    dataStorage = gameObject.GetComponent<DataStorage>();
   }
 
   public void ToggleScanning() {
-    IsScanning = !IsScanning;
+    isScanning = !isScanning;
   }
 
   public void RunStep(float deltaTime) {
-    if(IsScanning) {
+    if(isScanning) {
       float samplePowerRequirement = powerRequired * deltaTime;
 
       if(powerStorage.DrainCharge(samplePowerRequirement)) {
         float scanSampleCompletion = scanRate * Time.deltaTime;
         float sampleDataRequirement = scanSampleCompletion * completeScanDataSize;
 
-        if(dataStorageModule.WriteData(sampleDataRequirement)) {
+        if(dataStorage.WriteData(sampleDataRequirement)) {
           ScanCompletion = Mathf.Clamp(ScanCompletion + scanSampleCompletion, 0f, 1f);
           if(ScanCompletion == 1f) ToggleScanning();
         } else {

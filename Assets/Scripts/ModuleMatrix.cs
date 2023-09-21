@@ -7,8 +7,8 @@ public class ModuleMatrix : MonoBehaviour {
   [SerializeField] private CoreProcess coreProcess;
   [SerializeField] private TopographyScanner topographyScanner;
   [SerializeField] private SolarPanel solarPanel;
+  [SerializeField] private DataStorage dataStorage;
 
-  private DataStorageModule dataStorageModule;
   private DroneDockModule droneDockModule;
 
   private void Awake() {
@@ -28,7 +28,8 @@ public class ModuleMatrix : MonoBehaviour {
     solarPanel.rechargeRate = 1f;
     solarPanel.rechargeEfficiency = 1f;
 
-    dataStorageModule = new DataStorageModule(100f);
+    dataStorage = gameObject.AddComponent<DataStorage>();
+    dataStorage.storageCapacity = 100f;
 
     droneDockModule = new DroneDockModule();
     //  droneDockModule.SetTopographyScannerModule(topographyScannerModule);
@@ -39,7 +40,6 @@ public class ModuleMatrix : MonoBehaviour {
     solarPanel.RunStep(Time.deltaTime);
     topographyScanner.RunStep(Time.deltaTime);
     powerStorage.RunStep();
-
-    dataStorageModule.Update();
+    dataStorage.RunStep();
   }
 }
