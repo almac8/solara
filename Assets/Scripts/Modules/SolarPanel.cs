@@ -6,8 +6,7 @@ public class SolarPanel : Module {
   public bool isDeployed;
   public float rechargeRate;
   public float rechargeEfficiency;
-
-  private PowerStorage powerStorage;
+  public PowerStorage powerStorage;
 
   private void Start() {
     powerStorage = gameObject.GetComponent<PowerStorage>();

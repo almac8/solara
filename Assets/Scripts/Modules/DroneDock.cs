@@ -5,8 +5,7 @@ using UnityEngine;
 public class DroneDock : Module {
   public bool droneIsDeployed;
   public GameObject drone;
-
-  private TopographyScanner topographyScanner;
+  public TopographyScanner topographyScanner;
 
   private void Start() {
     topographyScanner = gameObject.GetComponent<TopographyScanner>();

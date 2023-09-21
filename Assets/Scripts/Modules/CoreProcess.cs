@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CoreProcess : Module {
   public float standbyPowerConsumption;
-  
-  private PowerStorage powerStorage;
+  public PowerStorage powerStorage;
 
   private void Start() {
     powerStorage = gameObject.GetComponent<PowerStorage>();

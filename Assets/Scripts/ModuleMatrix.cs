@@ -3,52 +3,59 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ModuleMatrix : MonoBehaviour {
-  private PowerStorage powerStorage;
-  private CoreProcess coreProcess;
-  private TopographyScanner topographyScanner;
-  private SolarPanel solarPanel;
-  private DataStorage dataStorage;
-  private DroneDock droneDock;
+  public enum ModuleType {
+    POWER_STORAGE,
+    CORE_PROCESS,
+    TOPOGRAPHY_SCANNER,
+    SOLAR_PANEL,
+    DATA_STORAGE,
+    DRONE_DOCK
+  }
 
-  private void Awake() {
-    powerStorage = gameObject.AddComponent<PowerStorage>();
-    powerStorage.charge = 100f;
-    powerStorage.chargeCapacity = 100f;
+  private List<Module> modules;
 
-    coreProcess = gameObject.AddComponent<CoreProcess>();
-    coreProcess.standbyPowerConsumption = 0.001f;
+  private void Start() {
+    modules = new List<Module>();
+    GetComponents<Module>(modules);
+  }
 
-    topographyScanner = gameObject.AddComponent<TopographyScanner>();
-    topographyScanner.powerRequired = 2f;
-    topographyScanner.scanRate = 0.01f;
-    topographyScanner.completeScanDataSize = 5f;
+  public Module AddModule(ModuleType type) {
+    Module newModule = null;
 
-    solarPanel = gameObject.AddComponent<SolarPanel>();
-    solarPanel.rechargeRate = 1f;
-    solarPanel.rechargeEfficiency = 1f;
+    switch (type) {
+      case ModuleType.POWER_STORAGE:
+        newModule = gameObject.AddComponent<PowerStorage>();
+        break;
+      
+      case ModuleType.CORE_PROCESS:
+        newModule = gameObject.AddComponent<CoreProcess>();
+        break;
 
-    dataStorage = gameObject.AddComponent<DataStorage>();
-    dataStorage.storageCapacity = 100f;
+      case ModuleType.TOPOGRAPHY_SCANNER:
+        newModule = gameObject.AddComponent<TopographyScanner>();
+        break;
 
-    droneDock = gameObject.AddComponent<DroneDock>();
+      case ModuleType.SOLAR_PANEL:
+        newModule = gameObject.AddComponent<SolarPanel>();
+        break;
+
+      case ModuleType.DATA_STORAGE:
+        newModule = gameObject.AddComponent<DataStorage>();
+        break;
+
+      case ModuleType.DRONE_DOCK:
+        newModule = gameObject.AddComponent<DroneDock>();
+        break;
+    }
+
+    modules.Add(newModule);
+    return newModule;
   }
 
   private void Update() {
     float deltaTime = Time.deltaTime;
-
-    coreProcess.RunStep(deltaTime);
-    solarPanel.RunStep(deltaTime);
-    topographyScanner.RunStep(deltaTime);
-    powerStorage.RunStep(deltaTime);
-    dataStorage.RunStep(deltaTime);
-    droneDock.RunStep(deltaTime);
-  }
-  
-  public string GetPowerStatus() {
-    return powerStorage.GetStatusString();
-  }
-
-  public string GetDataStorageStatus() {
-    return dataStorage.GetStatusString();
+    foreach (Module module in modules) {
+      module.RunStep(deltaTime);
+    }
   }
 }

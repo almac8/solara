@@ -9,9 +9,8 @@ public class TopographyScanner : Module {
   public float powerRequired;
   public float scanRate;
   public float completeScanDataSize;
-  
-  private PowerStorage powerStorage;
-  private DataStorage dataStorage;
+  public PowerStorage powerStorage;
+  public DataStorage dataStorage;
 
   private void Start() {
     powerStorage = gameObject.GetComponent<PowerStorage>();
