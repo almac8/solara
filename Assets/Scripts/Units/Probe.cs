@@ -10,8 +10,8 @@ public class Probe : Unit {
   [SerializeField] private TMP_Text dataText;
 
   private void FixedUpdate() {
-    //  powerText.text = "Power: " + powerModule.GetStatusString();
-    //  dataText.text = "Data: " + dataStorageModule.GetStatusString();
+    powerText.text = "Power: " + moduleMatrix.GetPowerStatus();
+    dataText.text = "Data: " + moduleMatrix.GetDataStorageStatus();
   }
 
   private void OnMouseDown() {
