@@ -2,40 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TopographyScannerModule {
+public class TopographyScanner : Module {
   public bool IsScanning { get; private set; }
   public float ScanCompletion { get; private set; }
-  
-  private float powerRequired;
-  private float scanRate;
-  private float completeScanDataSize;
 
-  private PowerModule powerModule;
+  public float powerRequired;
+  public float scanRate;
+  public float completeScanDataSize;
+  
+  private PowerStorage powerStorage;
   private DataStorageModule dataStorageModule;
 
-  public TopographyScannerModule(float powerRequired, float scanRate, float completeScanDataSize) {
-    this.powerRequired = powerRequired;
-    this.scanRate = scanRate;
-    this.completeScanDataSize = completeScanDataSize;
+  private void Start() {
+    powerStorage = gameObject.GetComponent<PowerStorage>();
+    //  dataStorageModule = 
   }
 
   public void ToggleScanning() {
     IsScanning = !IsScanning;
   }
 
-  public void SetPowerModule(PowerModule powerModule) {
-    this.powerModule = powerModule;
-  }
-
-  public void SetDataStorageModule(DataStorageModule dataStorageModule) {
-    this.dataStorageModule = dataStorageModule;
-  }
-
-  public void Update(float deltaTime) {
+  public void RunStep(float deltaTime) {
     if(IsScanning) {
       float samplePowerRequirement = powerRequired * deltaTime;
 
-      if(powerModule.DrainCharge(samplePowerRequirement)) {
+      if(powerStorage.DrainCharge(samplePowerRequirement)) {
         float scanSampleCompletion = scanRate * Time.deltaTime;
         float sampleDataRequirement = scanSampleCompletion * completeScanDataSize;
 
@@ -43,7 +34,7 @@ public class TopographyScannerModule {
           ScanCompletion = Mathf.Clamp(ScanCompletion + scanSampleCompletion, 0f, 1f);
           if(ScanCompletion == 1f) ToggleScanning();
         } else {
-          powerModule.SupplyCharge(samplePowerRequirement);
+          powerStorage.SupplyCharge(samplePowerRequirement);
         }
       }
     }

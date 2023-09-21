@@ -3,39 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ModuleMatrix : MonoBehaviour {
+  [SerializeField] private PowerStorage powerStorage;
   [SerializeField] private CoreProcess coreProcess;
+  [SerializeField] private TopographyScanner topographyScanner;
 
   private SolarPanelModule solarPanelModule;
   private DataStorageModule dataStorageModule;
-  private TopographyScannerModule topographyScannerModule;
   private DroneDockModule droneDockModule;
 
   private void Awake() {
-    PowerStorage powerStorage = gameObject.AddComponent<PowerStorage>();
-    //  powerModule = new PowerModule(100f);
+    powerStorage = gameObject.AddComponent<PowerStorage>();
+    powerStorage.charge = 100f;
+    powerStorage.chargeCapacity = 100f;
 
     coreProcess = gameObject.AddComponent<CoreProcess>();
     coreProcess.standbyPowerConsumption = 0.001f;
+
+    topographyScanner = gameObject.AddComponent<TopographyScanner>();
+    topographyScanner.powerRequired = 2f;
+    topographyScanner.scanRate = 0.01f;
+    topographyScanner.completeScanDataSize = 5f;
     
     solarPanelModule = new SolarPanelModule(1f);
     //  solarPanelModule.SetPowerModule(powerModule);
 
     dataStorageModule = new DataStorageModule(100f);
 
-    topographyScannerModule = new TopographyScannerModule(2f, 0.01f, 5f);
-    //  topographyScannerModule.SetPowerModule(powerModule);
-    topographyScannerModule.SetDataStorageModule(dataStorageModule);
-
     droneDockModule = new DroneDockModule();
-    droneDockModule.SetTopographyScannerModule(topographyScannerModule);
+    //  droneDockModule.SetTopographyScannerModule(topographyScannerModule);
   }
 
   private void Update() {
     coreProcess.RunStep(Time.deltaTime);
 
     solarPanelModule.Update(Time.deltaTime);
-    topographyScannerModule.Update(Time.deltaTime);
-    //  powerModule.Update();
+    
+    topographyScanner.RunStep(Time.deltaTime);
+    powerStorage.RunStep();
+
     dataStorageModule.Update();
   }
 }
