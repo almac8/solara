@@ -23,7 +23,7 @@ public class PowerStorage : Module {
     }
   }
 
-  public void RunStep() {
+  public override void RunStep(float deltaTime) {
     chargeDelta = powerCharged - powerDisCharged;
     charge = Mathf.Clamp(charge + chargeDelta, 0.0f, chargeCapacity);
 

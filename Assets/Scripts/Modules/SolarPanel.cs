@@ -13,7 +13,7 @@ public class SolarPanel : Module {
     powerStorage = gameObject.GetComponent<PowerStorage>();
   }
 
-  public void RunStep(float deltaTime) {
+  public override void RunStep(float deltaTime) {
     float chargeSupplied = isDeployed ? rechargeRate * rechargeEfficiency * deltaTime : 0f;
     powerStorage.SupplyCharge(chargeSupplied);
   }

@@ -34,11 +34,13 @@ public class ModuleMatrix : MonoBehaviour {
   }
 
   private void Update() {
-    coreProcess.RunStep(Time.deltaTime);
-    solarPanel.RunStep(Time.deltaTime);
-    topographyScanner.RunStep(Time.deltaTime);
-    powerStorage.RunStep();
-    dataStorage.RunStep();
-    droneDock.RunStep();
+    float deltaTime = Time.deltaTime;
+
+    coreProcess.RunStep(deltaTime);
+    solarPanel.RunStep(deltaTime);
+    topographyScanner.RunStep(deltaTime);
+    powerStorage.RunStep(deltaTime);
+    dataStorage.RunStep(deltaTime);
+    droneDock.RunStep(deltaTime);
   }
 }

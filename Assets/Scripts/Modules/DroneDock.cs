@@ -12,7 +12,7 @@ public class DroneDock : Module {
     topographyScanner = gameObject.GetComponent<TopographyScanner>();
   }
 
-  public void RunStep() {
+  public override void RunStep(float deltaTime) {
     drone.SetActive(droneIsDeployed);
   }
 }

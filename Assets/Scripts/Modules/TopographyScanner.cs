@@ -22,7 +22,7 @@ public class TopographyScanner : Module {
     isScanning = !isScanning;
   }
 
-  public void RunStep(float deltaTime) {
+  public override void RunStep(float deltaTime) {
     if(isScanning) {
       float samplePowerRequirement = powerRequired * deltaTime;
 

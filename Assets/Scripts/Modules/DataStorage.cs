@@ -10,7 +10,7 @@ public class DataStorage : Module {
   private float dataProcessed;
   private float storageDelta;
 
-  public void RunStep() {
+  public override void RunStep(float deltaTime) {
     storageDelta = dataWritten - dataProcessed;
     storageUsed = Mathf.Clamp(storageUsed + storageDelta, 0.0f, storageCapacity);
     

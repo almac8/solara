@@ -11,7 +11,7 @@ public class CoreProcess : Module {
     powerStorage = gameObject.GetComponent<PowerStorage>();
   }
 
-  public void RunStep(float deltaTime) {
+  public override void RunStep(float deltaTime) {
     if(!powerStorage.DrainCharge(standbyPowerConsumption * deltaTime)) {
       Debug.Log("Systems Shutdown");
     }
