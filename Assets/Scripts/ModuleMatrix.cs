@@ -3,25 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ModuleMatrix : MonoBehaviour {
-  private PowerModule powerModule;
+  [SerializeField] private CoreProcess coreProcess;
+
   private SolarPanelModule solarPanelModule;
   private DataStorageModule dataStorageModule;
   private TopographyScannerModule topographyScannerModule;
   private DroneDockModule droneDockModule;
 
   private void Awake() {
-    powerModule = new PowerModule(100f);
+    PowerStorage powerStorage = gameObject.AddComponent<PowerStorage>();
+    //  powerModule = new PowerModule(100f);
 
-    CoreProcess coreProcess = gameObject.AddComponent<CoreProcess>();
+    coreProcess = gameObject.AddComponent<CoreProcess>();
     coreProcess.standbyPowerConsumption = 0.001f;
     
     solarPanelModule = new SolarPanelModule(1f);
-    solarPanelModule.SetPowerModule(powerModule);
+    //  solarPanelModule.SetPowerModule(powerModule);
 
     dataStorageModule = new DataStorageModule(100f);
 
     topographyScannerModule = new TopographyScannerModule(2f, 0.01f, 5f);
-    topographyScannerModule.SetPowerModule(powerModule);
+    //  topographyScannerModule.SetPowerModule(powerModule);
     topographyScannerModule.SetDataStorageModule(dataStorageModule);
 
     droneDockModule = new DroneDockModule();
@@ -33,7 +35,7 @@ public class ModuleMatrix : MonoBehaviour {
 
     solarPanelModule.Update(Time.deltaTime);
     topographyScannerModule.Update(Time.deltaTime);
-    powerModule.Update();
+    //  powerModule.Update();
     dataStorageModule.Update();
   }
 }

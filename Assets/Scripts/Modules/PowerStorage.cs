@@ -2,19 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerModule {
-  private float charge;
-  private float _chargeCapacity;
+public class PowerStorage : Module {
+  public float charge;
+  public float chargeCapacity;
   
   private float powerCharged;
   private float powerDisCharged;
   private float chargeDelta;
 
-  public PowerModule(float chargeCapacity) {
-    _chargeCapacity = chargeCapacity;
-    charge = _chargeCapacity;
-  }
-  
   public void SupplyCharge(float chargeSupplied) {
     powerCharged += chargeSupplied;
   }
@@ -28,15 +23,15 @@ public class PowerModule {
     }
   }
 
-  public void Update() {
+  public void RunStep() {
     chargeDelta = powerCharged - powerDisCharged;
-    charge = Mathf.Clamp(charge + chargeDelta, 0.0f, _chargeCapacity);
+    charge = Mathf.Clamp(charge + chargeDelta, 0.0f, chargeCapacity);
 
     powerCharged = 0f;
     powerDisCharged = 0f;
   }
 
   public string GetStatusString() {
-    return $"{ charge }/{ _chargeCapacity } ({ chargeDelta })";
+    return $"{ charge }/{ chargeCapacity } ({ chargeDelta })";
   }
 }
