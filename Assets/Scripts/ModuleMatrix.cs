@@ -9,7 +9,8 @@ public class ModuleMatrix : MonoBehaviour {
     TOPOGRAPHY_SCANNER,
     SOLAR_PANEL,
     DATA_STORAGE,
-    DRONE_DOCK
+    DRONE_DOCK,
+    KNOWLEDGE_DATABASE
   }
 
   private List<Module> modules;
@@ -46,6 +47,10 @@ public class ModuleMatrix : MonoBehaviour {
       case ModuleType.DRONE_DOCK:
         newModule = gameObject.AddComponent<DroneDock>();
         break;
+
+      case ModuleType.KNOWLEDGE_DATABASE:
+       newModule = gameObject.AddComponent<KnowledgeDatabase>();
+       break;
     }
 
     modules.Add(newModule);

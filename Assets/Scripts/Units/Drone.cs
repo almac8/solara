@@ -18,13 +18,9 @@ public class Drone : Unit {
   }
 
   [SerializeField] private DroneState state;
+  [SerializeField] private GameObject homeDock;
   private GameObject target;
-  private Vector3 homingPoint;
-
-  private void Start() {
-    homingPoint = transform.position;
-  }
-
+  
   private void Update() {
     switch(state) {
       case DroneState.DOCKED:
@@ -49,11 +45,11 @@ public class Drone : Unit {
         break;
 
       case DroneState.HOMING:
-        if(transform.position == homingPoint) {
+        if(transform.position == homeDock.transform.position) {
           state = DroneState.DOCKED;
         } else {
           transform.eulerAngles = Vector3.zero;
-          Vector3 direction = Vector3.Normalize(homingPoint - transform.position);
+          Vector3 direction = Vector3.Normalize(homeDock.transform.position - transform.position);
           transform.Translate(direction * Time.deltaTime * movementSpeed);
         }
         break;
@@ -61,8 +57,16 @@ public class Drone : Unit {
   }
 
   public void Collect(GameObject objectToCollect) {
-    target = objectToCollect;
-    state = DroneState.MOVING;
+    KnowledgeDatabase knowledgeDatabase = homeDock.GetComponent<KnowledgeDatabase>();
+    float flyingUnitTopographicalSafeDistance = knowledgeDatabase.localTopographyRadius;
+    float distanceToTarget = Vector3.Distance(homeDock.transform.position, objectToCollect.transform.position);
+
+    if(distanceToTarget < flyingUnitTopographicalSafeDistance) {
+      target = objectToCollect;
+      state = DroneState.MOVING;
+    } else {
+      Debug.Log("Requires local topography information");
+    }
   }
 
   private void OnMouseDown() {

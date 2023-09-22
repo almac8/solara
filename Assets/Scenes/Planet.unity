@@ -1729,7 +1729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8060983304523548042, guid: a485aad2e435c5368bc39c2947f628ed, type: 3}
       propertyPath: m_Name
-      value: Basic Module Matrix
+      value: Emergency Module Matrix
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1741,6 +1741,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8060983304523548042, guid: a485aad2e435c5368bc39c2947f628ed, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2038332690}
+    - targetCorrespondingSourceObject: {fileID: 8060983304523548042, guid: a485aad2e435c5368bc39c2947f628ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2038332696}
+    - targetCorrespondingSourceObject: {fileID: 8060983304523548042, guid: a485aad2e435c5368bc39c2947f628ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2038332695}
+    - targetCorrespondingSourceObject: {fileID: 8060983304523548042, guid: a485aad2e435c5368bc39c2947f628ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2038332694}
+    - targetCorrespondingSourceObject: {fileID: 8060983304523548042, guid: a485aad2e435c5368bc39c2947f628ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2038332693}
+    - targetCorrespondingSourceObject: {fileID: 8060983304523548042, guid: a485aad2e435c5368bc39c2947f628ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2038332692}
   m_SourcePrefab: {fileID: 100100000, guid: a485aad2e435c5368bc39c2947f628ed, type: 3}
 --- !u!1 &859637997
 GameObject:
@@ -1967,6 +1982,7 @@ MonoBehaviour:
   cargoStorage: 0
   extractionRate: 0.5
   state: 0
+  homeDock: {fileID: 2038332686}
 --- !u!4 &920465223
 Transform:
   m_ObjectHideFlags: 0
@@ -4327,6 +4343,82 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   standbyPowerConsumption: 0.001
+  powerStorage: {fileID: 2038332689}
+--- !u!114 &2038332692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038332686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8675a5ee080681c3e9fcf3ab7a3a10b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localTopographyRadius: 0
+--- !u!114 &2038332693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038332686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68317addf60400a99af1768bc0ec6ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droneIsDeployed: 0
+  drone: {fileID: 920465220}
+  topographyScanner: {fileID: 2038332695}
+--- !u!114 &2038332694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038332686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cde857abd32f3142aab3917dc6ef45f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storageUsed: 0
+  storageCapacity: 50
+--- !u!114 &2038332695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038332686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8ad67b3a71f4adeda6e3fa417ba13ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isScanning: 0
+  powerRequired: 0.01
+  scanRate: 1
+  completeScanDataSize: 20
+  powerStorage: {fileID: 2038332689}
+  dataStorage: {fileID: 0}
+--- !u!114 &2038332696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038332686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 649a64d0f99a65d5c926efa209a81836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDeployed: 0
+  rechargeRate: 1
+  rechargeEfficiency: 1
   powerStorage: {fileID: 2038332689}
 --- !u!1 &2068621816
 GameObject:

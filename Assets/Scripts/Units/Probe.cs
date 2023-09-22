@@ -36,6 +36,8 @@ public class Probe : Unit {
     dataStorage.storageCapacity = 100f;
 
     droneDock = moduleMatrix.AddModule(ModuleMatrix.ModuleType.DRONE_DOCK) as DroneDock;
+
+    moduleMatrix.AddModule(ModuleMatrix.ModuleType.KNOWLEDGE_DATABASE);
   }
 
   private void FixedUpdate() {
