@@ -27,6 +27,15 @@ public class DataStorage : Module {
     }
   }
 
+  public bool ReadData(float dataToRead) {
+    if(storageUsed - dataToRead > 0f) {
+      dataProcessed += dataToRead;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   public string GetStatusString() {
     return $"{ storageUsed }/{ storageCapacity } ({ storageDelta })";
   }
