@@ -30,7 +30,7 @@ public class Drone : Unit {
         Vector3 collectionPoint = target.transform.position;
         collectionPoint.y = transform.position.y;
 
-        if(transform.position == collectionPoint) {
+        if(Vector3.Distance(transform.position, collectionPoint) < 0.01) {
           state = DroneState.COLLECTING;
         } else {
           Vector3 direction = Vector3.Normalize(collectionPoint - transform.position);
@@ -45,11 +45,14 @@ public class Drone : Unit {
         break;
 
       case DroneState.HOMING:
-        if(transform.position == homeDock.transform.position) {
+        Vector3 homePosition = homeDock.transform.position;
+        homePosition.y = 1;
+
+        if(Vector3.Distance(transform.position, homePosition) < 0.01) {
           state = DroneState.DOCKED;
         } else {
           transform.eulerAngles = Vector3.zero;
-          Vector3 direction = Vector3.Normalize(homeDock.transform.position - transform.position);
+          Vector3 direction = Vector3.Normalize(homePosition - transform.position);
           transform.Translate(direction * Time.deltaTime * movementSpeed);
         }
         break;

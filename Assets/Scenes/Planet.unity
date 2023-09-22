@@ -1756,6 +1756,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8060983304523548042, guid: a485aad2e435c5368bc39c2947f628ed, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2038332692}
+    - targetCorrespondingSourceObject: {fileID: 8060983304523548042, guid: a485aad2e435c5368bc39c2947f628ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2038332697}
   m_SourcePrefab: {fileID: 100100000, guid: a485aad2e435c5368bc39c2947f628ed, type: 3}
 --- !u!1 &859637997
 GameObject:
@@ -4403,7 +4406,7 @@ MonoBehaviour:
   scanRate: 1
   completeScanDataSize: 20
   powerStorage: {fileID: 2038332689}
-  dataStorage: {fileID: 0}
+  dataStorage: {fileID: 2038332694}
 --- !u!114 &2038332696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4420,6 +4423,23 @@ MonoBehaviour:
   rechargeRate: 1
   rechargeEfficiency: 1
   powerStorage: {fileID: 2038332689}
+--- !u!114 &2038332697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038332686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3365d0f46e3105dfd9748a15494ad6ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAnalizing: 0
+  dataAnalized: 0
+  analysisRate: 1
+  knowledgeDatabase: {fileID: 2038332692}
+  dataStorage: {fileID: 2038332694}
 --- !u!1 &2068621816
 GameObject:
   m_ObjectHideFlags: 0
