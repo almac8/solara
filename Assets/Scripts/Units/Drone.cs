@@ -19,7 +19,7 @@ public class Drone : Unit {
 
   [SerializeField] private DroneState state;
   [SerializeField] private GameObject homeDock;
-  private GameObject target;
+  [SerializeField] private GameObject target;
   
   private void Update() {
     switch(state) {
