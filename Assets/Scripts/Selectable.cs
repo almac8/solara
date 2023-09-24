@@ -15,7 +15,7 @@ public class Selectable : MonoBehaviour {
 
   private void Select() {
     IsSelected = true;
-    SelectionManager.Select(gameObject);
+    SelectionManager.Select(this);
     Selected();
   }
 

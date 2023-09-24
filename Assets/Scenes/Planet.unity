@@ -335,6 +335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1182011471568827517, guid: ad01c8d490d9ef9d7a893724b0f2199f, type: 3}
+    - {fileID: 4448732510619342720, guid: ad01c8d490d9ef9d7a893724b0f2199f, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4464258411262011794, guid: ad01c8d490d9ef9d7a893724b0f2199f, type: 3}
     m_AddedGameObjects:
@@ -730,7 +731,7 @@ GameObject:
   m_Component:
   - component: {fileID: 920465223}
   - component: {fileID: 920465222}
-  - component: {fileID: 920465221}
+  - component: {fileID: 920465224}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -738,27 +739,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!65 &920465221
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920465220}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &920465222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,7 +751,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e963f9f82a79ec7861b889c0637b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UI: {fileID: 0}
   rotationSpeed: 150
   movementSpeed: 1
   cargoStorageCapacity: 5
@@ -796,6 +775,27 @@ Transform:
   - {fileID: 955736449}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &920465224
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920465220}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &955736448
 GameObject:
   m_ObjectHideFlags: 0
