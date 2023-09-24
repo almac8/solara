@@ -71,8 +71,4 @@ public class Drone : Unit {
       Debug.Log("Requires local topography information");
     }
   }
-
-  private void OnMouseDown() {
-    ShowUI();
-  }
 }
