@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(47, 35, 56, 0); justify-content: space-between; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+        <ui:Label tabindex="-1" text="Unit Label" display-tooltip-when-elided="true" name="unit_label" style="font-size: 64px; align-self: flex-start; background-color: rgba(47, 35, 56, 0.53); padding-left: 32px; padding-right: 32px; padding-top: 16px; padding-bottom: 16px; display: flex; visibility: visible;" />
+        <ui:Label tabindex="-1" text="Resource Label" display-tooltip-when-elided="true" name="resource_label" style="font-size: 32px; -unity-text-align: upper-right; align-self: flex-end; background-color: rgba(47, 35, 56, 0.53); padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px;" />
+    </ui:VisualElement>
+</ui:UXML>
