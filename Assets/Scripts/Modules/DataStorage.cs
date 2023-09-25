@@ -37,6 +37,6 @@ public class DataStorage : Module {
   }
 
   public string GetStatusString() {
-    return $"{ storageUsed }/{ storageCapacity } ({ storageDelta })";
+    return $"{ Mathf.Round(storageUsed) }/{ storageCapacity } ({ storageDelta })";
   }
 }

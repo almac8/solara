@@ -32,6 +32,6 @@ public class PowerStorage : Module {
   }
 
   public string GetStatusString() {
-    return $"{ charge }/{ chargeCapacity } ({ chargeDelta })";
+    return $"{ Mathf.Round(charge) }/{ chargeCapacity } ({ chargeDelta })";
   }
 }

@@ -2,24 +2,31 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class HUD : MonoBehaviour {
+  [SerializeField] private Drone drone;
   private VisualElement root;
 
   private VisualElement unitHUD;
   private Label unitLabel;
-  private Label resourceLabel;
   private ProgressBar powerProgressBar;
+  private ProgressBar dataProgressBar;
   private Button deploySolarPanelButton;
   private Button deployDroneButton;
   private Button topographyScanButton;
+  private Button analizeDataButton;
   private Button closeButton;
+
+  private VisualElement resourceHUD;
+  private Label resourceLabel;
+  private Button collectSampleButton;
 
   private void Start() {
     root = GetComponent<UIDocument>().rootVisualElement;
 
     unitHUD = root.Q<VisualElement>("unit_hud");
     unitLabel = root.Q<Label>("unit_label");
-    resourceLabel = root.Q<Label>("resource_label");
+
     powerProgressBar = root.Q<ProgressBar>("power_progress_bar");
+    dataProgressBar = root.Q<ProgressBar>("data_progress_bar");
 
     deploySolarPanelButton = root.Q<Button>("deploy_solar_panel");
     deploySolarPanelButton.clicked += DeploySolarPanel;
@@ -30,8 +37,17 @@ public class HUD : MonoBehaviour {
     topographyScanButton = root.Q<Button>("topography_scan");
     topographyScanButton.clicked += TopographyScan;
 
+    analizeDataButton = root.Q<Button>("analize_data");
+    analizeDataButton.clicked += AnalizeData;
+
     closeButton = root.Q<Button>("close");
     closeButton.clicked += Close;
+    
+    resourceHUD = root.Q<VisualElement>("resource_hud");
+    resourceLabel = root.Q<Label>("resource_label");
+    
+    collectSampleButton = root.Q<Button>("collect_sample");
+    collectSampleButton.clicked += CollectSample;
   }
 
   private void Update() {
@@ -39,7 +55,6 @@ public class HUD : MonoBehaviour {
       unitHUD.visible = false;
     } else {
       unitLabel.text = SelectionManager.SelectedUnit.gameObject.name;
-      unitHUD.visible = true;
 
       PowerStorage powerStorage = SelectionManager.SelectedUnit.transform.Find("Emergency Module Matrix").gameObject.GetComponent<PowerStorage>();
 
@@ -47,17 +62,23 @@ public class HUD : MonoBehaviour {
       powerProgressBar.value = powerStorage.charge;
       powerProgressBar.title = "Power: " + powerStorage.GetStatusString();
 
-      if(Input.GetButtonDown("Cancel")) {
-        SelectionManager.DeselectAll();
-      }
+      DataStorage dataStorage = SelectionManager.SelectedUnit.transform.Find("Emergency Module Matrix").gameObject.GetComponent<DataStorage>();
+      dataProgressBar.highValue = dataStorage.storageCapacity;
+      dataProgressBar.value = dataStorage.storageUsed;
+      dataProgressBar.title = "Data: " + dataStorage.GetStatusString();
+      
+      unitHUD.visible = true;
     }
 
     if(SelectionManager.SelectedResource == null) {
-      resourceLabel.text = "";
-      resourceLabel.visible = false;
+      resourceHUD.visible = false;
     } else {
       resourceLabel.text = SelectionManager.SelectedResource.gameObject.name;
-      resourceLabel.visible = true;
+      resourceHUD.visible = true;
+    }
+
+    if(Input.GetButtonDown("Cancel")) {
+      SelectionManager.DeselectAll();
     }
   }
 
@@ -72,10 +93,26 @@ public class HUD : MonoBehaviour {
   }
 
   private void TopographyScan() {
-    Debug.Log("Topography Scan");
+    TopographyScanner topographyScanner = SelectionManager.SelectedUnit.transform.Find("Emergency Module Matrix").gameObject.GetComponent<TopographyScanner>();
+    topographyScanner.isScanning = true;
+  }
+
+  private void AnalizeData() {
+    DataAnalizer dataAnalizer = SelectionManager.SelectedUnit.transform.Find("Emergency Module Matrix").gameObject.GetComponent<DataAnalizer>();
+    dataAnalizer.isAnalizing = true;
   }
 
   private void Close() {
     SelectionManager.DeselectAll();
+  }
+
+  private void CollectSample() {
+    DroneDock droneDock = SelectionManager.SelectedUnit.transform.Find("Emergency Module Matrix").gameObject.GetComponent<DroneDock>();
+
+    if(droneDock.droneIsDeployed) {
+      drone.Collect(SelectionManager.SelectedResource.gameObject);
+    } else {
+      Debug.Log("Drone is not Deployed");
+    }
   }
 }
