@@ -6,6 +6,7 @@ public class DroneDock : Module {
   public bool droneIsDeployed;
   public GameObject drone;
   public TopographyScanner topographyScanner;
+  public Animator animator;
 
   private void Start() {
     topographyScanner = gameObject.GetComponent<TopographyScanner>();
@@ -13,5 +14,6 @@ public class DroneDock : Module {
 
   public override void RunStep(float deltaTime) {
     drone.SetActive(droneIsDeployed);
+    animator.SetBool("is_deployed", droneIsDeployed);
   }
 }

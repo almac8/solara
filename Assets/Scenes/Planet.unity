@@ -128,6 +128,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d1186262f8d86cf8f968cfbf2ad5cac2, type: 3}
   m_PrefabInstance: {fileID: 1488200632}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &71652605 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d1186262f8d86cf8f968cfbf2ad5cac2, type: 3}
+  m_PrefabInstance: {fileID: 1488200632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &71652606
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71652605}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8da3700e84837d7c89f3cb4bde21a8e3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &72950442
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +438,32 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1441072146}
   m_SourcePrefab: {fileID: 100100000, guid: ad01c8d490d9ef9d7a893724b0f2199f, type: 3}
+--- !u!1 &778538130 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 798494594622333083, guid: d1186262f8d86cf8f968cfbf2ad5cac2, type: 3}
+  m_PrefabInstance: {fileID: 1488200632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &778538134
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778538130}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a20069bdcc6cd0c65bdb22fb8740ef85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &796970962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -524,6 +576,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4130984861114058935, guid: a485aad2e435c5368bc39c2947f628ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6611235693151814807, guid: a485aad2e435c5368bc39c2947f628ed, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8060983304523548042, guid: a485aad2e435c5368bc39c2947f628ed, type: 3}
@@ -1448,18 +1504,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6619305646024862989, guid: d1186262f8d86cf8f968cfbf2ad5cac2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -2859109400176981367, guid: d1186262f8d86cf8f968cfbf2ad5cac2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f42b2d931df4ca41eb0bd0aa3df8341c, type: 2}
     - target: {fileID: 919132149155446097, guid: d1186262f8d86cf8f968cfbf2ad5cac2, type: 3}
       propertyPath: m_Name
-      value: rescue_pod
+      value: model
       objectReference: {fileID: 0}
     - target: {fileID: 1582334460265446024, guid: d1186262f8d86cf8f968cfbf2ad5cac2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f42b2d931df4ca41eb0bd0aa3df8341c, type: 2}
+    - target: {fileID: 8573454165192797499, guid: d1186262f8d86cf8f968cfbf2ad5cac2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8800034175510914794, guid: d1186262f8d86cf8f968cfbf2ad5cac2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1467,7 +1531,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d1186262f8d86cf8f968cfbf2ad5cac2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 71652606}
+    - targetCorrespondingSourceObject: {fileID: 798494594622333083, guid: d1186262f8d86cf8f968cfbf2ad5cac2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 778538134}
   m_SourcePrefab: {fileID: 100100000, guid: d1186262f8d86cf8f968cfbf2ad5cac2, type: 3}
 --- !u!1 &1641976469
 GameObject:
@@ -1686,6 +1756,7 @@ MonoBehaviour:
   droneIsDeployed: 0
   drone: {fileID: 920465220}
   topographyScanner: {fileID: 2038332695}
+  animator: {fileID: 778538134}
 --- !u!114 &2038332694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1734,6 +1805,7 @@ MonoBehaviour:
   rechargeRate: 1
   rechargeEfficiency: 1
   powerStorage: {fileID: 2038332689}
+  animator: {fileID: 71652606}
 --- !u!114 &2038332697
 MonoBehaviour:
   m_ObjectHideFlags: 0
