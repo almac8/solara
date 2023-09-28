@@ -9,6 +9,7 @@ public class DroneDock : Module {
   public Animator animator;
 
   private void Start() {
+    Title = "Drone Dock";
     topographyScanner = gameObject.GetComponent<TopographyScanner>();
   }
 

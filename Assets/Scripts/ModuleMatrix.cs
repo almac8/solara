@@ -14,7 +14,7 @@ public class ModuleMatrix : MonoBehaviour {
     DATA_ANALIZER
   }
 
-  private List<Module> modules;
+  public List<Module> modules;
 
   private void Start() {
     modules = new List<Module>();

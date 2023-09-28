@@ -3,6 +3,8 @@ using UnityEngine.UIElements;
 
 public class HUD : MonoBehaviour {
   [SerializeField] private Drone drone;
+  [SerializeField] private ModuleMatrixUI moduleMatrixUI;
+  
   private VisualElement root;
 
   private VisualElement unitHUD;
@@ -13,6 +15,7 @@ public class HUD : MonoBehaviour {
   private Button deployDroneButton;
   private Button topographyScanButton;
   private Button analizeDataButton;
+  private Button moduleMatrixButton;
   private Button closeButton;
 
   private VisualElement resourceHUD;
@@ -39,6 +42,9 @@ public class HUD : MonoBehaviour {
 
     analizeDataButton = root.Q<Button>("analize_data");
     analizeDataButton.clicked += AnalizeData;
+
+    moduleMatrixButton = root.Q<Button>("module_matrix");
+    moduleMatrixButton.clicked += ShowModuleMatrix;
 
     closeButton = root.Q<Button>("close");
     closeButton.clicked += Close;
@@ -114,5 +120,9 @@ public class HUD : MonoBehaviour {
     } else {
       Debug.Log("Drone is not Deployed");
     }
+  }
+
+  private void ShowModuleMatrix() {
+    moduleMatrixUI.Show();
   }
 }

@@ -10,6 +10,10 @@ public class DataAnalizer : Module {
   public KnowledgeDatabase knowledgeDatabase;
   public DataStorage dataStorage;
 
+  public void Start() {
+    Title = "Data Analizer";
+  }
+
   public override void RunStep(float deltaTime) {
     if(isAnalizing) {
       float dataToAnalize = analysisRate * deltaTime;

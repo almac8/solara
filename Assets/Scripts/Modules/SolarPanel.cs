@@ -10,6 +10,7 @@ public class SolarPanel : Module {
   public Animator animator;
 
   private void Start() {
+    Title = "Solar Panel";
     powerStorage = gameObject.GetComponent<PowerStorage>();
   }
 

@@ -13,6 +13,7 @@ public class TopographyScanner : Module {
   public DataStorage dataStorage;
 
   private void Start() {
+    Title = "Topography Scanner";
     powerStorage = gameObject.GetComponent<PowerStorage>();
     dataStorage = gameObject.GetComponent<DataStorage>();
   }

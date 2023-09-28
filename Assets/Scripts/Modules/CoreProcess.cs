@@ -7,6 +7,7 @@ public class CoreProcess : Module {
   public PowerStorage powerStorage;
 
   private void Start() {
+    Title = "Core Process";
     powerStorage = gameObject.GetComponent<PowerStorage>();
   }
 

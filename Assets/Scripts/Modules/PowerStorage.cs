@@ -10,6 +10,10 @@ public class PowerStorage : Module {
   private float powerDisCharged;
   private float chargeDelta;
 
+  public void Start() {
+    Title = "Power Storage";
+  }
+
   public void SupplyCharge(float chargeSupplied) {
     powerCharged += chargeSupplied;
   }
