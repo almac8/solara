@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-color: rgba(47, 35, 56, 0); justify-content: space-between; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-self: auto;">
-        <ui:VisualElement name="unit_hud" style="flex-grow: 0; background-color: rgba(47, 35, 56, 0.59); align-self: flex-start; visibility: hidden; max-height: none; justify-content: space-between; overflow: visible; align-items: stretch; height: 477px; width: 211px;">
+        <ui:VisualElement name="unit_hud" style="flex-grow: 0; background-color: rgba(47, 35, 56, 0.59); align-self: flex-start; visibility: visible; max-height: none; justify-content: space-between; overflow: visible; align-items: stretch; height: 581px; width: 211px;">
             <ui:Label tabindex="-1" text="Unit Label" display-tooltip-when-elided="true" name="unit_label" style="font-size: 32px; align-self: center; background-color: rgba(47, 35, 56, 0); padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; display: flex;" />
             <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                 <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
@@ -13,6 +13,7 @@
                     <ui:Button text="Topography Scan" display-tooltip-when-elided="true" name="topography_scan" />
                     <ui:Button text="Analize Data" display-tooltip-when-elided="true" name="analize_data" />
                     <ui:Button text="Module Matrix" display-tooltip-when-elided="true" name="module_matrix" />
+                    <ui:Button text="Construction" display-tooltip-when-elided="true" name="construction_mode" />
                 </ui:VisualElement>
                 <ui:Button text="Close" display-tooltip-when-elided="true" name="close" />
             </ui:VisualElement>

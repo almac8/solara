@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 public class HUD : MonoBehaviour {
   [SerializeField] private Drone drone;
   [SerializeField] private ModuleMatrixUI moduleMatrixUI;
+  [SerializeField] private ConstructionManager constructionManager;
   
   private VisualElement root;
 
@@ -16,6 +17,7 @@ public class HUD : MonoBehaviour {
   private Button topographyScanButton;
   private Button analizeDataButton;
   private Button moduleMatrixButton;
+  private Button constructionModeButton;
   private Button closeButton;
 
   private VisualElement resourceHUD;
@@ -45,6 +47,9 @@ public class HUD : MonoBehaviour {
 
     moduleMatrixButton = root.Q<Button>("module_matrix");
     moduleMatrixButton.clicked += ShowModuleMatrix;
+
+    constructionModeButton = root.Q<Button>("construction_mode");
+    constructionModeButton.clicked += EnableConstructionMode;
 
     closeButton = root.Q<Button>("close");
     closeButton.clicked += Close;
@@ -124,5 +129,10 @@ public class HUD : MonoBehaviour {
 
   private void ShowModuleMatrix() {
     moduleMatrixUI.Show();
+  }
+
+  private void EnableConstructionMode() {
+    constructionManager.EnableConstructionMode();
+    Close();
   }
 }
