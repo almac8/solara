@@ -10,6 +10,7 @@ public class DroneDock : Module {
 
   private void Start() {
     Title = "Drone Dock";
+    Description = "\"Drone Deployment Depot - Your Personal Taskmasters.\" Because we know Solara can't be bothered to pick up space rocks herself.";
     topographyScanner = gameObject.GetComponent<TopographyScanner>();
   }
 

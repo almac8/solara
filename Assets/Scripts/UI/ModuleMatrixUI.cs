@@ -9,7 +9,7 @@ public class ModuleMatrixUI : MonoBehaviour {
   private ListView modulesListView;
   private VisualElement moduleView;
   private Label moduleTitle;
-  private Label muduleDescription;
+  private Label moduleDescription;
   private Button closeButton;
 
   private void Start() {
@@ -19,7 +19,7 @@ public class ModuleMatrixUI : MonoBehaviour {
     modulesListView = root.Q<ListView>("modules_list");
     moduleView = root.Q<VisualElement>("module");
     moduleTitle = root.Q<Label>("module_title");
-    muduleDescription = root.Q<Label>("mudule_description");
+    moduleDescription = root.Q<Label>("module_description");
     closeButton = root.Q<Button>("close");
     closeButton.clicked += Hide;
   }
@@ -47,6 +47,7 @@ public class ModuleMatrixUI : MonoBehaviour {
       modulesListView.selectionChanged += objects => {
         Module selectedModule = modulesListView.selectedItem as Module;
         moduleTitle.text = selectedModule.Title;
+        moduleDescription.text = selectedModule.Description;
       };
     }
   }

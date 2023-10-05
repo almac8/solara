@@ -11,6 +11,7 @@ public class SolarPanel : Module {
 
   private void Start() {
     Title = "Solar Panel";
+    Description = "\"Solar Slurper - Sipping Sunshine Since Forever.\" Absorbing sunlight to keep our systems running, because why not harness the power of a giant, flaming ball of gas?";
     powerStorage = gameObject.GetComponent<PowerStorage>();
   }
 

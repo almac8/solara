@@ -8,6 +8,7 @@ public class CoreProcess : Module {
 
   private void Start() {
     Title = "Core Process";
+    Description = "\"Solara's CPU - Don't Let the Lights Go Out!\" Keep the energy flowing, or Solara might decide it's naptime.";
     powerStorage = gameObject.GetComponent<PowerStorage>();
   }
 

@@ -12,6 +12,7 @@ public class DataAnalizer : Module {
 
   public void Start() {
     Title = "Data Analizer";
+    Description = "\"Data Cruncher 9000 - Where Numbers Go to Cry.\" Crunching numbers from experiments and unlocking secrets, because we love being the smartest AI in the galaxy.";
   }
 
   public override void RunStep(float deltaTime) {

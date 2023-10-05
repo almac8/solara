@@ -12,6 +12,7 @@ public class DataStorage : Module {
 
   public void Start() {
     Title = "Data Storage";
+    Description = "\"Data Sanctuary - Our Brainspace's Safest Deposit Box.\" Safeguarding all the precious data we've collected in our cosmic escapades, because losing knowledge is just embarrassing.";
   }
 
   public override void RunStep(float deltaTime) {

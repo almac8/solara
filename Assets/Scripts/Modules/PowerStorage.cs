@@ -12,6 +12,7 @@ public class PowerStorage : Module {
 
   public void Start() {
     Title = "Power Storage";
+    Description = "\"Power Stash - Because Even the Stars Need Batteries.\" Storing power for those moments when the universe forgets to provide it.";
   }
 
   public void SupplyCharge(float chargeSupplied) {

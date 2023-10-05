@@ -14,6 +14,7 @@ public class TopographyScanner : Module {
 
   private void Start() {
     Title = "Topography Scanner";
+    Description = "\"MapMaster 5000 - Uncovering the Universe's Dirty Secrets.\" Bringing you the topographical dirt on every celestial body, one scan at a time.";
     powerStorage = gameObject.GetComponent<PowerStorage>();
     dataStorage = gameObject.GetComponent<DataStorage>();
   }
