@@ -10,38 +10,16 @@ public class HUD : MonoBehaviour {
 
   private VisualElement rootVisualElement;
   private List<ProgressBar> gaugeVisuals;
-
-  private void Awake() {
-    gauges = new List<ModuleGauge>();
-    gaugeVisuals = new List<ProgressBar>();
-    rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
-  }
+  private Button closeButton;
 
   private void OnEnable() {
-    Unit selectedUnit = SelectionManager.SelectedUnit;
+    selectedUnit = SelectionManager.SelectedUnit;
 
-    if(selectedUnit != null) {
-      unitName = selectedUnit.gameObject.name;
-
-      moduleMatrix = selectedUnit.GetModuleMatrix();
-      if(moduleMatrix == null) {
-        Debug.Log("No Module Matrix on this Unit");
-      } else if(moduleMatrix.modules.Count > 0) {
-        gauges = moduleMatrix.GetGauges();
-        
-        foreach (ModuleGauge gauge in gauges) {
-          ProgressBar gaugeVisual = new ProgressBar();
-
-          gaugeVisual.title = gauge.Title;
-          gaugeVisual.value = gauge.Value;
-          gaugeVisual.highValue = gauge.MaxValue;
-
-          gaugeVisuals.Add(gaugeVisual);
-
-          VisualElement gaugeList = rootVisualElement.Q<VisualElement>("gauge_list");
-          gaugeList.Add(gaugeVisual);
-        }
-      }
+    if(selectedUnit == null) {
+      Debug.Log("No Unit Selected");
+    } else {
+      CollectUnitData();
+      BuildUnitUI();
     }
   }
 
@@ -51,6 +29,42 @@ public class HUD : MonoBehaviour {
       gaugeVisuals[i].value = gauges[i].Value;
       gaugeVisuals[i].highValue = gauges[i].MaxValue;
     }
+  }
+
+  private void CollectUnitData() {
+    unitName = selectedUnit.gameObject.name;
+    gauges = new List<ModuleGauge>();
+    moduleMatrix = selectedUnit.GetModuleMatrix();
+
+    if(moduleMatrix != null && moduleMatrix.modules.Count > 0) {
+      gauges = moduleMatrix.GetGauges();
+    }
+  }
+
+  private void BuildUnitUI() {
+    rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
+    gaugeVisuals = new List<ProgressBar>();
+
+    closeButton = rootVisualElement.Q<Button>("close");
+    closeButton.clicked += Close;
+
+    foreach (ModuleGauge gauge in gauges) {
+      ProgressBar gaugeVisual = new ProgressBar();
+
+      gaugeVisual.title = gauge.Title;
+      gaugeVisual.value = gauge.Value;
+      gaugeVisual.highValue = gauge.MaxValue;
+
+      gaugeVisuals.Add(gaugeVisual);
+
+      VisualElement gaugeList = rootVisualElement.Q<VisualElement>("gauge_list");
+      gaugeList.Add(gaugeVisual);
+    }
+  }
+
+  private void Close() {
+    SelectionManager.DeselectAll();
+    gameObject.SetActive(false);
   }
 }
 
@@ -74,7 +88,6 @@ public class HUD : MonoBehaviour {
   private Button analizeDataButton;
   private Button moduleMatrixButton;
   private Button constructionModeButton;
-  private Button closeButton;
 
   private VisualElement resourceHUD;
   private Label resourceLabel;
@@ -102,9 +115,6 @@ public class HUD : MonoBehaviour {
 
     constructionModeButton = root.Q<Button>("construction_mode");
     constructionModeButton.clicked += EnableConstructionMode;
-
-    closeButton = root.Q<Button>("close");
-    closeButton.clicked += Close;
     
     resourceHUD = root.Q<VisualElement>("resource_hud");
     resourceLabel = root.Q<Label>("resource_label");
@@ -153,10 +163,6 @@ public class HUD : MonoBehaviour {
   private void AnalizeData() {
     DataAnalizer dataAnalizer = SelectionManager.SelectedUnit.transform.Find("Emergency Module Matrix").gameObject.GetComponent<DataAnalizer>();
     dataAnalizer.isAnalizing = true;
-  }
-
-  private void Close() {
-    SelectionManager.DeselectAll();
   }
 
   private void CollectSample() {
