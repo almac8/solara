@@ -7,9 +7,11 @@ public class HUD : MonoBehaviour {
   private string unitName;
   private ModuleMatrix moduleMatrix;
   private List<ModuleGauge> gauges;
+  private List<ModuleActivator> activators;
 
   private VisualElement rootVisualElement;
   private List<ProgressBar> gaugeVisuals;
+  private List<Button> activatorVisuals;
   private Button closeButton;
 
   private void OnEnable() {
@@ -29,21 +31,28 @@ public class HUD : MonoBehaviour {
       gaugeVisuals[i].value = gauges[i].Value;
       gaugeVisuals[i].highValue = gauges[i].MaxValue;
     }
+
+    for(int i = 0; i < activators.Count; i++) {
+      activatorVisuals[i].text = activators[i].Title;
+    }
   }
 
   private void CollectUnitData() {
     unitName = selectedUnit.gameObject.name;
-    gauges = new List<ModuleGauge>();
     moduleMatrix = selectedUnit.GetModuleMatrix();
+    gauges = new List<ModuleGauge>();
+    activators = new List<ModuleActivator>();
 
     if(moduleMatrix != null && moduleMatrix.modules.Count > 0) {
       gauges = moduleMatrix.GetGauges();
+      activators = moduleMatrix.GetActivators();
     }
   }
 
   private void BuildUnitUI() {
     rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
     gaugeVisuals = new List<ProgressBar>();
+    activatorVisuals = new List<Button>();
 
     closeButton = rootVisualElement.Q<Button>("close");
     closeButton.clicked += Close;
@@ -59,6 +68,18 @@ public class HUD : MonoBehaviour {
 
       VisualElement gaugeList = rootVisualElement.Q<VisualElement>("gauge_list");
       gaugeList.Add(gaugeVisual);
+    }
+
+    foreach (ModuleActivator activator in activators) {
+      Button activatorVisual = new Button();
+
+      activatorVisual.text = activator.Title;
+      activatorVisual.clicked += activator.Toggle;
+
+      activatorVisuals.Add(activatorVisual);
+
+      VisualElement activatorList = rootVisualElement.Q<VisualElement>("activator_list");
+      activatorList.Add(activatorVisual);
     }
   }
 

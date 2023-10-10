@@ -81,4 +81,17 @@ public class ModuleMatrix : MonoBehaviour {
 
     return gauges;
   }
+
+  public List<ModuleActivator> GetActivators() {
+    List<ModuleActivator> activators = new List<ModuleActivator>();
+
+    foreach (Module module in modules) {
+      ModuleActivator activator = module.Activator;
+      if(activator != null) {
+        activators.Add(activator);
+      }
+    }
+
+    return activators;
+  }
 }

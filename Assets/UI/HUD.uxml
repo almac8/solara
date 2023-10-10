@@ -4,14 +4,9 @@
             <ui:Label tabindex="-1" text="Unit Label" display-tooltip-when-elided="true" name="unit_label" style="font-size: 32px; align-self: center; background-color: rgba(47, 35, 56, 0); padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; display: flex;" />
             <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                 <ui:VisualElement name="gauge_list" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
-                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-                    <ui:Button text="Deploy Solar Panel" display-tooltip-when-elided="true" name="deploy_solar_panel" />
-                    <ui:Button text="Deploy Drone" display-tooltip-when-elided="true" name="deploy_drone" />
-                    <ui:Button text="Topography Scan" display-tooltip-when-elided="true" name="topography_scan" />
-                    <ui:Button text="Analize Data" display-tooltip-when-elided="true" name="analize_data" />
-                    <ui:Button text="Module Matrix" display-tooltip-when-elided="true" name="module_matrix" />
-                    <ui:Button text="Construction" display-tooltip-when-elided="true" name="construction_mode" />
-                </ui:VisualElement>
+                <ui:VisualElement name="activator_list" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+                <ui:Button text="Construction" display-tooltip-when-elided="true" name="construction_mode" />
+                <ui:Button text="Module Matrix" display-tooltip-when-elided="true" name="module_matrix" />
                 <ui:Button text="Close" display-tooltip-when-elided="true" name="close" />
             </ui:VisualElement>
         </ui:VisualElement>
