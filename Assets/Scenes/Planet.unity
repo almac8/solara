@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953af43344c4b223d9ee07953f609ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moduleMatrixUI: {fileID: 258183726}
 --- !u!1 &258183726
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &258183727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -934,9 +935,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2859109400176981367, guid: d1186262f8d86cf8f968cfbf2ad5cac2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f42b2d931df4ca41eb0bd0aa3df8341c, type: 2}
     - target: {fileID: 919132149155446097, guid: d1186262f8d86cf8f968cfbf2ad5cac2, type: 3}
       propertyPath: m_Name
       value: rescue_pod
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582334460265446024, guid: d1186262f8d86cf8f968cfbf2ad5cac2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ff0422ceb9c284e9aac6c0bc47922071, type: 2}
+    - target: {fileID: 8573454165192797499, guid: d1186262f8d86cf8f968cfbf2ad5cac2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1221,7 +1234,7 @@ Transform:
   m_GameObject: {fileID: 920465220}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children:
