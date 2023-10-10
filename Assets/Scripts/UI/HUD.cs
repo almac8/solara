@@ -92,48 +92,16 @@ public class HUD : MonoBehaviour {
 
 
 /* 
-using UnityEngine;
-using UnityEngine.UIElements;
-
 public class HUD : MonoBehaviour {
   [SerializeField] private Drone drone;
   [SerializeField] private ModuleMatrixUI moduleMatrixUI;
   [SerializeField] private ConstructionManager constructionManager;
-  
-
-  private VisualElement unitHUD;
-  private ProgressBar dataProgressBar;
-  private Button deploySolarPanelButton;
-  private Button deployDroneButton;
-  private Button topographyScanButton;
-  private Button analizeDataButton;
-  private Button moduleMatrixButton;
-  private Button constructionModeButton;
 
   private VisualElement resourceHUD;
   private Label resourceLabel;
   private Button collectSampleButton;
 
   private void Start() {
-    unitHUD = root.Q<VisualElement>("unit_hud");
-
-    dataProgressBar = root.Q<ProgressBar>("data_progress_bar");
-
-    deploySolarPanelButton = root.Q<Button>("deploy_solar_panel");
-    deploySolarPanelButton.clicked += DeploySolarPanel;
-
-    deployDroneButton = root.Q<Button>("deploy_drone");
-    deployDroneButton.clicked += DeployDrone;
-
-    topographyScanButton = root.Q<Button>("topography_scan");
-    topographyScanButton.clicked += TopographyScan;
-
-    analizeDataButton = root.Q<Button>("analize_data");
-    analizeDataButton.clicked += AnalizeData;
-
-    moduleMatrixButton = root.Q<Button>("module_matrix");
-    moduleMatrixButton.clicked += ShowModuleMatrix;
-
     constructionModeButton = root.Q<Button>("construction_mode");
     constructionModeButton.clicked += EnableConstructionMode;
     
@@ -145,15 +113,6 @@ public class HUD : MonoBehaviour {
   }
 
   private void Update() {
-    if(SelectionManager.SelectedUnit == null) {
-      unitHUD.visible = false;
-    } else {
-      DataStorage dataStorage = SelectionManager.SelectedUnit.transform.Find("Emergency Module Matrix").gameObject.GetComponent<DataStorage>();
-      dataProgressBar.highValue = dataStorage.storageCapacity;
-      dataProgressBar.value = dataStorage.storageUsed;
-      dataProgressBar.title = "Data: " + dataStorage.GetStatusString();
-    }
-
     if(SelectionManager.SelectedResource == null) {
       resourceHUD.visible = false;
     } else {
@@ -164,26 +123,6 @@ public class HUD : MonoBehaviour {
     if(Input.GetButtonDown("Cancel")) {
       SelectionManager.DeselectAll();
     }
-  }
-
-  private void DeploySolarPanel() {
-    SolarPanel solarPanel = SelectionManager.SelectedUnit.transform.Find("Emergency Module Matrix").gameObject.GetComponent<SolarPanel>();
-    solarPanel.isDeployed = true;
-  }
-
-  private void DeployDrone() {
-    DroneDock droneDock = SelectionManager.SelectedUnit.transform.Find("Emergency Module Matrix").gameObject.GetComponent<DroneDock>();
-    droneDock.droneIsDeployed = true;
-  }
-
-  private void TopographyScan() {
-    TopographyScanner topographyScanner = SelectionManager.SelectedUnit.transform.Find("Emergency Module Matrix").gameObject.GetComponent<TopographyScanner>();
-    topographyScanner.isScanning = true;
-  }
-
-  private void AnalizeData() {
-    DataAnalizer dataAnalizer = SelectionManager.SelectedUnit.transform.Find("Emergency Module Matrix").gameObject.GetComponent<DataAnalizer>();
-    dataAnalizer.isAnalizing = true;
   }
 
   private void CollectSample() {
