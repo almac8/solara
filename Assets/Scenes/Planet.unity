@@ -604,8 +604,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba58e589d8c22809b937c8be5e0844e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standbyPowerConsumption: 1
-  powerStorage: {fileID: 0}
+  standbyPowerConsumption: 0.001
+  powerStorage: {fileID: 511771388}
 --- !u!114 &511771390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,7 +644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 649a64d0f99a65d5c926efa209a81836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rechargeRate: 2
+  rechargeRate: 1
   rechargeEfficiency: 1
   powerStorage: {fileID: 511771388}
   animator: {fileID: 1815436387}
@@ -660,8 +660,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ad67b3a71f4adeda6e3fa417ba13ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerRequired: 0.5
-  scanRate: 0
+  powerRequired: 0.01
+  scanRate: 0.5
   completeScanDataSize: 20
   powerStorage: {fileID: 511771388}
   dataStorage: {fileID: 511771391}
@@ -706,7 +706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataAnalized: 0
-  analysisRate: 0.1
+  analysisRate: 1
   knowledgeDatabase: {fileID: 511771394}
   dataStorage: {fileID: 511771391}
 --- !u!1 &778538130 stripped
