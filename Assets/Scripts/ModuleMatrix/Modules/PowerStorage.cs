@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerStorage : Module {
-  public float charge;
-  public float chargeCapacity;
-  
+  [SerializeField] private float chargeCapacity;
+
   private float powerCharged;
   private float powerDisCharged;
   private float chargeDelta;
 
-  public void Start() {
+  public void Awake() {
     Title = "Power Storage";
     Description = "\"Power Stash - Because Even the Stars Need Batteries.\" Storing power for those moments when the universe forgets to provide it.";
+    Gauge = new ModuleGauge(chargeCapacity, chargeCapacity, "Power");
   }
 
   public void SupplyCharge(float chargeSupplied) {
@@ -20,7 +20,7 @@ public class PowerStorage : Module {
   }
 
   public bool DrainCharge(float chargeToDrain) {
-    if(charge - chargeToDrain < 0f) {
+    if(Gauge.Value - chargeToDrain < 0f) {
       return false;
     } else {
       powerDisCharged += chargeToDrain;
@@ -30,13 +30,10 @@ public class PowerStorage : Module {
 
   public override void RunStep(float deltaTime) {
     chargeDelta = powerCharged - powerDisCharged;
-    charge = Mathf.Clamp(charge + chargeDelta, 0.0f, chargeCapacity);
+    Gauge.Value = Mathf.Clamp(Gauge.Value + chargeDelta, 0.0f, Gauge.MaxValue);
+    Gauge.Title = $"Power: { Mathf.Round(Gauge.Value) }/{ Gauge.MaxValue } ({ chargeDelta })";
 
     powerCharged = 0f;
     powerDisCharged = 0f;
-  }
-
-  public string GetStatusString() {
-    return $"{ Mathf.Round(charge) }/{ chargeCapacity } ({ chargeDelta })";
   }
 }

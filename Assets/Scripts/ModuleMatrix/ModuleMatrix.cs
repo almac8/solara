@@ -68,4 +68,30 @@ public class ModuleMatrix : MonoBehaviour {
       module.RunStep(deltaTime);
     }
   }
+
+  public List<ModuleGauge> GetGauges() {
+    List<ModuleGauge> gauges = new List<ModuleGauge>();
+    
+    foreach (Module module in modules) {
+      ModuleGauge gauge = module.Gauge;
+      if(gauge != null) {
+        gauges.Add(gauge);
+      }
+    }
+
+    return gauges;
+  }
+
+  public List<ModuleActivator> GetActivators() {
+    List<ModuleActivator> activators = new List<ModuleActivator>();
+
+    foreach (Module module in modules) {
+      ModuleActivator activator = module.Activator;
+      if(activator != null) {
+        activators.Add(activator);
+      }
+    }
+
+    return activators;
+  }
 }

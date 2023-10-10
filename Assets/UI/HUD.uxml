@@ -1,24 +1,16 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-color: rgba(47, 35, 56, 0); justify-content: space-between; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-self: auto; visibility: visible;">
-        <ui:VisualElement name="unit_hud" style="flex-grow: 0; background-color: rgba(47, 35, 56, 0.59); align-self: flex-start; visibility: hidden; max-height: none; justify-content: space-between; overflow: visible; align-items: stretch; height: 581px; width: 211px;">
+        <ui:VisualElement name="unit_hud" style="flex-grow: 0; background-color: rgba(47, 35, 56, 0.59); align-self: flex-start; visibility: visible; max-height: none; justify-content: space-between; overflow: visible; align-items: stretch; height: 581px; width: 211px;">
             <ui:Label tabindex="-1" text="Unit Label" display-tooltip-when-elided="true" name="unit_label" style="font-size: 32px; align-self: center; background-color: rgba(47, 35, 56, 0); padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; display: flex;" />
             <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-                    <ui:ProgressBar value="22" title="Power: 0/0 (0)" name="power_progress_bar" />
-                    <ui:ProgressBar value="22" title="Data: 0/0 (0)" name="data_progress_bar" />
-                </ui:VisualElement>
-                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-                    <ui:Button text="Deploy Solar Panel" display-tooltip-when-elided="true" name="deploy_solar_panel" />
-                    <ui:Button text="Deploy Drone" display-tooltip-when-elided="true" name="deploy_drone" />
-                    <ui:Button text="Topography Scan" display-tooltip-when-elided="true" name="topography_scan" />
-                    <ui:Button text="Analize Data" display-tooltip-when-elided="true" name="analize_data" />
-                    <ui:Button text="Module Matrix" display-tooltip-when-elided="true" name="module_matrix" />
-                    <ui:Button text="Construction" display-tooltip-when-elided="true" name="construction_mode" />
-                </ui:VisualElement>
+                <ui:VisualElement name="gauge_list" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+                <ui:VisualElement name="activator_list" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+                <ui:Button text="Construction" display-tooltip-when-elided="true" name="construction_mode" />
+                <ui:Button text="Module Matrix" display-tooltip-when-elided="true" name="module_matrix" />
                 <ui:Button text="Close" display-tooltip-when-elided="true" name="close" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="resource_hud" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); align-self: flex-end; justify-content: space-between; height: 124px; visibility: hidden;">
+        <ui:VisualElement name="resource_hud" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); align-self: flex-end; justify-content: space-between; height: 124px; visibility: visible;">
             <ui:Label tabindex="-1" text="Resource Label" display-tooltip-when-elided="true" name="resource_label" style="font-size: 32px; -unity-text-align: upper-right; align-self: flex-end; background-color: rgba(47, 35, 56, 0.53); padding-left: 8px; padding-right: 8px; padding-top: 4px; padding-bottom: 4px; height: auto;" />
             <ui:Button text="Collect Sample" display-tooltip-when-elided="true" name="collect_sample" />
         </ui:VisualElement>
