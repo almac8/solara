@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moduleMatrixUI: {fileID: 258183726}
+  constructionManager: {fileID: 1143688017}
 --- !u!1 &258183726
 GameObject:
   m_ObjectHideFlags: 0

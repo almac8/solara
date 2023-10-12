@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 
 public class HUD : MonoBehaviour {
   [SerializeField] private GameObject moduleMatrixUI;
+  [SerializeField] private ConstructionManager constructionManager;
 
   private Unit selectedUnit;
   private string unitName;
@@ -24,13 +25,9 @@ public class HUD : MonoBehaviour {
     } else {
       CollectUnitData();
       BuildUnitUI();
+      SetupModuleMatrix();
+      SetupConstructionManager();
     }
-
-    Button moduleMatrixButton = rootVisualElement.Q<Button>("module_matrix");
-    moduleMatrixButton.clicked += () => {
-      moduleMatrixUI.SetActive(true);
-      gameObject.SetActive(false);
-    };
   }
 
   private void Update() {
@@ -91,6 +88,22 @@ public class HUD : MonoBehaviour {
     }
   }
 
+  private void SetupModuleMatrix() {
+    Button moduleMatrixButton = rootVisualElement.Q<Button>("module_matrix");
+    moduleMatrixButton.clicked += () => {
+      moduleMatrixUI.SetActive(true);
+      gameObject.SetActive(false);
+    };
+  }
+
+  private void SetupConstructionManager() {
+    Button constructionModeButton = rootVisualElement.Q<Button>("construction_mode");
+    constructionModeButton.clicked += () => {
+      constructionManager.EnableConstructionMode();
+      gameObject.SetActive(false);
+    };
+  }
+
   private void Close() {
     SelectionManager.DeselectAll();
     gameObject.SetActive(false);
@@ -102,17 +115,12 @@ public class HUD : MonoBehaviour {
 /* 
 public class HUD : MonoBehaviour {
   [SerializeField] private Drone drone;
-  [SerializeField] private ModuleMatrixUI moduleMatrixUI;
-  [SerializeField] private ConstructionManager constructionManager;
 
   private VisualElement resourceHUD;
   private Label resourceLabel;
   private Button collectSampleButton;
 
   private void Start() {
-    constructionModeButton = root.Q<Button>("construction_mode");
-    constructionModeButton.clicked += EnableConstructionMode;
-    
     resourceHUD = root.Q<VisualElement>("resource_hud");
     resourceLabel = root.Q<Label>("resource_label");
     
@@ -141,15 +149,6 @@ public class HUD : MonoBehaviour {
     } else {
       Debug.Log("Drone is not Deployed");
     }
-  }
-
-  private void ShowModuleMatrix() {
-    moduleMatrixUI.Show();
-  }
-
-  private void EnableConstructionMode() {
-    constructionManager.EnableConstructionMode();
-    Close();
   }
 }
  */
