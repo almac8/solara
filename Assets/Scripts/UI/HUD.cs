@@ -21,12 +21,9 @@ public class HUD : MonoBehaviour {
     selectedUnit = SelectionManager.SelectedUnit;
 
     if(selectedUnit == null) {
-      Debug.Log("No Unit Selected");
+      gameObject.SetActive(false);
     } else {
-      CollectUnitData();
       BuildUnitUI();
-      SetupModuleMatrix();
-      SetupConstructionManager();
     }
   }
 
@@ -42,6 +39,17 @@ public class HUD : MonoBehaviour {
     }
   }
 
+  private void BuildUnitUI() {
+    rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
+    
+    CollectUnitData();
+    SetupModuleGauges();
+    SetupModuleActivators();
+    SetupConstructionManager();
+    SetupModuleMatrixUI();
+    SetupCloseButton();
+  }
+
   private void CollectUnitData() {
     unitName = selectedUnit.gameObject.name;
     moduleMatrix = selectedUnit.GetModuleMatrix();
@@ -54,13 +62,8 @@ public class HUD : MonoBehaviour {
     }
   }
 
-  private void BuildUnitUI() {
-    rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
+  private void SetupModuleGauges() {
     gaugeVisuals = new List<ProgressBar>();
-    activatorVisuals = new List<Button>();
-
-    closeButton = rootVisualElement.Q<Button>("close");
-    closeButton.clicked += Close;
 
     foreach (ModuleGauge gauge in gauges) {
       ProgressBar gaugeVisual = new ProgressBar();
@@ -74,6 +77,10 @@ public class HUD : MonoBehaviour {
       VisualElement gaugeList = rootVisualElement.Q<VisualElement>("gauge_list");
       gaugeList.Add(gaugeVisual);
     }
+  }
+
+  private void SetupModuleActivators() {
+    activatorVisuals = new List<Button>();
 
     foreach (ModuleActivator activator in activators) {
       Button activatorVisual = new Button();
@@ -88,25 +95,31 @@ public class HUD : MonoBehaviour {
     }
   }
 
-  private void SetupModuleMatrix() {
-    Button moduleMatrixButton = rootVisualElement.Q<Button>("module_matrix");
-    moduleMatrixButton.clicked += () => {
-      moduleMatrixUI.SetActive(true);
-      gameObject.SetActive(false);
-    };
-  }
-
   private void SetupConstructionManager() {
     Button constructionModeButton = rootVisualElement.Q<Button>("construction_mode");
+
     constructionModeButton.clicked += () => {
       constructionManager.EnableConstructionMode();
       gameObject.SetActive(false);
     };
   }
 
-  private void Close() {
-    SelectionManager.DeselectAll();
-    gameObject.SetActive(false);
+  private void SetupModuleMatrixUI() {
+    Button moduleMatrixButton = rootVisualElement.Q<Button>("module_matrix");
+
+    moduleMatrixButton.clicked += () => {
+      moduleMatrixUI.SetActive(true);
+      gameObject.SetActive(false);
+    };
+  }
+
+  private void SetupCloseButton() {
+    closeButton = rootVisualElement.Q<Button>("close");
+
+    closeButton.clicked += () => {
+      SelectionManager.DeselectAll();
+      gameObject.SetActive(false);
+    }
   }
 }
 
