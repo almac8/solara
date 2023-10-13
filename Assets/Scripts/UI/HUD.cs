@@ -119,7 +119,7 @@ public class HUD : MonoBehaviour {
     closeButton.clicked += () => {
       SelectionManager.DeselectAll();
       gameObject.SetActive(false);
-    }
+    };
   }
 }
 
