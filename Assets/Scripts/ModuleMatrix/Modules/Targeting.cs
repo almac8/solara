@@ -17,6 +17,8 @@ public class Targeting : Module {
   }
 
   private void Awake() {
+    Title = "Targeting";
+    Description = "Locks on to a target";
     hoverMovement = GetComponent<HoverMovement>();
     Activator = new ModuleActivator(false, "Cancel Targeting", "Set Target");
     Activator.Activated += ActivateTargetingMode;

@@ -11,6 +11,8 @@ public class HoverMovement : Module {
   private KnowledgeDatabase knowledgeDatabase = null;
 
   private void Awake() {
+    Title = "Hover Movement";
+    Description = "Creates Movement";
     homeDockPosition = transform.position;
     targeting = GetComponent<Targeting>();
     knowledgeDatabase = transform.parent.gameObject.GetComponent<KnowledgeDatabase>();
