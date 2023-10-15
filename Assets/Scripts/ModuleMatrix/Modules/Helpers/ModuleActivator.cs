@@ -10,6 +10,7 @@ public class ModuleActivator {
   public bool IsActive { get; private set; }
 
   public event Action Activated;
+  public event Action Deactivated;
 
   public string Title {
     get {
@@ -32,6 +33,8 @@ public class ModuleActivator {
 
     if(IsActive) {
       Activated?.Invoke();
+    } else {
+      Deactivated?.Invoke();
     }
   }
 }
