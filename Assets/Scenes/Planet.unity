@@ -615,6 +615,7 @@ GameObject:
   - component: {fileID: 616967057}
   - component: {fileID: 616967058}
   - component: {fileID: 616967059}
+  - component: {fileID: 616967060}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -710,6 +711,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1
+--- !u!114 &616967060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616967053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825543948bd23e20aa922fd6f131f95f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sampleSize: 20
+  samplingRate: 1
 --- !u!1001 &796970962
 PrefabInstance:
   m_ObjectHideFlags: 0

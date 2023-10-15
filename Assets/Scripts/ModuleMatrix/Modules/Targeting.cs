@@ -5,6 +5,7 @@ using UnityEngine;
 public class Targeting : Module {
   private GameObject target = null;
   private HoverMovement hoverMovement = null;
+  public bool IsLockedOn { get; private set; }
 
   public GameObject Target {
     get {
@@ -49,7 +50,12 @@ public class Targeting : Module {
     Vector3 targetPosition = target.transform.position;
     targetPosition.y = transform.position.y;
 
-    if(Vector3.Distance(transform.position, targetPosition) < 0.01) return;
+    if(Vector3.Distance(transform.position, targetPosition) < 0.01) {
+      IsLockedOn = true;
+      return;
+    } else {
+      IsLockedOn = false;
+    }
 
     Vector3 movement = targetPosition - transform.position;
 
