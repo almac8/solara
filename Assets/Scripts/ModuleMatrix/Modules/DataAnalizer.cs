@@ -25,7 +25,6 @@ public class DataAnalizer : Module {
 
       if(dataAnalized > 10f) {
         knowledgeDatabase.localTopographyRadius = 10f;
-        Debug.Log("Drone Unlocked");
       }
     }
   }

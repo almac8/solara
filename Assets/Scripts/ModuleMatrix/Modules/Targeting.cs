@@ -6,6 +6,16 @@ public class Targeting : Module {
   private GameObject target = null;
   private HoverMovement hoverMovement = null;
 
+  public GameObject Target {
+    get {
+      return target;
+    }
+
+    private set {
+      target = value;
+    }
+  }
+
   private void Awake() {
     hoverMovement = GetComponent<HoverMovement>();
     Activator = new ModuleActivator(false, "Cancel Targeting", "Set Target");
