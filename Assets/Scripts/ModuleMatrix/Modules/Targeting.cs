@@ -44,6 +44,10 @@ public class Targeting : Module {
     }
   }
 
+  public void SetTarget(GameObject targetObject) {
+    target = targetObject;
+  }
+
   private void MoveToTarget() {
     if(target == null) return;
 
