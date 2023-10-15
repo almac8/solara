@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class ModuleActivator {
   private string inactiveTitle;
 
   public bool IsActive { get; private set; }
+
+  public event Action Activated;
 
   public string Title {
     get {
@@ -26,5 +29,9 @@ public class ModuleActivator {
 
   public void Toggle() {
     IsActive = !IsActive;
+
+    if(IsActive) {
+      Activated?.Invoke();
+    }
   }
 }

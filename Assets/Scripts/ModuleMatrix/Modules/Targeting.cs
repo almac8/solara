@@ -3,15 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Targeting : Module {
-  [SerializeField] private GameObject target = null;
-
+  private GameObject target = null;
   private HoverMovement hoverMovement = null;
 
-  private void Start() {
+  private void Awake() {
     hoverMovement = GetComponent<HoverMovement>();
+    Activator = new ModuleActivator(false, "Cancel Targeting", "Set Target");
+    Activator.Activated += ActivateTargetingMode;
+  }
+
+  private void ActivateTargetingMode() {
+    SelectionManager.DeselectResource();
+  }
+
+  private void DeactivateTargetingMode() {
+    Activator.Toggle();
   }
 
   public override void RunStep(float deltaTime) {
+    if(Activator.IsActive) {
+      if(SelectionManager.SelectedResource != null) {
+        target = SelectionManager.SelectedResource.gameObject;
+        DeactivateTargetingMode();
+      }
+    } else {
+      MoveToTarget();
+    }
+  }
+
+  private void MoveToTarget() {
     if(target == null) return;
 
     Vector3 targetPosition = target.transform.position;
