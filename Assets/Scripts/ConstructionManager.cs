@@ -36,7 +36,7 @@ public class ConstructionManager : MonoBehaviour {
     constructionGhost = Instantiate(constructionReference, Vector3.zero, constructionReference.transform.rotation);
   }
 
-  private void DisableConstructionMode() {
+  public void DisableConstructionMode() {
     constructionModeEnabled = false;
     Destroy(constructionGhost);
   }

@@ -4,7 +4,6 @@ using UnityEngine.UIElements;
 
 public class HUD : MonoBehaviour {
   [SerializeField] private GameObject moduleMatrixUI;
-  [SerializeField] private ConstructionManager constructionManager;
 
   private Unit selectedUnit;
   private string unitName;
@@ -45,7 +44,6 @@ public class HUD : MonoBehaviour {
     CollectUnitData();
     SetupModuleGauges();
     SetupModuleActivators();
-    SetupConstructionManager();
     SetupModuleMatrixUI();
     SetupCloseButton();
   }
@@ -94,16 +92,7 @@ public class HUD : MonoBehaviour {
       activatorList.Add(activatorVisual);
     }
   }
-
-  private void SetupConstructionManager() {
-    Button constructionModeButton = rootVisualElement.Q<Button>("construction_mode");
-
-    constructionModeButton.clicked += () => {
-      constructionManager.EnableConstructionMode();
-      gameObject.SetActive(false);
-    };
-  }
-
+  
   private void SetupModuleMatrixUI() {
     Button moduleMatrixButton = rootVisualElement.Q<Button>("module_matrix");
 
@@ -122,46 +111,3 @@ public class HUD : MonoBehaviour {
     };
   }
 }
-
-
-
-/* 
-public class HUD : MonoBehaviour {
-  [SerializeField] private Drone drone;
-
-  private VisualElement resourceHUD;
-  private Label resourceLabel;
-  private Button collectSampleButton;
-
-  private void Start() {
-    resourceHUD = root.Q<VisualElement>("resource_hud");
-    resourceLabel = root.Q<Label>("resource_label");
-    
-    collectSampleButton = root.Q<Button>("collect_sample");
-    collectSampleButton.clicked += CollectSample;
-  }
-
-  private void Update() {
-    if(SelectionManager.SelectedResource == null) {
-      resourceHUD.visible = false;
-    } else {
-      resourceLabel.text = SelectionManager.SelectedResource.gameObject.name;
-      resourceHUD.visible = true;
-    }
-
-    if(Input.GetButtonDown("Cancel")) {
-      SelectionManager.DeselectAll();
-    }
-  }
-
-  private void CollectSample() {
-    DroneDock droneDock = SelectionManager.SelectedUnit.transform.Find("Emergency Module Matrix").gameObject.GetComponent<DroneDock>();
-
-    if(droneDock.droneIsDeployed) {
-      drone.Collect(SelectionManager.SelectedResource.gameObject);
-    } else {
-      Debug.Log("Drone is not Deployed");
-    }
-  }
-}
- */
