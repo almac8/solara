@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine.UIElements;
 
 public class HUD : MonoBehaviour {
-  [SerializeField] private GameObject moduleMatrixUI;
-
   private Unit selectedUnit;
   private string unitName;
   private ModuleMatrix moduleMatrix;
@@ -44,7 +42,6 @@ public class HUD : MonoBehaviour {
     CollectUnitData();
     SetupModuleGauges();
     SetupModuleActivators();
-    SetupModuleMatrixUI();
     SetupCloseButton();
   }
 
@@ -93,15 +90,6 @@ public class HUD : MonoBehaviour {
     }
   }
   
-  private void SetupModuleMatrixUI() {
-    Button moduleMatrixButton = rootVisualElement.Q<Button>("module_matrix");
-
-    moduleMatrixButton.clicked += () => {
-      moduleMatrixUI.SetActive(true);
-      gameObject.SetActive(false);
-    };
-  }
-
   private void SetupCloseButton() {
     closeButton = rootVisualElement.Q<Button>("close");
 

@@ -184,7 +184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953af43344c4b223d9ee07953f609ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moduleMatrixUI: {fileID: 258183726}
 --- !u!1 &258183726
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,6 +398,7 @@ GameObject:
   - component: {fileID: 511771394}
   - component: {fileID: 511771393}
   - component: {fileID: 511771397}
+  - component: {fileID: 511771398}
   m_Layer: 0
   m_Name: Seed Pod
   m_TagString: Untagged
@@ -600,6 +600,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   storageCapacity: 100
+--- !u!114 &511771398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511771383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad9ca27cebe029b2989869e892b3434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moduleMatrixUI: {fileID: 258183726}
 --- !u!1 &616967053
 GameObject:
   m_ObjectHideFlags: 0
