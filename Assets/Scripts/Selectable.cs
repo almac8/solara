@@ -19,7 +19,7 @@ public class Selectable : MonoBehaviour {
     Selected();
   }
 
-  private void Deselect() {
+  public void Deselect() {
     IsSelected = false;
     Deselected();
   }

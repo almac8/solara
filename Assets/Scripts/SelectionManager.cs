@@ -9,14 +9,28 @@ public static class SelectionManager {
 
   public static void Select(Selectable selected) {
     if(selected is Unit) {
+      if(SelectedUnit != null) SelectedUnit.Deselect();
       SelectedUnit = selected as Unit;
     } else if(selected is Resource) {
-      SelectedResource = selected as Resource;
+      if(SelectedUnit != null) {
+        if(SelectedResource != null) SelectedResource.Deselect();
+        SelectedResource = selected as Resource;
+      }
     }
   }
 
   public static void DeselectAll() {
+    DeselectUnit();
+    DeselectResource();
+  }
+
+  public static void DeselectUnit() {
+    SelectedUnit?.Deselect();
     SelectedUnit = null;
+  }
+
+  public static void DeselectResource() {
+    SelectedResource?.Deselect();
     SelectedResource = null;
   }
 }
