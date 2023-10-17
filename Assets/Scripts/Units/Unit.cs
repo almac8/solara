@@ -4,14 +4,18 @@ using UnityEngine;
 
 [RequireComponent(typeof(ModuleMatrix))]
 public class Unit : Selectable {
-  [SerializeField] private HUD hud;
+  private UIManager uiManager;
+
+  private void Start() {
+    uiManager = GameObject.FindWithTag("UIManager").GetComponent<UIManager>();
+  }
 
   public ModuleMatrix GetModuleMatrix() {
     return gameObject.GetComponent<ModuleMatrix>();
   }
 
   protected override void Selected() {
-    hud.gameObject.SetActive(true);
+    uiManager.EnableHUD();
   }
 
   //  protected virtual void Deselected() {}

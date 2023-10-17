@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8399894892271382164}
   - component: {fileID: 235880349662781051}
   - component: {fileID: 7923177082072436137}
+  - component: {fileID: 5303110960157490651}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -54,8 +55,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.75
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &235880349662781051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +69,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb87963d1a0933b898cb35b11662998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hud: {fileID: 0}
 --- !u!114 &7923177082072436137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,6 +82,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modules: []
+--- !u!114 &5303110960157490651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2526345228679811676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad9ca27cebe029b2989869e892b3434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moduleMatrixUI: {fileID: 0}
 --- !u!1 &3036141880493282632
 GameObject:
   m_ObjectHideFlags: 0
