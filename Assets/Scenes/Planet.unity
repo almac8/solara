@@ -806,7 +806,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5986dd21d164c694db98ca3df4541dd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  constructionManager: {fileID: 1143688017}
 --- !u!1001 &796970962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1281,7 +1280,7 @@ GameObject:
   - component: {fileID: 1143688017}
   m_Layer: 0
   m_Name: Construction Manager
-  m_TagString: Untagged
+  m_TagString: ConstructionManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
