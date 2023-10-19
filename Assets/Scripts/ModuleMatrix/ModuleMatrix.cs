@@ -62,6 +62,10 @@ public class ModuleMatrix : MonoBehaviour {
     return newModule;
   }
 
+  public void RemoveModule(Module moduleToRemove) {
+    modules.Remove(moduleToRemove);
+  }
+
   private void Update() {
     float deltaTime = Time.deltaTime;
     foreach (Module module in modules) {
