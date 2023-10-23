@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DataStorage : Module {
-  public float storageCapacity;
+  [SerializeField] private float storageCapacity;
 
   private float dataWritten;
   private float dataProcessed;
