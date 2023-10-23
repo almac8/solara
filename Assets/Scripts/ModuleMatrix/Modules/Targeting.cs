@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Targeting : Module {
   private const int HOVER_MOVEMENT_INDEX = 0;
-  
+
   private GameObject target = null;
   public bool IsLockedOn { get; private set; }
   
@@ -26,6 +26,8 @@ public class Targeting : Module {
     
     ModuleRequirement requirement = new ModuleRequirement();
     requirement.SetRequiredModule<HoverMovement>("Hover Movement");
+    
+    Requirements.Add(requirement);
   }
 
   private void ActivateTargetingMode() {

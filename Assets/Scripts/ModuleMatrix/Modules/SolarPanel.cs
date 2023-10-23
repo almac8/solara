@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class SolarPanel : Module {
   private const int POWER_STORAGE_INDEX = 0;
-  
+
   [SerializeField] private float rechargeRate;
   [SerializeField] private float rechargeEfficiency;
-
-  private Animator animator;
+  [SerializeField] private Animator animator;
 
   private void Start() {
     Title = "Solar Panel";
@@ -17,6 +16,8 @@ public class SolarPanel : Module {
 
     ModuleRequirement requirement = new ModuleRequirement();
     requirement.SetRequiredModule<PowerStorage>("Power Storage");
+
+    Requirements.Add(requirement);
   }
 
   public override void RunStep(float deltaTime) {

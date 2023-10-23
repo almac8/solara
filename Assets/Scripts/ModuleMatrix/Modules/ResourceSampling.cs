@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ResourceSampling : Module {
   private const int TARGETING_INDEX = 0;
-  
+
   [SerializeField] private float sampleSize;
   [SerializeField] private float samplingRate;
 
@@ -16,6 +16,7 @@ public class ResourceSampling : Module {
 
     ModuleRequirement requirement = new ModuleRequirement();
     requirement.SetRequiredModule<Targeting>("Targeting");
+    Requirements.Add(requirement);
   }
 
   public override void RunStep(float deltaTime) {
