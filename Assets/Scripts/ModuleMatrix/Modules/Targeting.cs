@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Targeting : Module {
+  private const int HOVER_MOVEMENT_INDEX = 0;
+  
   private GameObject target = null;
-  private HoverMovement hoverMovement = null;
   public bool IsLockedOn { get; private set; }
-
+  
   public GameObject Target {
     get {
       return target;
@@ -20,9 +21,11 @@ public class Targeting : Module {
   private void Awake() {
     Title = "Targeting";
     Description = "Locks on to a target";
-    hoverMovement = GetComponent<HoverMovement>();
     Activator = new ModuleActivator(false, "Cancel Targeting", "Set Target");
     Activator.Activated += ActivateTargetingMode;
+    
+    ModuleRequirement requirement = new ModuleRequirement();
+    requirement.SetRequiredModule<HoverMovement>("Hover Movement");
   }
 
   private void ActivateTargetingMode() {
@@ -50,19 +53,23 @@ public class Targeting : Module {
 
   private void MoveToTarget() {
     if(target == null) return;
+    
+    HoverMovement hoverMovement = Requirements[HOVER_MOVEMENT_INDEX].AssociatedModule as HoverMovement;
 
-    Vector3 targetPosition = target.transform.position;
-    targetPosition.y = transform.position.y;
+    if(hoverMovement != null) {
+      Vector3 targetPosition = target.transform.position;
+      targetPosition.y = transform.position.y;
 
-    if(Vector3.Distance(transform.position, targetPosition) < 0.01) {
-      IsLockedOn = true;
-      return;
-    } else {
-      IsLockedOn = false;
+      if(Vector3.Distance(transform.position, targetPosition) < 0.01) {
+        IsLockedOn = true;
+        return;
+      } else {
+        IsLockedOn = false;
+      }
+
+      Vector3 movement = targetPosition - transform.position;
+
+      hoverMovement.ApplyMovement(movement);
     }
-
-    Vector3 movement = targetPosition - transform.position;
-
-    hoverMovement.ApplyMovement(movement);
   }
 }
