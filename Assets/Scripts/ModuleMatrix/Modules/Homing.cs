@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Homing : Module {
+  private const int TARGETING_INDEX = 0;
+
   private GameObject homeDock = null;
 
   private void Awake() {
@@ -19,7 +21,8 @@ public class Homing : Module {
 
   public override void RunStep(float deltaTime) {
     if(Activator.IsActive){
-      Requirements[TARGETING_INDEX].SetTarget(homeDock);
+      Targeting targeting = Requirements[TARGETING_INDEX].AssociatedModule as Targeting;
+      if(targeting != null) targeting.SetTarget(homeDock);
     }
   }
 }
