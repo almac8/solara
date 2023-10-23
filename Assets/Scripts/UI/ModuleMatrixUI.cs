@@ -52,6 +52,8 @@ public class ModuleMatrixUI : MonoBehaviour {
   private void SetModuleDetails(Module selectedModule) {
     Label moduleTitle = rootVisualElement.Q<Label>("module_title");
     Label moduleDescription = rootVisualElement.Q<Label>("module_description");
+    VisualElement requirementsVisual = rootVisualElement.Q<VisualElement>("requirements");
+    requirementsVisual.Clear();
     Button removeModuleButton = rootVisualElement.Q<Button>("remove");
 
     if(selectedModule == null) {
@@ -61,6 +63,38 @@ public class ModuleMatrixUI : MonoBehaviour {
     } else {
       moduleTitle.text = selectedModule.Title;
       moduleDescription.text = selectedModule.Description;
+
+      List<ModuleRequirement> requirements = selectedModule.Requirements;
+      foreach (ModuleRequirement requirement in requirements) {
+        VisualElement requirementVisual = new VisualElement();
+
+        Label requirementLabel = new Label();
+        requirementLabel.text = requirement.ModuleName + ": ";
+        requirementVisual.Add(requirementLabel);
+        
+        List<Module> availableModules = moduleMatrix.modules;
+        List<Module> validModules = new List<Module>();
+        List<string> availableModulesNames = new List<string>();
+
+        foreach (Module module in availableModules){
+          if(requirement.ModuleType == module.GetType()) {
+            validModules.Add(module);
+            availableModulesNames.Add(module.Title);
+          }
+        }
+
+        DropdownField availableModulesDropdown = new DropdownField();
+        availableModulesDropdown.choices = availableModulesNames;
+        requirementVisual.Add(availableModulesDropdown);
+
+        Button connectModuleButton = new Button();
+        connectModuleButton.text = "Connect Module";
+        connectModuleButton.clicked += () => requirement.SetAssociatedModule(validModules[availableModulesDropdown.index]);
+        requirementVisual.Add(connectModuleButton);
+
+        requirementsVisual.Add(requirementVisual);
+      }
+
       removeModuleButton.clicked += () => RemoveModule(selectedModule);
     }
   }

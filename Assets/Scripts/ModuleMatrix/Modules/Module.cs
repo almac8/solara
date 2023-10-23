@@ -8,5 +8,16 @@ public abstract class Module : MonoBehaviour {
   public ModuleGauge Gauge { get; protected set; }
   public ModuleActivator Activator { get; protected set; }
 
+  private List<ModuleRequirement> requirements = new List<ModuleRequirement>();
+  public List<ModuleRequirement> Requirements {
+    get {
+      return requirements;
+    }
+
+    set {
+      requirements = value;
+    }
+  }
+
   public abstract void RunStep(float deltaTime);
 }

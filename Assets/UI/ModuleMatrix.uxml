@@ -9,6 +9,7 @@
             <ui:VisualElement name="module" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 65%; height: 100%;">
                 <ui:Label tabindex="-1" text="Title" display-tooltip-when-elided="true" name="module_title" />
                 <ui:Label tabindex="-1" text="Description" display-tooltip-when-elided="true" name="module_description" style="white-space: normal;" />
+                <ui:VisualElement name="requirements" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
                 <ui:Button text="Remove Module" display-tooltip-when-elided="true" name="remove" />
             </ui:VisualElement>
         </ui:VisualElement>
