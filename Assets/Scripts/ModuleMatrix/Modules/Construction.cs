@@ -11,7 +11,13 @@ public class Construction : Module {
 
   private void Start() {
     ConstructionManager constructionManager = GameObject.FindWithTag("ConstructionManager").GetComponent<ConstructionManager>();
-    Activator.Activated += constructionManager.EnableConstructionMode;
+    UIManager uiManager = GameObject.FindWithTag("UIManager").GetComponent<UIManager>();
+
+    Activator.Activated += () => {
+      constructionManager.EnableConstructionMode();
+      uiManager.EnableConstructionUI();
+    };
+
     Activator.Deactivated += constructionManager.DisableConstructionMode;
   }
 

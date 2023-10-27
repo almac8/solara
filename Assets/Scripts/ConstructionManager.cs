@@ -1,8 +1,6 @@
 using UnityEngine;
 
 public class ConstructionManager : MonoBehaviour {
-  [SerializeField] private GameObject constructionReference;
-
   private bool constructionModeEnabled;
   private GameObject constructionGhost;
   private TerrainCollider terrainCollider;
@@ -20,7 +18,7 @@ public class ConstructionManager : MonoBehaviour {
       Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
       RaycastHit hitData;
 
-      if(terrainCollider.Raycast(ray, out hitData, 1000)) {
+      if(constructionGhost != null && terrainCollider.Raycast(ray, out hitData, 1000)) {
         Vector3 constructionPosition = new Vector3(Mathf.Round(hitData.point.x), Mathf.Round(hitData.point.y), Mathf.Round(hitData.point.z));
         constructionGhost.transform.position = constructionPosition;
 
@@ -33,11 +31,14 @@ public class ConstructionManager : MonoBehaviour {
 
   public void EnableConstructionMode() {
     constructionModeEnabled = true;
-    constructionGhost = Instantiate(constructionReference, Vector3.zero, constructionReference.transform.rotation);
   }
 
   public void DisableConstructionMode() {
     constructionModeEnabled = false;
     Destroy(constructionGhost);
+  }
+
+  public void SetConstructionGhost(GameObject constructionReference) {
+    constructionGhost = Instantiate(constructionReference, Vector3.zero, constructionReference.transform.rotation);
   }
 }
