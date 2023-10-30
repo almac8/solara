@@ -8,21 +8,24 @@ public class Hexmap : MonoBehaviour {
   [SerializeField] private int tileCount;
 
   private void Awake() {
-    Vector3 finalOffset = Vector3.zero;
+    int numLines = tileCount * 2 - 1;
+    Vector3 spawnpoint = transform.position;
+    int c = tileCount;
 
-    for(int x = 0; x < tileCount; x++) {
-      finalOffset.x = offset.x * x;
+    spawnpoint.z += ((numLines / 2) + 1) * offset.z;
+    for(int z = 0; z < numLines; z++) {
+      spawnpoint.z -= offset.z;
+      spawnpoint.x = transform.position.x - (c - 1) * (offset.x / 2);
 
-      for(int y = 0; y < tileCount; y++) {
-        finalOffset.z = offset.z * y;
+      for(int x = 0; x < c; x++) {
+        Instantiate(tile, spawnpoint, tile.transform.rotation);
+        spawnpoint.x += offset.x;
+      }
 
-        if(y % 2 != 0) {
-          finalOffset.x += offset.x / 2;
-        } else {
-          finalOffset.x -= offset.x / 2;
-        }
-
-        Instantiate(tile, finalOffset, tile.transform.rotation);
+      if(z < numLines / 2) {
+        c++;
+      } else {
+        c--;
       }
     }
   }

@@ -518,7 +518,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &511771384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1537,7 +1537,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!154 &1177953970
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -1792,7 +1792,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1477888706
 Transform:
   m_ObjectHideFlags: 0
@@ -1862,7 +1862,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile: {fileID: 8558686113920827098, guid: 17568471720f09ada87d0328acb3f859, type: 3}
   offset: {x: 1.73, y: 0, z: 1.5}
-  tileCount: 16
+  tileCount: 32
 --- !u!1 &1641976469
 GameObject:
   m_ObjectHideFlags: 0
