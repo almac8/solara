@@ -18,7 +18,7 @@ public class Hexmap : MonoBehaviour {
       spawnpoint.x = transform.position.x - (c - 1) * (offset.x / 2);
 
       for(int x = 0; x < c; x++) {
-        Instantiate(tile, spawnpoint, tile.transform.rotation);
+        Instantiate(tile, spawnpoint, tile.transform.rotation, transform);
         spawnpoint.x += offset.x;
       }
 

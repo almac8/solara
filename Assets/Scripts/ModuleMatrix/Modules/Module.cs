@@ -19,5 +19,5 @@ public abstract class Module : MonoBehaviour {
     }
   }
 
-  public abstract void RunStep(float deltaTime);
+  public virtual void RunStep(float deltaTime) {}
 }
