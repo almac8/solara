@@ -9,7 +9,6 @@ public class ConstructionUI : MonoBehaviour {
   private void OnEnable() {
     VisualElement rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
     UIManager uiManager = GameObject.FindWithTag("UIManager").GetComponent<UIManager>();
-    ConstructionManager constructionManager = GameObject.FindWithTag("ConstructionManager").GetComponent<ConstructionManager>();
 
     Button closeButton = rootVisualElement.Q<Button>("close");
     closeButton.clicked += uiManager.DisableConstructionUI;
@@ -19,7 +18,9 @@ public class ConstructionUI : MonoBehaviour {
     foreach (GameObject option in constructionOptions) {
       Button optionButton = new Button();
       optionButton.text = option.name;
-      optionButton.clicked += () => constructionManager.SetConstructionGhost(option);
+      optionButton.clicked += () => {
+        SelectionManager.SelectedUnit.gameObject.GetComponent<ConstructionPlanner>().SetConstructionGhost(option);
+      };
 
       constructionOptionsButtons.Add(optionButton);
     }

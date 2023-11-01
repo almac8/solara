@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Construction : Module {
+/* 
   private void Awake() {
     Title = "Construction Module";
     Description = "It can build stuff";
@@ -22,4 +23,5 @@ public class Construction : Module {
   }
 
   public override void RunStep(float deltaTime) {}
+   */
 }

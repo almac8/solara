@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Hexmap : MonoBehaviour {
   [SerializeField] private GameObject tile;
   [SerializeField] private Vector3 offset;
   [SerializeField] private int tileCount;
+
+  public Vector3 HoveredTilePosition { get; private set; }
+
+  public event Action TileHover;
+  public event Action TileClick;
 
   private void Awake() {
     int numLines = tileCount * 2 - 1;
@@ -28,5 +34,14 @@ public class Hexmap : MonoBehaviour {
         c--;
       }
     }
+  }
+
+  public void TileHovered(Vector3 tilePosition) {
+    HoveredTilePosition = tilePosition;
+    TileHover?.Invoke();
+  }
+
+  public void TileClicked(Vector3 tilePosition) {
+    TileClick?.Invoke();
   }
 }
