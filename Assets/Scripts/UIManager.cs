@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour {
   [SerializeField] private GameObject constructionUI;
 
   public void EnableHUD() {
+    hud.SetActive(false);
     hud.SetActive(true);
   }
 
