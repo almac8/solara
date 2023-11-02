@@ -49,5 +49,6 @@ public class ConstructionPlanner : Module {
     if(constructionGhost != null) GameObject.Destroy(constructionGhost);
 
     constructionGhost = Instantiate(constructionReference, Vector3.zero, constructionReference.transform.rotation);
+    constructionGhost.GetComponent<Unit>().SetSelectable(false);
   }
 }

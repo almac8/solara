@@ -10,7 +10,8 @@ public static class SelectionManager {
   public static void Select(Selectable selected) {
     if(selected is Unit) {
       if(SelectedUnit != null) SelectedUnit.Deselect();
-      SelectedUnit = selected as Unit;
+      Unit selectedAsUnit = selected as Unit;
+      if(selectedAsUnit.IsSelectable) SelectedUnit = selectedAsUnit;
     } else if(selected is Resource) {
       if(SelectedUnit != null) {
         if(SelectedResource != null) SelectedResource.Deselect();

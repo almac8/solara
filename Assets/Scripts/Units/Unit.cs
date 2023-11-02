@@ -6,8 +6,11 @@ using UnityEngine;
 public class Unit : Selectable {
   private UIManager uiManager;
 
+  public bool IsSelectable { get; private set; }
+
   private void Start() {
     uiManager = GameObject.FindWithTag("UIManager").GetComponent<UIManager>();
+    IsSelectable = true;
   }
 
   public ModuleMatrix GetModuleMatrix() {
@@ -19,4 +22,8 @@ public class Unit : Selectable {
   }
 
   //  protected virtual void Deselected() {}
+
+  public void SetSelectable(bool canSelect) {
+    IsSelectable = canSelect;
+  }
 }
