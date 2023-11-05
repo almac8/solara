@@ -40,12 +40,11 @@ public class ModuleMatrixUI : MonoBehaviour {
     modulesListView = rootVisualElement.Q<ListView>("modules_list");
     List<Module> modulesList = moduleMatrix.modules;
     modulesListView.itemsSource = modulesList;
+    modulesListView.makeItem = () => new Button();
 
-    modulesListView.makeItem = () => new Label();
-    modulesListView.bindItem = (item, index) => (item as Label).text = modulesList[index].Title;
-    modulesListView.selectionChanged += objects => {
-      Module selectedModule = modulesListView.selectedItem as Module;
-      SetModuleDetails(selectedModule);
+    modulesListView.bindItem = (item, index) => {
+      (item as Button).text = modulesList[index].Title;
+      (item as Button).clicked += () => SetModuleDetails(modulesList[index]);
     };
   }
 

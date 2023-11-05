@@ -2,7 +2,7 @@
     <ui:VisualElement name="module_matrix_ui" style="flex-grow: 1; background-color: rgb(255, 255, 255); flex-direction: column; justify-content: center; align-items: center; visibility: visible;">
         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row;">
             <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-                <ui:ListView focusable="true" name="modules_list" style="flex-grow: 1; width: 35%; flex-wrap: wrap; height: 100%;" />
+                <ui:ListView focusable="true" name="modules_list" style="flex-grow: 1; width: 100%; flex-wrap: wrap; height: 100%;" />
                 <ui:DropdownField label="Select" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="modules_dropdown" />
                 <ui:Button text="Add Module" display-tooltip-when-elided="true" name="add_module" />
             </ui:VisualElement>
