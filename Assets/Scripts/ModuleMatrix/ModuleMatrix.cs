@@ -11,7 +11,8 @@ public class ModuleMatrix : MonoBehaviour {
     DATA_STORAGE,
     DRONE_DOCK,
     KNOWLEDGE_DATABASE,
-    DATA_ANALIZER
+    DATA_ANALIZER,
+    PHYSICAL_STORAGE
   }
 
   public List<Module> modules;
@@ -55,6 +56,10 @@ public class ModuleMatrix : MonoBehaviour {
 
       case ModuleType.DATA_ANALIZER:
         newModule = gameObject.AddComponent<DataAnalizer>();
+        break;
+
+      case ModuleType.PHYSICAL_STORAGE:
+        newModule = gameObject.AddComponent<PhysicalStorage>();
         break;
     }
 

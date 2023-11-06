@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerStorage : Module {
-  [SerializeField] private float chargeCapacity;
+  [SerializeField] private float chargeCapacity = 50;
 
   private float powerCharged;
   private float powerDisCharged;

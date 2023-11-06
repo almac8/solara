@@ -11,5 +11,7 @@ public class PhysicalStorage : Module {
     Gauge = new ModuleGauge(0, storageCapacity, "Inventory");
   }
 
-  public override void RunStep(float deltaTime) {}
+  public bool Add(float amount) {
+    return true;
+  }
 }
