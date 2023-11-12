@@ -23,8 +23,11 @@ public class MapGenerator {
     Height = height;
 
     TileValues = new int[Width][];
-    for(int i = 0; i < Width; i++) {
-      TileValues[i] = new int[Height];
+    for(int x = 0; x < Width; x++) {
+      TileValues[x] = new int[Height];
+      for(int y = 0; y < Height; y++) {
+        TileValues[x][y] = Random.Range(0, 2);
+      }
     }
   }
 
