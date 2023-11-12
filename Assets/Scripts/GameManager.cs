@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
   private void Awake() {
-    Debug.Log("Game Manager Awakened");
+    MapGenerator mapGenerator = new MapGenerator(128, 32);
+    Debug.Log(mapGenerator.ToString());
   }
 }
