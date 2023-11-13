@@ -15,7 +15,7 @@ public class HUD : MonoBehaviour {
   private Button closeButton;
 
   private void OnEnable() {
-    selectedUnit = SelectionManager.SelectedUnit;
+    selectedUnit = GameManager.Instance.SelectionManager.SelectedUnit;
 
     if(selectedUnit == null) {
       gameObject.SetActive(false);
@@ -94,7 +94,7 @@ public class HUD : MonoBehaviour {
     closeButton = rootVisualElement.Q<Button>("close");
 
     closeButton.clicked += () => {
-      SelectionManager.DeselectAll();
+      GameManager.Instance.SelectionManager.DeselectAll();
       gameObject.SetActive(false);
     };
   }

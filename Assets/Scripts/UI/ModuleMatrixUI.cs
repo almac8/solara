@@ -9,7 +9,7 @@ public class ModuleMatrixUI : MonoBehaviour {
 
   private void OnEnable() {
     rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
-    moduleMatrix = SelectionManager.SelectedUnit.GetModuleMatrix();
+    moduleMatrix = GameManager.Instance.SelectionManager.SelectedUnit.GetModuleMatrix();
 
     PopulateListView();
 

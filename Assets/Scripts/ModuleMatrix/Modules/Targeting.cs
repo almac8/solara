@@ -31,7 +31,7 @@ public class Targeting : Module {
   }
 
   private void ActivateTargetingMode() {
-    SelectionManager.DeselectResource();
+    GameManager.Instance.SelectionManager.DeselectResource();
   }
 
   private void DeactivateTargetingMode() {
@@ -40,8 +40,8 @@ public class Targeting : Module {
 
   public override void RunStep(float deltaTime) {
     if(Activator.IsActive) {
-      if(SelectionManager.SelectedResource != null) {
-        target = SelectionManager.SelectedResource.gameObject;
+      if(GameManager.Instance.SelectionManager.SelectedResource != null) {
+        target = GameManager.Instance.SelectionManager.SelectedResource.gameObject;
         DeactivateTargetingMode();
       }
     } else {

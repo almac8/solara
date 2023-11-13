@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SelectionManager))]
 public class GameManager : MonoBehaviour {
   [SerializeField] private GameObject tile;
   
   public static GameManager Instance { get; private set; }
+  public SelectionManager SelectionManager { get; private set; }
 
   private void Awake() {
     if(Instance != null && Instance != this) {
@@ -14,6 +16,7 @@ public class GameManager : MonoBehaviour {
     }
 
     Instance = this;
+    SelectionManager = GetComponent<SelectionManager>();
 
     MapGenerator mapGenerator = new MapGenerator(256, 32);
     InstantiateMap(mapGenerator.TileValues);

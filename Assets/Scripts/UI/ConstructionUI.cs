@@ -19,7 +19,7 @@ public class ConstructionUI : MonoBehaviour {
       Button optionButton = new Button();
       optionButton.text = option.name;
       optionButton.clicked += () => {
-        SelectionManager.SelectedUnit.gameObject.GetComponent<ConstructionPlanner>().SetConstructionGhost(option);
+        GameManager.Instance.SelectionManager.SelectedUnit.gameObject.GetComponent<ConstructionPlanner>().SetConstructionGhost(option);
       };
 
       constructionOptionsButtons.Add(optionButton);
