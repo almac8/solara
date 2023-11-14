@@ -7,7 +7,9 @@ public class MapManager : MonoBehaviour {
   private float tileHeight = 1.44f;
 
   private void Awake() {
-    MapGenerator mapGenerator = new MapGenerator(256, 32);
+    MapGenerator mapGenerator = new MapGenerator(32);
+    TerrainGenerator terrainGenerator = new TerrainGenerator(mapGenerator.TileValues, tileWidth, tileHeight);
+    
     InstantiateMapTiles(mapGenerator.TileValues);
   }
 

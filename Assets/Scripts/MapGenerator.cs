@@ -5,8 +5,7 @@ using UnityEngine;
 public class MapGenerator {
   private int[][] tileValues;
 
-  public int Width { get; private set; }
-  public int Height { get; private set; }
+  public int Size { get; private set; }
 
   public int[][] TileValues {
     get {
@@ -18,30 +17,33 @@ public class MapGenerator {
     }
   }
 
-  public MapGenerator(int width, int height) {
-    Width = width;
-    Height = height;
+  public MapGenerator(int size) {
+    Size = size;
 
-    TileValues = new int[Width][];
-    for(int x = 0; x < Width; x++) {
-      TileValues[x] = new int[Height];
-      for(int y = 0; y < Height; y++) {
-        TileValues[x][y] = Random.Range(0, 2);
+    GenerateRandomness();
+  }
+
+  private void GenerateBlankMap() {
+    TileValues = new int[Size][];
+
+    for(int x = 0; x < Size; x++) {
+      TileValues[x] = new int[Size];
+
+      for(int y = 0; y < Size; y++) {
+        TileValues[x][y] = 0;
       }
     }
   }
 
-  public override string ToString() {
-    string mapString = "";
-    
-    for(int y = 0; y < Height; y++) {
-      for(int x = 0; x < Width; x++) {
-        mapString = mapString + "0";
+  private void GenerateRandomness() {
+    TileValues = new int[Size][];
+
+    for(int x = 0; x < Size; x++) {
+      TileValues[x] = new int[Size];
+
+      for(int y = 0; y < Size; y++) {
+        TileValues[x][y] = Random.Range(0, 2);
       }
-
-      mapString = mapString + "\n";
     }
-
-    return mapString;
   }
 }
