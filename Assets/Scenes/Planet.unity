@@ -156,7 +156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a1ed772960a4f06882f1b2f7b81c416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile: {fileID: 8558686113920827098, guid: 17568471720f09ada87d0328acb3f859, type: 3}
 --- !u!4 &198088937
 Transform:
   m_ObjectHideFlags: 0
@@ -208,6 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b3859bb4af1143108c4e7f8f428949a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tile: {fileID: 8558686113920827098, guid: 17568471720f09ada87d0328acb3f859, type: 3}
 --- !u!114 &198088941
 MonoBehaviour:
   m_ObjectHideFlags: 0
