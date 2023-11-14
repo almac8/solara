@@ -24,11 +24,11 @@ public class UIManager : MonoBehaviour {
         break;
 
       case UILayout.MODULE_MATRIX:
-        hud.SetActive(true);
+        moduleMatrixUI.SetActive(true);
         break;
 
       case UILayout.CONSTRUCTION:
-        hud.SetActive(true);
+        constructionUI.SetActive(true);
         break;
 
       default:
