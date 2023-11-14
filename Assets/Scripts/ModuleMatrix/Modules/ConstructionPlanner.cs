@@ -23,7 +23,12 @@ public class ConstructionPlanner : Module {
   }
 
   private void ActivateConstructionPlanner() {
+    Vector2 unitTileIndex = GameManager.Instance.MapManager.GetTileIndex(transform.position);
+    Vector3 absoluteTilePosition = GameManager.Instance.MapManager.GetTilePosition(unitTileIndex);
+    
+    hexmap.transform.position = absoluteTilePosition;
     hexmap.gameObject.SetActive(true);
+    
     constructionUiPanel.SetActive(true);
   }
 

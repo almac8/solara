@@ -4,12 +4,14 @@ using UnityEngine;
 
 [RequireComponent(typeof(SelectionManager))]
 [RequireComponent(typeof(UnitManager))]
+[RequireComponent(typeof(MapManager))]
 public class GameManager : MonoBehaviour {
   [SerializeField] private GameObject tile;
   
   public static GameManager Instance { get; private set; }
   public SelectionManager SelectionManager { get; private set; }
   public UnitManager UnitManager { get; private set; }
+  public MapManager MapManager { get; private set; }
 
   private void Awake() {
     if(Instance != null && Instance != this) {
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour {
     Instance = this;
     SelectionManager = GetComponent<SelectionManager>();
     UnitManager = GetComponent<UnitManager>();
+    MapManager = GetComponent<MapManager>();
 
     MapGenerator mapGenerator = new MapGenerator(256, 32);
     InstantiateMap(mapGenerator.TileValues);
