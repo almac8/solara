@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 
 public class ConstructionPlanner : Module {
   [SerializeField] private Hexmap hexmap;
-  [SerializeField] private GameObject constructionUiPanel;
 
   private GameObject constructionGhost = null;
 
@@ -28,8 +27,8 @@ public class ConstructionPlanner : Module {
     
     hexmap.transform.position = absoluteTilePosition;
     hexmap.gameObject.SetActive(true);
-    
-    constructionUiPanel.SetActive(true);
+
+    GameManager.Instance.UIManager.SetUI(UIManager.UILayout.CONSTRUCTION);
   }
 
   private void DeactivateConstructionPlanner() {

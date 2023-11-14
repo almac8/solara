@@ -135,6 +135,8 @@ GameObject:
   - component: {fileID: 198088936}
   - component: {fileID: 198088938}
   - component: {fileID: 198088939}
+  - component: {fileID: 198088940}
+  - component: {fileID: 198088941}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -194,6 +196,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cebc78a47574cfe6e83147ed9064cb0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &198088940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198088935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b3859bb4af1143108c4e7f8f428949a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &198088941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198088935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d3ec3098e1fc11a898f43a68dfa0bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hud: {fileID: 1308057891}
+  moduleMatrixUI: {fileID: 1293078145}
+  constructionUI: {fileID: 1470768581}
 --- !u!1001 &273547834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1108,7 +1137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hexmap: {fileID: 1508951990}
-  constructionUiPanel: {fileID: 1470768581}
 --- !u!114 &1208748665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1176,7 +1204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8075700996064337843, guid: 0274bc7f0fca1a0fa84d81c3c0330074, type: 3}
       propertyPath: movementSpeed
-      value: 20
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

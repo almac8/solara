@@ -4,12 +4,9 @@ using UnityEngine;
 
 [RequireComponent(typeof(ModuleMatrix))]
 public class Unit : Selectable {
-  private UIManager uiManager;
-
   public bool IsSelectable { get; private set; }
 
   private void Start() {
-    uiManager = GameObject.FindWithTag("UIManager").GetComponent<UIManager>();
     IsSelectable = true;
   }
 
@@ -18,7 +15,7 @@ public class Unit : Selectable {
   }
 
   protected override void Selected() {
-    uiManager.EnableHUD();
+    GameManager.Instance.UIManager.SetUI(UIManager.UILayout.HUD);
   }
 
   //  protected virtual void Deselected() {}

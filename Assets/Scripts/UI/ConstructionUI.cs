@@ -8,10 +8,9 @@ public class ConstructionUI : MonoBehaviour {
 
   private void OnEnable() {
     VisualElement rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
-    UIManager uiManager = GameObject.FindWithTag("UIManager").GetComponent<UIManager>();
 
     Button closeButton = rootVisualElement.Q<Button>("close");
-    closeButton.clicked += uiManager.DisableConstructionUI;
+    closeButton.clicked += GameManager.Instance.UIManager.DisableUI;
 
     VisualElement constructionOptionsButtons = rootVisualElement.Q<VisualElement>("construction_options");
 
