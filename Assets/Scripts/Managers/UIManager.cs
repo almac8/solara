@@ -34,8 +34,6 @@ public class UIManager : MonoBehaviour {
       default:
         break;
     }
-
-    //  Activated GameObject
   }
 
   public void DisableUI() {
