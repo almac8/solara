@@ -133,6 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 198088937}
   - component: {fileID: 198088936}
+  - component: {fileID: 198088938}
+  - component: {fileID: 198088939}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -168,6 +170,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &198088938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198088935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9653c3db2aeee0bca4349ade17c238f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &198088939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198088935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cebc78a47574cfe6e83147ed9064cb0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &273547834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1083,6 +1109,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexmap: {fileID: 1508951990}
   constructionUiPanel: {fileID: 1470768581}
+--- !u!114 &1208748665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208748658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba58e589d8c22809b937c8be5e0844e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  standbyPowerConsumption: 0.01
 --- !u!1001 &1212321939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1146,6 +1185,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3997700379203231259, guid: 0274bc7f0fca1a0fa84d81c3c0330074, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1208748664}
+    - targetCorrespondingSourceObject: {fileID: 3997700379203231259, guid: 0274bc7f0fca1a0fa84d81c3c0330074, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1208748665}
   m_SourcePrefab: {fileID: 100100000, guid: 0274bc7f0fca1a0fa84d81c3c0330074, type: 3}
 --- !u!1 &1293078145
 GameObject:

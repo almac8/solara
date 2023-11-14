@@ -13,6 +13,8 @@ public class CoreProcess : Module {
     ModuleRequirement requirement = new ModuleRequirement();
     requirement.SetRequiredModule<PowerStorage>("Power Storage");
     Requirements.Add(requirement);
+
+    GameManager.Instance.UnitManager.RegisterCoreProcessUnit(GetComponent<Unit>());
   }
 
   public override void RunStep(float deltaTime) {

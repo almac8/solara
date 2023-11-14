@@ -11,9 +11,11 @@ public class CameraController : MonoBehaviour {
   [SerializeField] private float scrollSensitivity;
 
   private void Update() {
-    if(GameManager.Instance.SelectionManager.SelectedUnit != null) {
-      transform.position = GameManager.Instance.SelectionManager.SelectedUnit.transform.position;
+    
+    if(GameManager.Instance.UnitManager.CoreProcessUnit != null) {
+      transform.position = GameManager.Instance.UnitManager.CoreProcessUnit.transform.position;
     }
+
 
     viewpointDistance = Mathf.Clamp(viewpointDistance - Input.mouseScrollDelta.y * scrollSensitivity, 0f, 2f);
     
