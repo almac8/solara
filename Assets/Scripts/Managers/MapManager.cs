@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour {
   [SerializeField] private GameObject tile;
-  
+
   private float tileWidth = 1.73f;
   private float tileHeight = 1.44f;
 
@@ -12,15 +12,18 @@ public class MapManager : MonoBehaviour {
   }
 
   private void InstantiateMapTiles(int[][] map) {
+    GameObject tileMap = new GameObject();
+    tileMap.name = "Tilemap";
+
     for(int x = 0; x < map.Length; x++) {
       for(int y = 0; y < map[x].Length; y++) {
         if(map[x][y] == 0) {
-          Vector3 offset = transform.position;
+          Vector3 offset = tileMap.transform.position;
           offset.x = x * 1.73f;
           offset.z = y * 1.44f;
           if(y % 2 == 0) offset.x += 1.73f / 2f;
 
-          Instantiate(tile, offset, tile.transform.rotation, transform);
+          Instantiate(tile, offset, tile.transform.rotation, tileMap.transform);
         }
       }
     }
