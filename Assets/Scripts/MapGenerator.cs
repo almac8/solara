@@ -79,11 +79,11 @@ public class MapGenerator {
           count += tiles[x  ][y+1];
           count += tiles[x+1][y+1];
 
-          if(count > 4) {
+          if(count > 6) {
             tiles[x][y] = 1;
           }
 
-          if(count < 4) {
+          if(count < 5) {
             tiles[x][y] = 0;
           }
 

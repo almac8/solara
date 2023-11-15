@@ -7,6 +7,7 @@ public class TerrainGenerator {
     int mapSize = tileValues.Length;
 
     TerrainData terrainData = new TerrainData();
+    terrainData.heightmapResolution = mapSize;
     terrainData.size = new Vector3(mapSize * tileWidth, mapSize / 2, mapSize * tileHeight);
 
     float[,] heights = new float[mapSize, mapSize];
@@ -14,11 +15,11 @@ public class TerrainGenerator {
       for(int y = 0; y < mapSize; y++) {
         switch(tileValues[x][y]) {
           case 0:
-            heights[y, x] = 1;
+            heights[y, x] = 0.5f;
             break;
 
           case 1:
-            heights[y, x] = 0.5f;
+            heights[y, x] = 1;
             break;
         }
       }
@@ -27,5 +28,6 @@ public class TerrainGenerator {
     terrainData.SetHeights(0, 0, heights);
 
     GameObject terrain = Terrain.CreateTerrainGameObject(terrainData);
+    terrain.transform.position = new Vector3(-mapSize / 2 * tileWidth, -mapSize / 4, -mapSize / 2 * tileHeight);
   }
 }

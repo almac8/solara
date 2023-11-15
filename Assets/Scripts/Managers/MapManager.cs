@@ -5,9 +5,10 @@ public class MapManager : MonoBehaviour {
 
   private float tileWidth = 1.73f;
   private float tileHeight = 1.44f;
+  private int mapSize = 32;
 
   private void Awake() {
-    MapGenerator mapGenerator = new MapGenerator(32);
+    MapGenerator mapGenerator = new MapGenerator(mapSize);
     TerrainGenerator terrainGenerator = new TerrainGenerator(mapGenerator.TileValues, tileWidth, tileHeight);
     
     InstantiateMapTiles(mapGenerator.TileValues);
@@ -16,13 +17,14 @@ public class MapManager : MonoBehaviour {
   private void InstantiateMapTiles(int[][] map) {
     GameObject tileMap = new GameObject();
     tileMap.name = "Tilemap";
+    tileMap.transform.position = new Vector3(-mapSize / 2 * tileWidth, 0, -mapSize / 2 * tileHeight);
 
     for(int x = 0; x < map.Length; x++) {
       for(int y = 0; y < map[x].Length; y++) {
         if(map[x][y] == 0) {
           Vector3 offset = tileMap.transform.position;
-          offset.x = x * 1.73f;
-          offset.z = y * 1.44f;
+          offset.x += x * 1.73f;
+          offset.z += y * 1.44f;
           if(y % 2 == 0) offset.x += 1.73f / 2f;
 
           Instantiate(tile, offset, tile.transform.rotation, tileMap.transform);
