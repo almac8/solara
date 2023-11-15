@@ -18,9 +18,9 @@ public class MapGenerator {
   }
 
   public MapGenerator(int size) {
-    Size = size;
+    Size = size + 1;
 
-    GenerateRandomness();
+    GenerateBlankMap();
   }
 
   private void GenerateBlankMap() {

@@ -9,9 +9,9 @@ public class TerrainGenerator {
     TerrainData terrainData = new TerrainData();
     terrainData.size = new Vector3(mapSize * tileWidth, mapSize / 2, mapSize * tileHeight);
 
-    float[,] heights = new float[33, 33];
-    for(int x = 0; x < 32; x++) {
-      for(int y = 0; y < 32; y++) {
+    float[,] heights = new float[mapSize, mapSize];
+    for(int x = 0; x < mapSize; x++) {
+      for(int y = 0; y < mapSize; y++) {
         switch(tileValues[x][y]) {
           case 0:
             heights[x, y] = 0;
