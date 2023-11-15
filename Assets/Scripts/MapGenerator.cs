@@ -20,30 +20,77 @@ public class MapGenerator {
   public MapGenerator(int size) {
     Size = size + 1;
 
-    GenerateBlankMap();
+    TileValues = GenerateMountains();
   }
 
-  private void GenerateBlankMap() {
-    TileValues = new int[Size][];
+  private int[][] GenerateBlankMap() {
+    int[][] tiles = new int[Size][];
 
     for(int x = 0; x < Size; x++) {
-      TileValues[x] = new int[Size];
+      tiles[x] = new int[Size];
 
       for(int y = 0; y < Size; y++) {
-        TileValues[x][y] = 0;
+        tiles[x][y] = 0;
       }
     }
+
+    return tiles;
   }
 
-  private void GenerateRandomness() {
-    TileValues = new int[Size][];
+  private int[][] GenerateRandomness() {
+    int[][] tiles = new int[Size][];
 
     for(int x = 0; x < Size; x++) {
-      TileValues[x] = new int[Size];
+      tiles[x] = new int[Size];
 
       for(int y = 0; y < Size; y++) {
-        TileValues[x][y] = Random.Range(0, 2);
+        tiles[x][y] = Random.Range(0, 2);
       }
     }
+
+    return tiles;
+  }
+
+  private int[][] GenerateMountains() {
+    int[][] tiles = new int[Size][];
+
+    for(int x = 0; x < Size; x++) {
+      tiles[x] = new int[Size];
+
+      for(int y = 0; y < Size; y++) {
+        tiles[x][y] = Random.Range(0, 2);
+      }
+    }
+
+    for(int i = 0; i < 2; i++) {
+      for(int x = 1; x < Size-1; x++) {
+        for(int y = 1; y < Size-1; y++) {
+          int count = 0;
+
+          count += tiles[x-1][y-1];
+          count += tiles[x  ][y-1];
+          count += tiles[x+1][y-1];
+
+          count += tiles[x-1][y  ];
+          count += tiles[x  ][y  ];
+          count += tiles[x+1][y  ];
+
+          count += tiles[x-1][y+1];
+          count += tiles[x  ][y+1];
+          count += tiles[x+1][y+1];
+
+          if(count > 4) {
+            tiles[x][y] = 1;
+          }
+
+          if(count < 4) {
+            tiles[x][y] = 0;
+          }
+
+        }
+      }
+    }
+
+    return tiles;
   }
 }

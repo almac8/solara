@@ -14,11 +14,11 @@ public class TerrainGenerator {
       for(int y = 0; y < mapSize; y++) {
         switch(tileValues[x][y]) {
           case 0:
-            heights[x, y] = 0;
+            heights[y, x] = 1;
             break;
 
           case 1:
-            heights[x, y] = 1;
+            heights[y, x] = 0.5f;
             break;
         }
       }
