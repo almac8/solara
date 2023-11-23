@@ -2,24 +2,28 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.UIElements;
+using System.Collections.Generic;
 
 public class WorldGenerator : EditorWindow {
   private const int MIN_MAP_SIZE = 2;
   private const int MAX_MAP_SIZE = 64;
 
   string[] mapSizeNames = new string[] {
-    "One",
-    "Two",
+    "Small",
+    "Medium",
+    "Large"
   };
   
   int[] mapSizeValues = new int[] {
-    2,
-    4
+    32,
+    64,
+    128
   };
 
   private static string previousScene;
   private static WorldGenerator window;
   private static UnityEngine.SceneManagement.Scene scene;
+  private static List<GameObject> tiles;
   
   private GameObject tileObject;
   private int mapSize;
@@ -28,6 +32,8 @@ public class WorldGenerator : EditorWindow {
   
   [MenuItem("Window/World Generator")]
   private static void ShowWindow() {
+    tiles = new List<GameObject>();
+
     window = GetWindow<WorldGenerator>();
     window.titleContent = new GUIContent("World Generator");
     window.Show();
@@ -61,7 +67,31 @@ public class WorldGenerator : EditorWindow {
       Debug.LogError("Tile has not been assigned");
       return;
     }
-    
-    instances = (GameObject) PrefabUtility.InstantiatePrefab(tileObject, scene);
+
+    if(tiles.Count > 0) {
+      foreach (GameObject tile in tiles) {
+        GameObject.DestroyImmediate(tile);
+      }
+    }
+
+    MapGenerator mapGenerator = new MapGenerator(mapSize);
+    int[][] tileValues = mapGenerator.TileValues;
+    float mapWidth = mapSize * tileWidth;
+    float mapHeight = mapSize * tileHeight;
+
+    for(int y = 0; y < tileValues.Length; y++) {
+      for(int x = 0; x < tileValues.Length; x++) {
+        if(tileValues[x][y] == 0) {
+          var instance = (GameObject) PrefabUtility.InstantiatePrefab(tileObject, scene);
+
+          Vector3 tilePosition = new Vector3(x * tileWidth, 0, y * tileHeight);
+          tilePosition.x -= mapWidth / 2;
+          tilePosition.z -= mapHeight / 2;
+          instance.transform.position = tilePosition;
+
+          tiles.Add(instance);
+        }
+      }
+    }
   }
 }
