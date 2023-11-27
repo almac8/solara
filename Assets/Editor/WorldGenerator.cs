@@ -24,11 +24,14 @@ public class WorldGenerator : EditorWindow {
   private static WorldGenerator window;
   private static UnityEngine.SceneManagement.Scene scene;
   private static List<GameObject> tiles;
+  private GameObject terrain;
   
   private GameObject tileObject;
   private int mapSize;
   private float tileWidth;
   private float tileHeight;
+  private bool showTiles;
+  private bool showTerrain;
   
   [MenuItem("Window/World Generator")]
   private static void ShowWindow() {
@@ -54,7 +57,10 @@ public class WorldGenerator : EditorWindow {
     tileHeight = EditorGUILayout.FloatField("Tile Height: ", tileHeight);
     EditorGUILayout.EndVertical();
 
-    if(GUILayout.Button("Generate")) GenerateMap();
+    if(GUILayout.Button("Generate")) GenerateWorld();
+
+    if(GUILayout.Button("Toggle Tiles")) ToggleTiles();
+    if(GUILayout.Button("Toggle Terrain")) ToggleTerrain();
 
     if(GUILayout.Button("Close")) {
       EditorSceneManager.OpenScene(previousScene);
@@ -62,7 +68,7 @@ public class WorldGenerator : EditorWindow {
     }
   }
 
-  private void GenerateMap() {
+  private void GenerateWorld() {
     if(tileObject == null) {
       Debug.LogError("Tile has not been assigned");
       return;
@@ -72,6 +78,8 @@ public class WorldGenerator : EditorWindow {
       foreach (GameObject tile in tiles) {
         GameObject.DestroyImmediate(tile);
       }
+
+      tiles = new List<GameObject>();
     }
 
     MapGenerator mapGenerator = new MapGenerator(mapSize);
@@ -93,5 +101,35 @@ public class WorldGenerator : EditorWindow {
         }
       }
     }
+
+    if(terrain != null) {
+      GameObject.DestroyImmediate(terrain);
+    }
+
+    TerrainGenerator terrainGenerator = new TerrainGenerator(tileValues, tileWidth, tileHeight);
+    terrain = terrainGenerator.Terrains;
+  }
+
+  private void ToggleTiles() {
+    if(tiles.Count == 0) {
+      Debug.LogError("Tiles have not been Generated");
+      return;
+    }
+
+    foreach (GameObject tile in tiles) {
+      tile.SetActive(showTiles);
+    }
+
+    showTiles = !showTiles;
+  }
+
+  private void ToggleTerrain() {
+    if(terrain == null) {
+      Debug.LogError("Terrain has not been Generated");
+      return;
+    }
+
+    terrain.SetActive(showTerrain);
+    showTerrain = !showTerrain;
   }
 }

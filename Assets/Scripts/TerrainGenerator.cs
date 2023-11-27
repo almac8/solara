@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TerrainGenerator {
+  public GameObject Terrains { get; private set; }
+
   public TerrainGenerator(int[][] tileValues, float tileWidth, float tileHeight) {
     int mapSize = tileValues.Length;
 
@@ -27,7 +29,7 @@ public class TerrainGenerator {
 
     terrainData.SetHeights(0, 0, heights);
 
-    GameObject terrain = Terrain.CreateTerrainGameObject(terrainData);
-    terrain.transform.position = new Vector3(-mapSize / 2 * tileWidth, -mapSize / 4, -mapSize / 2 * tileHeight);
+    Terrains = Terrain.CreateTerrainGameObject(terrainData);
+    Terrains.transform.position = new Vector3(-mapSize / 2 * tileWidth, -mapSize / 4, -mapSize / 2 * tileHeight);
   }
 }
