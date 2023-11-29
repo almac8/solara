@@ -6,6 +6,7 @@ public class MapGenerator {
   private int[][] tileValues;
 
   public int Size { get; private set; }
+  public int Seed { get; private set; }
 
   public int[][] TileValues {
     get {
@@ -17,8 +18,10 @@ public class MapGenerator {
     }
   }
 
-  public MapGenerator(int size) {
+  public MapGenerator(int size, int worldSeed) {
     Size = size + 1;
+    Seed = worldSeed;
+    Random.InitState(Seed);
 
     TileValues = GenerateMountains();
   }

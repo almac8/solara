@@ -26,6 +26,7 @@ public class WorldGenerator : EditorWindow {
   private static List<GameObject> tiles;
   private GameObject terrain;
   
+  private int worldSeed;
   private GameObject tileObject;
   private int mapSize;
   private float tileWidth;
@@ -51,6 +52,7 @@ public class WorldGenerator : EditorWindow {
   
   private void OnGUI() {
     EditorGUILayout.BeginVertical();
+    worldSeed = EditorGUILayout.IntField("World Seed: ", worldSeed);
     tileObject = (GameObject)EditorGUILayout.ObjectField(tileObject, typeof(Object), true);
     mapSize = EditorGUILayout.IntPopup("Map Size: ", mapSize, mapSizeNames, mapSizeValues);
     tileWidth = EditorGUILayout.FloatField("Tile Width: ", tileWidth);
@@ -69,6 +71,11 @@ public class WorldGenerator : EditorWindow {
   }
 
   private void GenerateWorld() {
+    if(worldSeed == 0) {
+      Debug.LogWarning("World Seed has not been set\nUsing random value");
+      worldSeed = (int)(Random.value * 10000);
+    }
+
     if(tileObject == null) {
       Debug.LogError("Tile has not been assigned");
       return;
@@ -82,7 +89,7 @@ public class WorldGenerator : EditorWindow {
       tiles = new List<GameObject>();
     }
 
-    MapGenerator mapGenerator = new MapGenerator(mapSize);
+    MapGenerator mapGenerator = new MapGenerator(mapSize, worldSeed);
     int[][] tileValues = mapGenerator.TileValues;
     float mapWidth = mapSize * tileWidth;
     float mapHeight = mapSize * tileHeight;

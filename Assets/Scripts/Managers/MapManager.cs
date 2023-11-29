@@ -12,7 +12,7 @@ public class MapManager : MonoBehaviour {
     TileHeight = 1.44f;
     MapSize = 32;
 
-    mapGenerator = new MapGenerator(MapSize);
+    mapGenerator = new MapGenerator(MapSize, 4444);
     TerrainGenerator terrainGenerator = new TerrainGenerator(mapGenerator.TileValues, TileWidth, TileHeight);
   }
 
