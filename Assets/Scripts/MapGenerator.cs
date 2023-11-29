@@ -22,78 +22,58 @@ public class MapGenerator {
     Size = size + 1;
     Seed = worldSeed;
     Random.InitState(Seed);
-
-    TileValues = GenerateMountains();
   }
 
-  private int[][] GenerateBlankMap() {
-    int[][] tiles = new int[Size][];
+  public void GenerateBlank() {
+    TileValues = new int[Size][];
 
     for(int x = 0; x < Size; x++) {
-      tiles[x] = new int[Size];
-
-      for(int y = 0; y < Size; y++) {
-        tiles[x][y] = 0;
-      }
+      TileValues[x] = new int[Size];
     }
-
-    return tiles;
   }
 
-  private int[][] GenerateRandomness() {
-    int[][] tiles = new int[Size][];
+  public void GenerateNoise() {
+    TileValues = new int[Size][];
 
     for(int x = 0; x < Size; x++) {
-      tiles[x] = new int[Size];
+      TileValues[x] = new int[Size];
 
       for(int y = 0; y < Size; y++) {
-        tiles[x][y] = Random.Range(0, 2);
+        TileValues[x][y] = Random.Range(0, 2);
       }
     }
-
-    return tiles;
   }
 
-  private int[][] GenerateMountains() {
-    int[][] tiles = new int[Size][];
-
-    for(int x = 0; x < Size; x++) {
-      tiles[x] = new int[Size];
-
-      for(int y = 0; y < Size; y++) {
-        tiles[x][y] = Random.Range(0, 2);
-      }
-    }
+  public void GenerateMountainous() {
+    GenerateNoise();
 
     for(int i = 0; i < 2; i++) {
       for(int x = 1; x < Size-1; x++) {
         for(int y = 1; y < Size-1; y++) {
           int count = 0;
 
-          count += tiles[x-1][y-1];
-          count += tiles[x  ][y-1];
-          count += tiles[x+1][y-1];
+          count += TileValues[x-1][y-1];
+          count += TileValues[x  ][y-1];
+          count += TileValues[x+1][y-1];
 
-          count += tiles[x-1][y  ];
-          count += tiles[x  ][y  ];
-          count += tiles[x+1][y  ];
+          count += TileValues[x-1][y  ];
+          count += TileValues[x  ][y  ];
+          count += TileValues[x+1][y  ];
 
-          count += tiles[x-1][y+1];
-          count += tiles[x  ][y+1];
-          count += tiles[x+1][y+1];
+          count += TileValues[x-1][y+1];
+          count += TileValues[x  ][y+1];
+          count += TileValues[x+1][y+1];
 
           if(count > 6) {
-            tiles[x][y] = 1;
+            TileValues[x][y] = 1;
           }
 
           if(count < 5) {
-            tiles[x][y] = 0;
+            TileValues[x][y] = 0;
           }
 
         }
       }
     }
-
-    return tiles;
   }
 }

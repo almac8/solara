@@ -73,7 +73,7 @@ public class WorldGenerator : EditorWindow {
   private void GenerateWorld() {
     if(worldSeed == 0) {
       Debug.LogWarning("World Seed has not been set\nUsing random value");
-      worldSeed = (int)(Random.value * 10000);
+      worldSeed = (int)(Random.value * 100000000);
     }
 
     if(tileObject == null) {
@@ -90,7 +90,14 @@ public class WorldGenerator : EditorWindow {
     }
 
     MapGenerator mapGenerator = new MapGenerator(mapSize, worldSeed);
+    mapGenerator.GenerateMountainous();
+
     int[][] tileValues = mapGenerator.TileValues;
+    if(tileValues == null) {
+      Debug.LogError("Map has not been Generated yet");
+      return;
+    }
+
     float mapWidth = mapSize * tileWidth;
     float mapHeight = mapSize * tileHeight;
 
