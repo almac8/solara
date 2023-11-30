@@ -81,12 +81,14 @@ public class WorldGenerator : EditorWindow {
       ToggleTerrain();
     }
 
-    displayFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(displayFoldout, "Display");
-    if(displayFoldout) {
-      if(GUILayout.Button("Toggle Tiles")) ToggleTiles();
-      if(GUILayout.Button("Toggle Terrain")) ToggleTerrain();
+    if(tiles.Count != 0) {
+      displayFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(displayFoldout, "Display");
+      if(displayFoldout) {
+        if(GUILayout.Button("Toggle Tiles")) ToggleTiles();
+        if(GUILayout.Button("Toggle Terrain")) ToggleTerrain();
+      }
+      EditorGUILayout.EndFoldoutHeaderGroup();
     }
-    EditorGUILayout.EndFoldoutHeaderGroup();
 
     if(GUILayout.Button("Close")) {
       EditorSceneManager.OpenScene(previousScene);
