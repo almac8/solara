@@ -15,9 +15,9 @@ public class WorldGenerator : EditorWindow {
   };
   
   int[] mapSizeValues = new int[] {
-    32,
     64,
-    128
+    128,
+    256
   };
 
   private static string previousScene;
