@@ -71,7 +71,6 @@ public class MapGenerator {
           if(count < 5) {
             TileValues[x][y] = 0;
           }
-
         }
       }
     }

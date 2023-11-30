@@ -59,7 +59,13 @@ public class WorldGenerator : EditorWindow {
     tileHeight = EditorGUILayout.FloatField("Tile Height: ", tileHeight);
     EditorGUILayout.EndVertical();
 
-    if(GUILayout.Button("Generate")) GenerateWorld();
+    if(GUILayout.Button("Generate")) {
+      GenerateWorld();
+      ToggleTiles();
+      ToggleTiles();
+      ToggleTerrain();
+      ToggleTerrain();
+    }
 
     if(GUILayout.Button("Toggle Tiles")) ToggleTiles();
     if(GUILayout.Button("Toggle Terrain")) ToggleTerrain();
