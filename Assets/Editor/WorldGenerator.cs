@@ -25,12 +25,17 @@ public class WorldGenerator : EditorWindow {
   private static UnityEngine.SceneManagement.Scene scene;
   private static List<GameObject> tiles;
   private GameObject terrain;
-  
+
+  private bool worldFoldout;
   private int worldSeed;
-  private GameObject tileObject;
   private int mapSize;
+
+  private bool tileFoldout;
+  private GameObject tileObject;
   private float tileWidth;
   private float tileHeight;
+  
+  private bool displayFoldout;
   private bool showTiles;
   private bool showTerrain;
   
@@ -52,12 +57,21 @@ public class WorldGenerator : EditorWindow {
   
   private void OnGUI() {
     EditorGUILayout.BeginVertical();
-    worldSeed = EditorGUILayout.IntField("World Seed: ", worldSeed);
-    tileObject = (GameObject)EditorGUILayout.ObjectField(tileObject, typeof(Object), true);
-    mapSize = EditorGUILayout.IntPopup("Map Size: ", mapSize, mapSizeNames, mapSizeValues);
-    tileWidth = EditorGUILayout.FloatField("Tile Width: ", tileWidth);
-    tileHeight = EditorGUILayout.FloatField("Tile Height: ", tileHeight);
-    EditorGUILayout.EndVertical();
+    
+    worldFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(worldFoldout, "World");
+    if(worldFoldout) {
+      worldSeed = EditorGUILayout.IntField("World Seed: ", worldSeed);
+      mapSize = EditorGUILayout.IntPopup("Map Size: ", mapSize, mapSizeNames, mapSizeValues);
+    }
+    EditorGUILayout.EndFoldoutHeaderGroup();
+
+    tileFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(tileFoldout, "Tile");
+    if(tileFoldout) {
+      tileObject = (GameObject)EditorGUILayout.ObjectField(tileObject, typeof(Object), true);
+      tileWidth = EditorGUILayout.FloatField("Tile Width: ", tileWidth);
+      tileHeight = EditorGUILayout.FloatField("Tile Height: ", tileHeight);
+    }
+    EditorGUILayout.EndFoldoutHeaderGroup();
 
     if(GUILayout.Button("Generate")) {
       GenerateWorld();
@@ -67,13 +81,19 @@ public class WorldGenerator : EditorWindow {
       ToggleTerrain();
     }
 
-    if(GUILayout.Button("Toggle Tiles")) ToggleTiles();
-    if(GUILayout.Button("Toggle Terrain")) ToggleTerrain();
+    displayFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(displayFoldout, "Display");
+    if(displayFoldout) {
+      if(GUILayout.Button("Toggle Tiles")) ToggleTiles();
+      if(GUILayout.Button("Toggle Terrain")) ToggleTerrain();
+    }
+    EditorGUILayout.EndFoldoutHeaderGroup();
 
     if(GUILayout.Button("Close")) {
       EditorSceneManager.OpenScene(previousScene);
       window.Close();
     }
+
+    EditorGUILayout.EndVertical();
   }
 
   private void GenerateWorld() {
