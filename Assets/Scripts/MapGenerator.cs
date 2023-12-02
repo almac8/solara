@@ -24,7 +24,7 @@ public class MapGenerator {
     Random.InitState(Seed);
   }
 
-  public void GenerateBlank() {
+  private void GenerateBlank() {
     TileValues = new int[Size][];
 
     for(int x = 0; x < Size; x++) {
@@ -32,7 +32,7 @@ public class MapGenerator {
     }
   }
 
-  public void GenerateNoise() {
+  private void GenerateNoise() {
     TileValues = new int[Size][];
 
     for(int x = 0; x < Size; x++) {
@@ -44,7 +44,7 @@ public class MapGenerator {
     }
   }
 
-  public void GenerateMountainous() {
+  public void GenerateTopography() {
     GenerateNoise();
 
     for(int i = 0; i < 2; i++) {
