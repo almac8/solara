@@ -5,7 +5,7 @@ using UnityEngine;
 public class TerrainGenerator {
   public GameObject Terrains { get; private set; }
 
-  public TerrainGenerator(int[][] tileValues, float tileWidth, float tileHeight) {
+  public TerrainGenerator(MapGenerator.TileType[][] tileValues, float tileWidth, float tileHeight) {
     int mapSize = tileValues.Length;
 
     TerrainData terrainData = new TerrainData();
@@ -16,12 +16,16 @@ public class TerrainGenerator {
     for(int x = 0; x < mapSize; x++) {
       for(int y = 0; y < mapSize; y++) {
         switch(tileValues[x][y]) {
-          case 0:
+          case MapGenerator.TileType.VALLEY:
+            heights[y, x] = 0.0f;
+            break;
+
+          case MapGenerator.TileType.SEA_LEVEL:
             heights[y, x] = 0.5f;
             break;
 
-          case 1:
-            heights[y, x] = 1;
+          case MapGenerator.TileType.MOUNTAIN:
+            heights[y, x] = 1.0f;
             break;
         }
       }

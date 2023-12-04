@@ -5,7 +5,7 @@ public class HexmapRenderer : MonoBehaviour {
   [SerializeField] private GameObject tile;
 
   private void Start() {
-    int[][] tiles = hexmap.GetTileValues();
+    MapGenerator.TileType[][] tiles = hexmap.GetTileValues();
     GameObject tileMap = new GameObject();
     tileMap.name = "Tilemap";
     

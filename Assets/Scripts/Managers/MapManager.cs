@@ -17,7 +17,7 @@ public class MapManager : MonoBehaviour {
     TerrainGenerator terrainGenerator = new TerrainGenerator(mapGenerator.TileValues, TileWidth, TileHeight);
   }
 
-  public int[][] GetTileValues() {
+  public MapGenerator.TileType[][] GetTileValues() {
     return mapGenerator.TileValues;
   }
 

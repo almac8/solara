@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MapGenerator {
-  private int[][] tileValues;
+  public enum TileType {
+    VALLEY,
+    SEA_LEVEL,
+    MOUNTAIN
+  };
+
+  private TileType[][] tileValues;
 
   public int Size { get; private set; }
   public int Seed { get; private set; }
 
-  public int[][] TileValues {
+  public TileType[][] TileValues {
     get {
       return tileValues;
     }
@@ -26,10 +32,10 @@ public class MapGenerator {
   }
 
   private void GenerateBlank() {
-    TileValues = new int[Size][];
+    TileValues = new TileType[Size][];
 
     for(int x = 0; x < Size; x++) {
-      TileValues[x] = new int[Size];
+      TileValues[x] = new TileType[Size];
     }
   }
 
@@ -38,11 +44,13 @@ public class MapGenerator {
 
     for(int y = 0; y < Size; y++) {
       for(int x = 0; x < Size; x++) {
+        TileValues[x][y] = TileType.SEA_LEVEL;
+
         float noiseSample = Mathf.PerlinNoise(offset.x + (x*scale), offset.y + (y*scale));
-        if(noiseSample > cutoff) {
-          TileValues[x][y] = 1;
-        } else {
-          TileValues[x][y] = 0;
+        if(noiseSample < 0.25f) {
+          TileValues[x][y] = TileType.VALLEY;
+        } else if(noiseSample > 0.75f) {
+          TileValues[x][y] = TileType.MOUNTAIN;
         }
       }
     }

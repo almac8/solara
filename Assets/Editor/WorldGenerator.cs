@@ -124,7 +124,7 @@ public class WorldGenerator : EditorWindow {
       tiles = new List<GameObject>();
     }
 
-    int[][] tileValues = mapGenerator.TileValues;
+    MapGenerator.TileType[][] tileValues = mapGenerator.TileValues;
     if(tileValues == null) {
       Debug.LogError("Map Generator does not contain any tile data");
       return;
