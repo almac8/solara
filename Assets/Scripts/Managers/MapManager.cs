@@ -13,7 +13,7 @@ public class MapManager : MonoBehaviour {
     MapSize = 64;
 
     mapGenerator = new MapGenerator(MapSize, 4444);
-    mapGenerator.GenerateTopography();
+    mapGenerator.GenerateTopography(0.1f, 0.5f);
     TerrainGenerator terrainGenerator = new TerrainGenerator(mapGenerator.TileValues, TileWidth, TileHeight);
   }
 

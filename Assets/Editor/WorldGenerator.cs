@@ -42,6 +42,8 @@ public class WorldGenerator : EditorWindow {
   private bool showTerrain;
 
   private bool topographyFoldout;
+  private float topographyScale;
+  private float topographyCutoff;
   
   [MenuItem("Window/World Generator")]
   private static void ShowWindow() {
@@ -82,6 +84,8 @@ public class WorldGenerator : EditorWindow {
     if(tileObject != null && tileWidth != 0 && tileHeight != 0) {
       topographyFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(topographyFoldout, "Topography");
       if(topographyFoldout) {
+        topographyScale = EditorGUILayout.FloatField("Topography Scale: ", topographyScale);
+        topographyCutoff = EditorGUILayout.FloatField("Topography Cutoff: ", topographyCutoff);
         if(GUILayout.Button("Generate Topography")) GenerateTopography();
       }
       EditorGUILayout.EndFoldoutHeaderGroup();
@@ -106,7 +110,7 @@ public class WorldGenerator : EditorWindow {
 
   private void GenerateTopography() {
     mapGenerator = new MapGenerator(mapSize, worldSeed);
-    mapGenerator.GenerateTopography();
+    mapGenerator.GenerateTopography(topographyScale, topographyCutoff);
 
     UpdateVisuals();
   }

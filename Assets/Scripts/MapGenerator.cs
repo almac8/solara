@@ -22,6 +22,7 @@ public class MapGenerator {
     Size = size + 1;
     Seed = worldSeed;
     Random.InitState(Seed);
+    GenerateBlank();
   }
 
   private void GenerateBlank() {
@@ -32,45 +33,14 @@ public class MapGenerator {
     }
   }
 
-  private void GenerateNoise() {
-    TileValues = new int[Size][];
-
-    for(int x = 0; x < Size; x++) {
-      TileValues[x] = new int[Size];
-
-      for(int y = 0; y < Size; y++) {
-        TileValues[x][y] = Random.Range(0, 2);
-      }
-    }
-  }
-
-  public void GenerateTopography() {
-    GenerateNoise();
-
-    for(int i = 0; i < 2; i++) {
-      for(int x = 1; x < Size-1; x++) {
-        for(int y = 1; y < Size-1; y++) {
-          int count = 0;
-
-          count += TileValues[x-1][y-1];
-          count += TileValues[x  ][y-1];
-          count += TileValues[x+1][y-1];
-
-          count += TileValues[x-1][y  ];
-          count += TileValues[x  ][y  ];
-          count += TileValues[x+1][y  ];
-
-          count += TileValues[x-1][y+1];
-          count += TileValues[x  ][y+1];
-          count += TileValues[x+1][y+1];
-
-          if(count > 6) {
-            TileValues[x][y] = 1;
-          }
-
-          if(count < 5) {
-            TileValues[x][y] = 0;
-          }
+  public void GenerateTopography(float scale, float cutoff) {
+    for(int y = 0; y < Size; y++) {
+      for(int x = 0; x < Size; x++) {
+        float noiseSample = Mathf.PerlinNoise(x*scale, y*scale);
+        if(noiseSample > cutoff) {
+          TileValues[x][y] = 1;
+        } else {
+          TileValues[x][y] = 0;
         }
       }
     }
