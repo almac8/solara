@@ -39,7 +39,7 @@ public class MapGenerator {
     }
   }
 
-  public void GenerateTopography(float scale, float cutoff) {
+  public void GenerateTopography(float scale, float valleyCutoff, float mountainCutoff) {
     Vector2 offset = new Vector2(Random.value * Size, Random.value * Size);
 
     for(int y = 0; y < Size; y++) {
@@ -47,9 +47,9 @@ public class MapGenerator {
         TileValues[x][y] = TileType.SEA_LEVEL;
 
         float noiseSample = Mathf.PerlinNoise(offset.x + (x*scale), offset.y + (y*scale));
-        if(noiseSample < 0.25f) {
+        if(noiseSample < valleyCutoff) {
           TileValues[x][y] = TileType.VALLEY;
-        } else if(noiseSample > 0.75f) {
+        } else if(noiseSample > mountainCutoff) {
           TileValues[x][y] = TileType.MOUNTAIN;
         }
       }
