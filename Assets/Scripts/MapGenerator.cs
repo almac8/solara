@@ -34,9 +34,11 @@ public class MapGenerator {
   }
 
   public void GenerateTopography(float scale, float cutoff) {
+    Vector2 offset = new Vector2(Random.value * Size, Random.value * Size);
+
     for(int y = 0; y < Size; y++) {
       for(int x = 0; x < Size; x++) {
-        float noiseSample = Mathf.PerlinNoise(x*scale, y*scale);
+        float noiseSample = Mathf.PerlinNoise(offset.x + (x*scale), offset.y + (y*scale));
         if(noiseSample > cutoff) {
           TileValues[x][y] = 1;
         } else {

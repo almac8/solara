@@ -10,10 +10,10 @@ public class MapManager : MonoBehaviour {
   private void Awake() {
     TileWidth = 1.73f;
     TileHeight = 1.44f;
-    MapSize = 64;
+    MapSize = 128;
 
     mapGenerator = new MapGenerator(MapSize, 4444);
-    mapGenerator.GenerateTopography(0.1f, 0.5f);
+    mapGenerator.GenerateTopography(0.03f, 0.6f);
     TerrainGenerator terrainGenerator = new TerrainGenerator(mapGenerator.TileValues, TileWidth, TileHeight);
   }
 
