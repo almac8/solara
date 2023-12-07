@@ -8,8 +8,8 @@ public class MapManager : MonoBehaviour {
   private MapGenerator mapGenerator;
 
   private void Awake() {
-    TileWidth = 1.73f;
-    TileHeight = 1.44f;
+    TileWidth = 0.866f;
+    TileHeight = 0.75f;
     MapSize = 128;
 
     mapGenerator = new MapGenerator(MapSize, 4444);

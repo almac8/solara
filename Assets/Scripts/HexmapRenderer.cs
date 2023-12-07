@@ -4,6 +4,9 @@ public class HexmapRenderer : MonoBehaviour {
   [SerializeField] private MapManager hexmap;
   [SerializeField] private GameObject tile;
 
+  [SerializeField] private float TileWidth = 0.866f;
+  [SerializeField] private float TileHeight = 0.75f;
+
   private void Start() {
     MapGenerator.TileType[][] tiles = hexmap.GetTileValues();
     GameObject tileMap = new GameObject();
@@ -19,9 +22,9 @@ public class HexmapRenderer : MonoBehaviour {
       for(int y = 0; y < tiles[x].Length; y++) {
         if(tiles[x][y] == 0) {
           Vector3 offset = tileMap.transform.position;
-          offset.x += x * 1.73f;
-          offset.z += y * 1.44f;
-          if(y % 2 == 0) offset.x += 1.73f / 2f;
+          offset.x += x * TileWidth;
+          offset.z += y * TileHeight;
+          if(y % 2 == 0) offset.x += TileWidth / 2f;
 
           Instantiate(tile, offset, tile.transform.rotation, tileMap.transform);
         }

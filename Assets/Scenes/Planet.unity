@@ -1027,7 +1027,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdaa60b23efbaa2e9a980a906208e588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hexmap: {fileID: 1508951990}
 --- !u!114 &1208748665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1439,10 +1438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   constructionOptions:
-  - {fileID: 6578380751539830389, guid: ccc0ac2ff24b5fb6e8c2deea5881eff7, type: 3}
-  - {fileID: 4592278537987218869, guid: 296b7652f7b2e897586f5947b9755482, type: 3}
-  - {fileID: 6451533446223499885, guid: 37ea216a337df1bdab67e94ffea69195, type: 3}
-  - {fileID: 6578380751539830389, guid: aad8bb735286bfc5abb50ee11bd5921a, type: 3}
+  - {fileID: 7248059150040269532, guid: 4b952ec514ea2e899b6328e63b6c70ef, type: 3}
 --- !u!1 &1477888705
 GameObject:
   m_ObjectHideFlags: 0
@@ -1526,8 +1522,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3890b5c2c1d4728bd8fb25062c663c31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile: {fileID: 8558686113920827098, guid: 17568471720f09ada87d0328acb3f859, type: 3}
-  offset: {x: 1.73, y: 0, z: 1.5}
+  tile: {fileID: 3870993183900167903, guid: 17568471720f09ada87d0328acb3f859, type: 3}
+  offset: {x: 0.866, y: 0, z: 0.75}
   tileCount: 4
 --- !u!1 &1641976469
 GameObject:
@@ -1644,7 +1640,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hexmap: {fileID: 198088940}
-  tile: {fileID: 8558686113920827098, guid: 17568471720f09ada87d0328acb3f859, type: 3}
+  tile: {fileID: 3870993183900167903, guid: 17568471720f09ada87d0328acb3f859, type: 3}
+  TileWidth: 0.866
+  TileHeight: 0.75
 --- !u!4 &1883137346
 Transform:
   m_ObjectHideFlags: 0
