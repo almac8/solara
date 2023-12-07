@@ -4,10 +4,10 @@ using UnityEngine;
 
 [RequireComponent(typeof(ModuleMatrix))]
 public class Unit : Selectable {
-  public bool IsSelectable { get; private set; }
+  public bool isSelectable;
 
-  private void Start() {
-    IsSelectable = true;
+  private void Awake() {
+    isSelectable = true;
   }
 
   public ModuleMatrix GetModuleMatrix() {
@@ -15,12 +15,10 @@ public class Unit : Selectable {
   }
 
   protected override void Selected() {
-    GameManager.Instance.UIManager.SetUI(UIManager.UILayout.HUD);
-  }
-
-  //  protected virtual void Deselected() {}
-
-  public void SetSelectable(bool canSelect) {
-    IsSelectable = canSelect;
+    if(isSelectable) {
+      GameManager.Instance.UIManager.SetUI(UIManager.UILayout.HUD);
+    } else {
+      Deselect();
+    }
   }
 }

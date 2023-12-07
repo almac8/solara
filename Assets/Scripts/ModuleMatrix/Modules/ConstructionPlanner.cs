@@ -1,13 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class ConstructionPlanner : Module {
-  [SerializeField] private Hexmap hexmap;
-
-  private GameObject constructionGhost = null;
+  private TerrainCollider terrainCollider;
+  private GameObject blueprint = null;
 
   private void Awake() {
     Title = "Construction Planner";
@@ -17,42 +12,44 @@ public class ConstructionPlanner : Module {
     Activator.Activated += ActivateConstructionPlanner;
     Activator.Deactivated += DeactivateConstructionPlanner;
 
-    hexmap.TileHover += HandleTileHover;
-    hexmap.TileClick += HandleTileClick;
+    terrainCollider = Terrain.activeTerrain.GetComponent<TerrainCollider>();
   }
 
   private void ActivateConstructionPlanner() {
-    Vector2 unitTileIndex = GameManager.Instance.MapManager.GetTileIndex(transform.position);
-    Vector3 absoluteTilePosition = GameManager.Instance.MapManager.GetTilePosition(unitTileIndex);
-    
-    hexmap.transform.position = absoluteTilePosition;
-    hexmap.gameObject.SetActive(true);
-
     GameManager.Instance.UIManager.SetUI(UIManager.UILayout.CONSTRUCTION);
   }
 
   private void DeactivateConstructionPlanner() {
-    hexmap.gameObject.SetActive(false);
-  }
-
-  private void HandleTileHover() {
-    if(constructionGhost != null) {
-      constructionGhost.transform.position = hexmap.HoveredTilePosition;
+    GameManager.Instance.UIManager.SetUI(UIManager.UILayout.HUD);
+    if(blueprint != null) {
+      GameObject.Destroy(blueprint);
     }
   }
 
-  private void HandleTileClick() {
-    if(EventSystem.current.IsPointerOverGameObject()) return;
+  private void Update() {
+    if(Activator.IsActive && blueprint != null) {
+      Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+      RaycastHit hitData;
 
-    if(constructionGhost != null) {
-      Instantiate(constructionGhost, constructionGhost.transform.position, constructionGhost.transform.rotation);
+      if(terrainCollider.Raycast(ray, out hitData, 1000)) {
+        Vector2 tileIndices = GameManager.Instance.MapManager.GetTileIndex(hitData.point);
+        Vector3 constructionPosition = GameManager.Instance.MapManager.GetTilePosition(tileIndices);
+
+        if(Vector3.Distance(constructionPosition, transform.position) < 5) {
+          blueprint.transform.position = constructionPosition;
+
+          if(Input.GetMouseButtonDown(0)) {
+            Instantiate(blueprint, constructionPosition, blueprint.transform.rotation);
+          }
+        }
+      }
     }
   }
 
-  public void SetConstructionGhost(GameObject constructionReference) {
-    if(constructionGhost != null) GameObject.Destroy(constructionGhost);
+  public void SetBlueprint(GameObject constructionReference) {
+    if(blueprint != null) GameObject.Destroy(blueprint);
 
-    constructionGhost = Instantiate(constructionReference, Vector3.zero, constructionReference.transform.rotation);
-    constructionGhost.GetComponent<Unit>().SetSelectable(false);
+    blueprint = Instantiate(constructionReference, Vector3.zero, constructionReference.transform.rotation);
+    blueprint.GetComponent<Unit>().isSelectable = false;
   }
 }

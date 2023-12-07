@@ -10,7 +10,7 @@ public class SelectionManager : MonoBehaviour {
     if(selected is Unit) {
       if(self.SelectedUnit != null) self.SelectedUnit.Deselect();
       Unit selectedAsUnit = selected as Unit;
-      if(selectedAsUnit.IsSelectable) self.SelectedUnit = selectedAsUnit;
+      if(selectedAsUnit.isSelectable) self.SelectedUnit = selectedAsUnit;
     } else if(selected is Resource) {
       if(self.SelectedUnit != null) {
         if(self.SelectedResource != null) self.SelectedResource.Deselect();
