@@ -41,6 +41,10 @@ public class ConstructionPlanner : Module {
           if(Input.GetMouseButtonDown(0)) {
             Instantiate(blueprint, constructionPosition, blueprint.transform.rotation);
           }
+
+          if(Input.GetKeyDown(KeyCode.R)) {
+            blueprint.transform.Rotate(Vector3.up, 60);
+          }
         }
       }
     }
