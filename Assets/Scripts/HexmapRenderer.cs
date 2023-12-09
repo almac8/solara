@@ -7,27 +7,18 @@ public class HexmapRenderer : MonoBehaviour {
   [SerializeField] private float TileWidth = 0.866f;
   [SerializeField] private float TileHeight = 0.75f;
 
+  private TerrainCollider terrainCollider;
+
   private void Start() {
     MapGenerator.TileType[][] tiles = hexmap.GetTileValues();
     GameObject tileMap = new GameObject();
     tileMap.name = "Tilemap";
-    
-    tileMap.transform.position = new Vector3(
-      -hexmap.MapSize / 2 * hexmap.TileWidth,
-      0,
-      -hexmap.MapSize / 2 * hexmap.TileHeight
-    );
+    terrainCollider = Terrain.activeTerrain.GetComponent<TerrainCollider>();
 
-    for(int x = 0; x < tiles.Length; x++) {
-      for(int y = 0; y < tiles[x].Length; y++) {
-        if(tiles[x][y] == 0) {
-          Vector3 offset = tileMap.transform.position;
-          offset.x += x * TileWidth;
-          offset.z += y * TileHeight;
-          if(y % 2 == 0) offset.x += TileWidth / 2f;
-
-          Instantiate(tile, offset, tile.transform.rotation, tileMap.transform);
-        }
+    for(int y = 0; y < tiles.Length; y++) {
+      for(int x = 0; x < tiles[y].Length; x++) {
+        Vector3 tilePosition = GameManager.Instance.MapManager.GetTilePosition(new Vector2(x, y));
+        Instantiate(tile, tilePosition, tile.transform.rotation, tileMap.transform);
       }
     }
   }

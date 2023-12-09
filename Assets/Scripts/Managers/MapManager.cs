@@ -24,8 +24,8 @@ public class MapManager : MonoBehaviour {
   public Vector2 GetTileIndex(Vector3 absolutePosition) {
     Vector2 tileIndex = Vector2.zero;
 
-    tileIndex.x = Mathf.FloorToInt(absolutePosition.x / TileWidth);
-    tileIndex.y = Mathf.FloorToInt(absolutePosition.z / TileHeight);
+    tileIndex.x = Mathf.FloorToInt(absolutePosition.x / TileWidth) + MapSize / 2;
+    tileIndex.y = Mathf.FloorToInt(absolutePosition.z / TileHeight) + MapSize / 2;
 
     return tileIndex;
   }
@@ -33,8 +33,12 @@ public class MapManager : MonoBehaviour {
   public Vector3 GetTilePosition(Vector2 tileIndex) {
     Vector3 tilePosition = Vector3.zero;
 
-    tilePosition.x = tileIndex.x * TileWidth + TileWidth / 2;
-    tilePosition.z = tileIndex.y * TileHeight + TileHeight / 2;
+    tilePosition.x = tileIndex.x * TileWidth;
+    if(tileIndex.y % 2 > 0) tilePosition.x += TileWidth / 2;
+    tilePosition.x -= TileWidth * MapSize / 2;
+
+    tilePosition.z = tileIndex.y * TileHeight;
+    tilePosition.z -= TileHeight * MapSize / 2;
 
     return tilePosition;
   }

@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
   public static GameManager Instance { get; private set; }
+  
   public SelectionManager SelectionManager { get; private set; }
   public UnitManager UnitManager { get; private set; }
   public MapManager MapManager { get; private set; }
