@@ -5,20 +5,7 @@ using UnityEngine.UIElements;
 using System.Collections.Generic;
 
 public class WorldGenerator : EditorWindow {
-  private const int MIN_MAP_SIZE = 2;
-  private const int MAX_MAP_SIZE = 64;
-
-  string[] mapSizeNames = new string[] {
-    "Small",
-    "Medium",
-    "Large"
-  };
-  
-  int[] mapSizeValues = new int[] {
-    128,
-    256,
-    512
-  };
+  private static WorldSettings worldSettings;
 
   private static string previousScene;
   private static WorldGenerator window;
@@ -29,26 +16,17 @@ public class WorldGenerator : EditorWindow {
   private MapGenerator mapGenerator;
 
   private bool worldFoldout;
-  private int worldSeed;
-  private int mapSize;
-
   private bool tileFoldout;
-  private GameObject tileObject;
-  private float tileWidth;
-  private float tileHeight;
-  
   private bool displayFoldout;
+  private bool topographyFoldout;
+  
   private bool showTiles;
   private bool showTerrain;
-
-  private bool topographyFoldout;
-  private float topographyScale;
-  private float valleyCutoff;
-  private float mountainCutoff;
   
   [MenuItem("Window/World Generator")]
   private static void ShowWindow() {
     tiles = new List<GameObject>();
+    worldSettings = new WorldSettings();
 
     window = GetWindow<WorldGenerator>();
     window.titleContent = new GUIContent("World Generator");
@@ -67,27 +45,27 @@ public class WorldGenerator : EditorWindow {
     
     worldFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(worldFoldout, "World");
     if(worldFoldout) {
-      worldSeed = EditorGUILayout.IntField("World Seed: ", worldSeed);
-      mapSize = EditorGUILayout.IntPopup("Map Size: ", mapSize, mapSizeNames, mapSizeValues);
+      worldSettings.worldSeed = EditorGUILayout.IntField("World Seed: ", worldSettings.worldSeed);
+      worldSettings.worldSize = EditorGUILayout.IntPopup("World Size: ", worldSettings.worldSize, worldSettings.mapSizeNames, worldSettings.mapSizeValues);
     }
     EditorGUILayout.EndFoldoutHeaderGroup();
 
-    if(worldSeed != 0 && mapSize != 0) {
+    if(worldSettings.worldSeed != 0 && worldSettings.worldSize != 0) {
       tileFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(tileFoldout, "Tile");
       if(tileFoldout) {
-        tileObject = (GameObject)EditorGUILayout.ObjectField(tileObject, typeof(Object), true);
-        tileWidth = EditorGUILayout.FloatField("Tile Width: ", tileWidth);
-        tileHeight = EditorGUILayout.FloatField("Tile Height: ", tileHeight);
+        worldSettings.tileObject = (GameObject)EditorGUILayout.ObjectField(worldSettings.tileObject, typeof(Object), true);
+        worldSettings.tileWidth = EditorGUILayout.FloatField("Tile Width: ", worldSettings.tileWidth);
+        worldSettings.tileHeight = EditorGUILayout.FloatField("Tile Height: ", worldSettings.tileHeight);
       }
       EditorGUILayout.EndFoldoutHeaderGroup();
     }
 
-    if(tileObject != null && tileWidth != 0 && tileHeight != 0) {
+    if(worldSettings.tileObject != null && worldSettings.tileWidth != 0 && worldSettings.tileHeight != 0) {
       topographyFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(topographyFoldout, "Topography");
       if(topographyFoldout) {
-        topographyScale = EditorGUILayout.FloatField("Topography Scale: ", topographyScale);
-        valleyCutoff = EditorGUILayout.FloatField("Topography Cutoff: ", valleyCutoff);
-        mountainCutoff = EditorGUILayout.FloatField("Topography Cutoff: ", mountainCutoff);
+        worldSettings.topographyScale = EditorGUILayout.FloatField("Topography Scale: ", worldSettings.topographyScale);
+        worldSettings.valleyCutoff = EditorGUILayout.FloatField("Topography Cutoff: ", worldSettings.valleyCutoff);
+        worldSettings.mountainCutoff = EditorGUILayout.FloatField("Topography Cutoff: ", worldSettings.mountainCutoff);
         if(GUILayout.Button("Generate Topography")) GenerateTopography();
       }
       EditorGUILayout.EndFoldoutHeaderGroup();
@@ -111,8 +89,8 @@ public class WorldGenerator : EditorWindow {
   }
 
   private void GenerateTopography() {
-    mapGenerator = new MapGenerator(mapSize, worldSeed);
-    mapGenerator.GenerateTopography(topographyScale, valleyCutoff, mountainCutoff);
+    mapGenerator = new MapGenerator(worldSettings.worldSize, worldSettings.worldSeed);
+    mapGenerator.GenerateTopography(worldSettings.topographyScale, worldSettings.valleyCutoff, worldSettings.mountainCutoff);
 
     UpdateVisuals();
   }
@@ -132,15 +110,15 @@ public class WorldGenerator : EditorWindow {
       return;
     }
 
-    float mapWidth = mapSize * tileWidth;
-    float mapHeight = mapSize * tileHeight;
+    float mapWidth = worldSettings.worldSize * worldSettings.tileWidth;
+    float mapHeight = worldSettings.worldSize * worldSettings.tileHeight;
 
     for(int y = 0; y < tileValues.Length; y++) {
       for(int x = 0; x < tileValues.Length; x++) {
         if(tileValues[x][y] == 0) {
-          var instance = (GameObject) PrefabUtility.InstantiatePrefab(tileObject, scene);
+          var instance = (GameObject) PrefabUtility.InstantiatePrefab(worldSettings.tileObject, scene);
 
-          Vector3 tilePosition = new Vector3(x * tileWidth, 0, y * tileHeight);
+          Vector3 tilePosition = new Vector3(x * worldSettings.tileWidth, 0, y * worldSettings.tileHeight);
           tilePosition.x -= mapWidth / 2;
           tilePosition.z -= mapHeight / 2;
           instance.transform.position = tilePosition;
@@ -154,7 +132,7 @@ public class WorldGenerator : EditorWindow {
       GameObject.DestroyImmediate(terrain);
     }
 
-    TerrainGenerator terrainGenerator = new TerrainGenerator(tileValues, tileWidth, tileHeight);
+    TerrainGenerator terrainGenerator = new TerrainGenerator(tileValues, worldSettings.tileWidth, worldSettings.tileHeight);
     terrain = terrainGenerator.Terrains;
   }
   
