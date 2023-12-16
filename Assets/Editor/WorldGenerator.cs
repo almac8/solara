@@ -8,7 +8,8 @@ public class WorldGenerator : EditorWindow {
     WORLD,
     TILE,
     SCENE,
-    TOPOGRAPHY
+    TOPOGRAPHY,
+    FILE
   }
 
   private static WorldGenerator window;
@@ -32,6 +33,7 @@ public class WorldGenerator : EditorWindow {
     foldouts.Add(UISection.TILE, false);
     foldouts.Add(UISection.SCENE, false);
     foldouts.Add(UISection.TOPOGRAPHY, false);
+    foldouts.Add(UISection.FILE, false);
 
     hasGenerated = false;
 
@@ -46,7 +48,10 @@ public class WorldGenerator : EditorWindow {
     ShowWorldFoldout();
     if(WorldSettings.worldSeed != 0 && WorldSettings.worldSize != 0) ShowTileFoldout();
     if(WorldSettings.tileObject != null && WorldSettings.tileWidth != 0 && WorldSettings.tileHeight != 0) ShowTopographyFoldout();
-    if(hasGenerated) ShowSceneFoldout();
+    if(hasGenerated) {
+      ShowSceneFoldout();
+      ShowFileFoldout();
+    }
     ShowCloseButton();
 
     EditorGUILayout.EndVertical();
@@ -96,6 +101,17 @@ public class WorldGenerator : EditorWindow {
       if(GUILayout.Button("Toggle Terrain")) worldGeneratorSceneManager.ToggleTerrain();
     }
     
+    EditorGUILayout.EndFoldoutHeaderGroup();
+  }
+
+  private void ShowFileFoldout() {
+    foldouts[UISection.FILE] = EditorGUILayout.BeginFoldoutHeaderGroup(foldouts[UISection.FILE], "File");
+
+    if(foldouts[UISection.FILE]) {
+      WorldSettings.filename = EditorGUILayout.TextField("File Name: ", WorldSettings.filename);
+      if(GUILayout.Button("Save")) WorldSettings.Save();
+    }
+
     EditorGUILayout.EndFoldoutHeaderGroup();
   }
 
