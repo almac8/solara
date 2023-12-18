@@ -32,6 +32,23 @@ public class WorldSettings {
 
   public string filename;
 
+  public WorldSettings Load(string fileToLoad) {
+    if (File.Exists(fileToLoad)) {
+      string json;
+
+      using(FileStream stream = File.Open(fileToLoad, FileMode.Open)) {
+        using(BinaryReader reader = new BinaryReader(stream, Encoding.UTF8, false)) {
+          json = reader.ReadString();
+        }
+      }
+
+      return JsonUtility.FromJson<WorldSettings>(json);
+    } else {
+      Debug.LogError("File does NOT Exist");
+      return new WorldSettings();
+    }
+  }
+
   public void Save() {
     string json = JsonUtility.ToJson(this);
 

@@ -2,14 +2,17 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 public class WorldGenerator : EditorWindow {
   private enum UISection {
+    LOAD,
     WORLD,
     TILE,
     SCENE,
     TOPOGRAPHY,
-    FILE
+    SAVE
   }
 
   private static WorldGenerator window;
@@ -20,6 +23,7 @@ public class WorldGenerator : EditorWindow {
 
   private static Dictionary<UISection, bool> foldouts;
   private static bool hasGenerated;
+  private static int loadFileIndex;
   
   [MenuItem("Window/World Generator")]
   private static void ShowWindow() {
@@ -29,13 +33,15 @@ public class WorldGenerator : EditorWindow {
     WorldSettings = new WorldSettings();
 
     foldouts = new Dictionary<UISection, bool>();
+    foldouts.Add(UISection.LOAD, false);
     foldouts.Add(UISection.WORLD, false);
     foldouts.Add(UISection.TILE, false);
     foldouts.Add(UISection.SCENE, false);
     foldouts.Add(UISection.TOPOGRAPHY, false);
-    foldouts.Add(UISection.FILE, false);
+    foldouts.Add(UISection.SAVE, false);
 
     hasGenerated = false;
+    loadFileIndex = 0;
 
     window = GetWindow<WorldGenerator>();
     window.titleContent = new GUIContent("World Generator");
@@ -45,16 +51,39 @@ public class WorldGenerator : EditorWindow {
   private void OnGUI() {
     EditorGUILayout.BeginVertical();
     
+    ShowLoadFoldout();
     ShowWorldFoldout();
     if(WorldSettings.worldSeed != 0 && WorldSettings.worldSize != 0) ShowTileFoldout();
     if(WorldSettings.tileObject != null && WorldSettings.tileWidth != 0 && WorldSettings.tileHeight != 0) ShowTopographyFoldout();
     if(hasGenerated) {
       ShowSceneFoldout();
-      ShowFileFoldout();
+      ShowSaveFoldout();
     }
     ShowCloseButton();
 
     EditorGUILayout.EndVertical();
+  }
+
+  private void ShowLoadFoldout() {
+    IEnumerable<string> filenamesEnumerable = Directory.EnumerateFiles(Directory.GetCurrentDirectory(), "*.ws");
+
+    if(filenamesEnumerable.Count() > 0) {
+      foldouts[UISection.LOAD] = EditorGUILayout.BeginFoldoutHeaderGroup(foldouts[UISection.LOAD], "Load");
+
+      if(foldouts[UISection.LOAD]) {
+        string[] filenames = filenamesEnumerable.Cast<string>().ToArray();
+        for(int i = 0; i < filenames.Length; i++) {
+          int slashIndex = filenames[i].LastIndexOf('/') + 1;
+          int substringLength = filenames[i].Length - slashIndex;
+          filenames[i] = filenames[i].Substring(slashIndex, substringLength);
+        }
+
+        loadFileIndex = EditorGUILayout.Popup(loadFileIndex, filenames);
+        if(GUILayout.Button("Load")) WorldSettings = WorldSettings.Load(filenames[loadFileIndex]);
+      }
+
+      EditorGUILayout.EndFoldoutHeaderGroup();
+    }
   }
 
   private void ShowWorldFoldout() {
@@ -104,10 +133,10 @@ public class WorldGenerator : EditorWindow {
     EditorGUILayout.EndFoldoutHeaderGroup();
   }
 
-  private void ShowFileFoldout() {
-    foldouts[UISection.FILE] = EditorGUILayout.BeginFoldoutHeaderGroup(foldouts[UISection.FILE], "File");
+  private void ShowSaveFoldout() {
+    foldouts[UISection.SAVE] = EditorGUILayout.BeginFoldoutHeaderGroup(foldouts[UISection.SAVE], "Save");
 
-    if(foldouts[UISection.FILE]) {
+    if(foldouts[UISection.SAVE]) {
       WorldSettings.filename = EditorGUILayout.TextField("File Name: ", WorldSettings.filename);
       if(GUILayout.Button("Save")) WorldSettings.Save();
     }
