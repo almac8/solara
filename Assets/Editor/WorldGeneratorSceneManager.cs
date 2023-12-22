@@ -57,6 +57,7 @@ public class WorldGeneratorSceneManager {
           Vector3 tilePosition = new Vector3(x * WorldGenerator.WorldSettings.tileWidth, 0, y * WorldGenerator.WorldSettings.tileHeight);
           tilePosition.x -= mapWidth / 2;
           tilePosition.z -= mapHeight / 2;
+          if(y % 2 > 0) tilePosition.x += WorldGenerator.WorldSettings.tileWidth / 2;
           instance.transform.position = tilePosition;
 
           tiles.Add(instance);
