@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Blueprint : MonoBehaviour {
+  [SerializeField] private Construction construction;
   [SerializeField] private GameObject bpBlankReference;
   [SerializeField] private GameObject bpFloorReference;
   [SerializeField] private GameObject bpFloorCornerReference;
+  [SerializeField] private GameObject bpCameraCornerReference;
   
   [SerializeField] private int numTilesWidth;
   [SerializeField] private int numTilesHeight;
 
   private GameObject[,] tiles;
 
-  private enum TileType {
+  public enum TileType {
     BLANK,
     FLOOR,
-    FLOOR_CORNER
+    FLOOR_CORNER,
+    CAMERA_CORNER
   }
 
   private TileType currentlySelectedTile;
@@ -39,7 +42,7 @@ public class Blueprint : MonoBehaviour {
       currentlySelectedInt--;
 
       if(currentlySelectedInt < 0) {
-        currentlySelectedInt = 2;
+        currentlySelectedInt = 3;
       }
 
       currentlySelectedTile = (TileType) currentlySelectedInt;
@@ -49,7 +52,7 @@ public class Blueprint : MonoBehaviour {
       int currentlySelectedInt = (int) currentlySelectedTile;
       currentlySelectedInt++;
 
-      if(currentlySelectedInt > 2) {
+      if(currentlySelectedInt > 3) {
         currentlySelectedInt = 0;
       }
 
@@ -88,6 +91,10 @@ public class Blueprint : MonoBehaviour {
         newTile = GameObject.Instantiate(bpFloorCornerReference, tiles[x, y].transform.position, currentlySelectedTileRotation, transform);
         break;
 
+      case TileType.CAMERA_CORNER:
+        newTile = GameObject.Instantiate(bpCameraCornerReference, tiles[x, y].transform.position, currentlySelectedTileRotation, transform);
+        break;
+
       default:
         newTile = GameObject.Instantiate(bpBlankReference, tiles[x, y].transform.position, currentlySelectedTileRotation, transform);
         break;
@@ -97,5 +104,8 @@ public class Blueprint : MonoBehaviour {
     tileScript.SetIndex(x, y);
     Destroy(tiles[x, y]);
     tiles[x, y] = newTile;
+    
+    Quaternion constructionTileRotation = Quaternion.Euler(0f, currentlySelectedTileRotation.eulerAngles.z, 0f);
+    construction.SetTile(x, y, currentlySelectedTile, constructionTileRotation);
   }
 }
