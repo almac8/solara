@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Construction : MonoBehaviour {
+  [SerializeField] private CameraManager cameraManager;
   [SerializeField] private GameObject floorReference;
   [SerializeField] private GameObject cameraCornerReference;
 
@@ -36,13 +37,20 @@ public class Construction : MonoBehaviour {
 
       case Blueprint.TileType.CAMERA_CORNER:
         newTile = GameObject.Instantiate(cameraCornerReference, offset, rotation, transform);
+        cameraManager.RegisterCamera(newTile.GetComponentInChildren<Camera>(true));
         break;
 
       default:
         newTile = null;
         break;
     }
-    
+
+    /*
+      if(tiles[x, y] == CAMERA) {
+        CAMERA.Unregister();
+      }
+    */
+
     Destroy(tiles[x, y]);
     tiles[x, y] = newTile;
   }
