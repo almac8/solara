@@ -6,6 +6,7 @@ public class Construction : MonoBehaviour {
   [SerializeField] private CameraManager cameraManager;
   [SerializeField] private GameObject floorReference;
   [SerializeField] private GameObject cameraCornerReference;
+  [SerializeField] private GameObject wallReference;
 
   [SerializeField] private int numTilesWidth;
   [SerializeField] private int numTilesHeight;
@@ -13,7 +14,7 @@ public class Construction : MonoBehaviour {
 
   private GameObject[,] tiles;
 
-  private void Start() {
+  private void Awake() {
     tiles = new GameObject[numTilesWidth, numTilesHeight];
   }
 
@@ -38,6 +39,10 @@ public class Construction : MonoBehaviour {
       case Blueprint.TileType.CAMERA_CORNER:
         newTile = GameObject.Instantiate(cameraCornerReference, offset, rotation, transform);
         cameraManager.RegisterCamera(newTile.GetComponentInChildren<Camera>(true));
+        break;
+
+      case Blueprint.TileType.WALL:
+        newTile = null;
         break;
 
       default:
