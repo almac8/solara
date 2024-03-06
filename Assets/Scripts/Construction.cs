@@ -45,11 +45,11 @@ public class Construction : MonoBehaviour {
         break;
     }
 
-    /*
-      if(tiles[x, y] == CAMERA) {
-        CAMERA.Unregister();
+    if(tiles[x, y] != null) {
+      if(tiles[x, y].GetComponentInChildren<Camera>(true)) {
+        cameraManager.UnregisterCamera(tiles[x, y].GetComponentInChildren<Camera>(true));
       }
-    */
+    }
 
     Destroy(tiles[x, y]);
     tiles[x, y] = newTile;

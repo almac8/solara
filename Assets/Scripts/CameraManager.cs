@@ -105,4 +105,8 @@ public class CameraManager : MonoBehaviour {
   public void RegisterCamera(Camera newCamera) {
     CameraList.Add(newCamera);
   }
+
+  public void UnregisterCamera(Camera oldCamera) {
+    CameraList.Remove(oldCamera);
+  }
 }
