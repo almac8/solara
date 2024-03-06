@@ -309,6 +309,7 @@ MonoBehaviour:
   bpFloorReference: {fileID: 3077862423906667971, guid: e45c87a2062172bd78e5c1002764111b, type: 3}
   bpFloorCornerReference: {fileID: 2644133999437427279, guid: be56e5f7b2e0c9bdc8947d1f5e7fbe89, type: 3}
   bpCameraCornerReference: {fileID: 3826997475180467970, guid: e391544a0d947a3aba12d8db84045425, type: 3}
+  bpWallReference: {fileID: 3168779732419981772, guid: 59e1b1010f916f2ae88ebc0ababe727b, type: 3}
   numTilesWidth: 10
   numTilesHeight: 10
 --- !u!1 &1276893131

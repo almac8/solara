@@ -8,6 +8,7 @@ public class Blueprint : MonoBehaviour {
   [SerializeField] private GameObject bpFloorReference;
   [SerializeField] private GameObject bpFloorCornerReference;
   [SerializeField] private GameObject bpCameraCornerReference;
+  [SerializeField] private GameObject bpWallReference;
   
   [SerializeField] private int numTilesWidth;
   [SerializeField] private int numTilesHeight;
@@ -18,7 +19,8 @@ public class Blueprint : MonoBehaviour {
     BLANK,
     FLOOR,
     FLOOR_CORNER,
-    CAMERA_CORNER
+    CAMERA_CORNER,
+    WALL
   }
 
   private TileType currentlySelectedTile;
@@ -42,7 +44,7 @@ public class Blueprint : MonoBehaviour {
       currentlySelectedInt--;
 
       if(currentlySelectedInt < 0) {
-        currentlySelectedInt = 3;
+        currentlySelectedInt = 4;
       }
 
       currentlySelectedTile = (TileType) currentlySelectedInt;
@@ -52,7 +54,7 @@ public class Blueprint : MonoBehaviour {
       int currentlySelectedInt = (int) currentlySelectedTile;
       currentlySelectedInt++;
 
-      if(currentlySelectedInt > 3) {
+      if(currentlySelectedInt > 4) {
         currentlySelectedInt = 0;
       }
 
@@ -93,6 +95,10 @@ public class Blueprint : MonoBehaviour {
 
       case TileType.CAMERA_CORNER:
         newTile = GameObject.Instantiate(bpCameraCornerReference, tiles[x, y].transform.position, currentlySelectedTileRotation, transform);
+        break;
+
+      case TileType.WALL:
+        newTile = GameObject.Instantiate(bpWallReference, tiles[x, y].transform.position, currentlySelectedTileRotation, transform);
         break;
 
       default:
