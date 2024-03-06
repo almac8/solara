@@ -77,6 +77,11 @@ public class Blueprint : MonoBehaviour {
     SetTile(x, y, TileType.BLANK);
   }
 
+  public void SetCurrentTileType(string text) {
+    Debug.Log("Set Tile Type");
+    Debug.Log(text);
+  }
+
   private void SetTile(int x, int y, TileType tile) {
     GameObject newTile;
 

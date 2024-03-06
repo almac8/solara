@@ -6,6 +6,7 @@ public class CameraManager : MonoBehaviour {
   public List<Camera> CameraList { get; private set; }
   
   [SerializeField] private Camera blueprintCamera;
+  [SerializeField] private GameObject blueprintUI;
 
   private bool isBlueprintActive;
   private int currentCameraIndex;
@@ -50,11 +51,13 @@ public class CameraManager : MonoBehaviour {
     isBlueprintActive = true;
     DeactivateCamera();
     blueprintCamera.gameObject.SetActive(isBlueprintActive);
+    blueprintUI.SetActive(isBlueprintActive);
   }
 
   private void DeactivateBlueprint() {
     if(CameraList.Count > 0) {
       isBlueprintActive = false;
+      blueprintUI.SetActive(isBlueprintActive);
       blueprintCamera.gameObject.SetActive(isBlueprintActive);
       ActivateCamera();
     } else {
