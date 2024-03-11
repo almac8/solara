@@ -14,6 +14,12 @@ public class Blueprint : MonoBehaviour {
   [SerializeField] private int numTilesHeight;
 
   private GameObject[,] tiles;
+  
+  public enum TileCategory {
+    FLOORS,
+    WALLS,
+    UNITS
+  }
 
   public enum TileType {
     BLANK,
@@ -77,9 +83,13 @@ public class Blueprint : MonoBehaviour {
     SetTile(x, y, TileType.BLANK);
   }
 
-  public void SetCurrentTileType(string text) {
-    Debug.Log("Set Tile Type");
-    Debug.Log(text);
+  public void SetCurrentTileCategory(TileCategory newCategory) {
+    Debug.Log("Set Tile Category");
+    Debug.Log(newCategory);
+  }
+
+  public void SetCurrentTileType(TileType newTileType) {
+    currentlySelectedTile = newTileType;
   }
 
   private void SetTile(int x, int y, TileType tile) {
