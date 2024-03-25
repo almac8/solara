@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="background" style="flex-grow: 1; background-color: rgb(64, 128, 64);">
+        <ui:VisualElement name="main_menu" style="flex-grow: 0; background-color: rgb(128, 64, 128); width: auto; height: auto; align-self: center; justify-content: space-around; margin-top: auto; margin-bottom: auto; padding-left: 16px; padding-right: 16px; padding-top: 16px; padding-bottom: 16px;">
+            <ui:Button text="New Game" display-tooltip-when-elided="true" name="start" style="margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px;" />
+            <ui:Button text="Load Game" display-tooltip-when-elided="true" name="load" style="margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px;" />
+            <ui:Button text="Settings" display-tooltip-when-elided="true" name="settings" style="margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px;" />
+            <ui:Button text="Quit" display-tooltip-when-elided="true" name="quit" style="margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
