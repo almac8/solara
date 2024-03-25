@@ -1,23 +1,17 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class NewGameUI : MonoBehaviour {
+public class SettingsUI : MonoBehaviour {
   private UserInterface uiController;
 
   private void OnEnable() {
+    Debug.Log("Settings");
     uiController = transform.parent.parent.gameObject.GetComponent<UserInterface>();
     
     VisualElement rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
 
-    Button startButton = rootVisualElement.Q<Button>("start");
-    startButton.clicked += StarNewGame;
-
     Button backButton = rootVisualElement.Q<Button>("back");
     backButton.clicked += ActivateMainMenuUI;
-  }
-
-  private void StarNewGame() {
-    GameManager.Instance.SetGameState(GameManager.GameState.PLAY);
   }
 
   private void ActivateMainMenuUI() {
