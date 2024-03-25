@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class MainMenu : MonoBehaviour {
+public class MainMenuUI : MonoBehaviour {
   private UserInterface uiController;
 
   private void OnEnable() {
