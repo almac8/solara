@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,48 +9,30 @@ public class UserInterface : MonoBehaviour {
     SETTINGS
   };
 
-  [SerializeField] private GameObject mainMenu;
-  [SerializeField] private GameObject newGame;
-  [SerializeField] private GameObject loadGame;
-  [SerializeField] private GameObject settings;
+  [SerializeField] private List<GameObject> uiPanels;
+
+  private GameObject[] uiPanelInstances;
 
   public UIState ActiveState { get; private set; }
 
   private void Awake() {
-    mainMenu.SetActive(true);
-    newGame.SetActive(false);
-    loadGame.SetActive(false);
-    settings.SetActive(false);
-  }
+    uiPanelInstances = new GameObject[uiPanels.Count];
+    Transform uiCanvasTransform = transform.GetChild(0);
+    
+    for(int i = 0; i < uiPanels.Count; i++) {
+      uiPanelInstances[i] = Instantiate(uiPanels[i], uiCanvasTransform);
+      uiPanelInstances[i].SetActive(false);
+    }
 
+    SetState(UIState.MAIN_MENU);
+  }
   public void SetState(UIState newUIState) {
     ActiveState = newUIState;
 
-    mainMenu.SetActive(false);
-    newGame.SetActive(false);
-    loadGame.SetActive(false);
-    settings.SetActive(false);
-
-    switch (newUIState) {
-      case UIState.MAIN_MENU:
-        mainMenu.SetActive(true);
-        break;
-
-      case UIState.START:
-        newGame.SetActive(true);
-        break;
-
-      case UIState.LOAD:
-        loadGame.SetActive(true);
-        break;
-
-      case UIState.SETTINGS:
-        settings.SetActive(true);
-        break;
-
-      default:
-        mainMenu.SetActive(true);
-        break;
+    for(int i = 0; i < uiPanelInstances.Length; i++) {
+      uiPanelInstances[i].SetActive(false);
     }
+
+    uiPanelInstances[(int)(newUIState)].SetActive(true);
   }
 }
