@@ -5,7 +5,6 @@ public class GameManager : MonoBehaviour {
   public enum GameState {
     MAIN_MENU,
     PLAY,
-    PAUSE,
     GAME_OVER
   };
 

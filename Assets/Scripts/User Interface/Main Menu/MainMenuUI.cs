@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UserInterface : MonoBehaviour {
+public class MainMenuUI : MonoBehaviour {
   public enum UIState {
     MAIN_MENU,
     START,

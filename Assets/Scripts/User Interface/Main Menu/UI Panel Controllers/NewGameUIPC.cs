@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class NewGameUI : MonoBehaviour {
-  private UserInterface uiController;
+public class NewGameUIPC : MonoBehaviour {
+  private MainMenuUI mainMenuUI;
 
   private void OnEnable() {
-    uiController = transform.parent.parent.gameObject.GetComponent<UserInterface>();
+    mainMenuUI = transform.parent.parent.gameObject.GetComponent<MainMenuUI>();
     
     VisualElement rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
 
@@ -21,6 +21,6 @@ public class NewGameUI : MonoBehaviour {
   }
 
   private void ActivateMainMenuUI() {
-    uiController.SetState(UserInterface.UIState.MAIN_MENU);
+    mainMenuUI.SetState(MainMenuUI.UIState.MAIN_MENU);
   }
 }
